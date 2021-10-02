@@ -12,9 +12,13 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "Checking if homebrew is installed...."
     if ! [ -x "$(command -v brew)" ]; then
         echo "Homebrew not found, installing..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        sudo -u $SUDO_USER /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    fi
     
-    brew cask install docker docker-compose
+    echo "brew is installed. Installing docker..."
+    sudo -u $SUDO_USER brew install --cask docker
+    sudo -u $SUDO_USER brew install docker-compose
+    open /Applications/Docker.app # Open docker to start daemon
 else
     # some unix env
     trap 'rm -f get-docker.sh' INT EXIT ERR # remove curled script after exiting for any reason
