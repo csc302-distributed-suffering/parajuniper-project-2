@@ -1,0 +1,27 @@
+version: "3.7"
+
+services: 
+    client:
+        stdin_open: true
+        tty: true
+        build:
+            dockerfile: Dockerfile
+            context: './src/client'
+        ports:
+            - 3000:3000
+        depends_on:
+            - "server"
+        volumes:
+            - /app/node_modules
+            - ./src/client:/app
+
+    server:
+        tty: true
+        build:
+            dockerfile: Dockerfile
+            context: './src/server'
+        ports:
+            - 5000:5000
+        volumes:
+            - /app/node_modules
+            - ./src/server:/app
