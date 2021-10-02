@@ -11,9 +11,8 @@ services:
             - 3000:3000
         depends_on:
             - "server"
-        volumes:
-            - /app/node_modules
-            - ./src/client:/app
+        networks:
+            - parajuniper2
 
     server:
         tty: true
@@ -22,6 +21,9 @@ services:
             context: './src/server'
         ports:
             - 5000:5000
-        volumes:
-            - /app/node_modules
-            - ./src/server:/app
+        networks:
+            - parajuniper2
+
+networks:
+    parajuniper2:
+        driver: bridge
