@@ -85,7 +85,7 @@ else
         install_curl
 
         if [ $? -eq 1 ]; then
-            echo "Could not install curl. Installation failed."
+            echo "Could not install curl. Exiting..."
             exit 1
         fi
     fi
