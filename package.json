@@ -1,0 +1,21 @@
+{
+  "name": "parajuniper-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-app": "concurrently \"cd src/server && npm start\" \"cd src/frontend && npm start\"",
+    "start-client": "cd src/client && npm start",
+    "start-server": "cd src/server && npm start",
+    "init-setup": "npm install && concurrently \"cd src/client && npm install\" \"cd src/server && npm install\"",
+    "init-setup-run": "npm run init-setup && npm run start-app",
+    "test": "(cd src/client && npm run test -- --watchAll=false) && (cd src/server && npm run test -- --watchAll=false)"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.2.2",
+    "fhir-kit-client": "^1.7.2"
+  }
+}

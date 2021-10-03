@@ -24,6 +24,16 @@ services:
         networks:
             - parajuniper2
 
+    test:
+        build:
+            context: '.'
+        environment:
+            - CI=true
+        ports:
+            - 80:80
+        profiles: ["test"]
+        command: npm run test
+
 networks:
     parajuniper2:
         driver: bridge
