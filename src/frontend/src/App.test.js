@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from "enzyme";
 import renderer from 'react-test-renderer';
 import { shallowToJson  } from 'enzyme-to-json';
-import { app } from "./App";
+import App  from "./App";
 // import "../setupTests"
 
 import { configure } from 'enzyme';
@@ -17,20 +17,13 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('Test App Entry point', function () {
   it('renders correctly', function () {
-    // const wrapper = mount(<app/>).toJSON()
-    // expect(wrapper.find("p").text()).toEqual("Why, if it isn't a running React app! A truly fine sight indeed.");
-  //   const tree = renderer
-  //   .create(<app/>)
-  //   .toJSON();
-  // expect(tree).toMatchSnapshot();
-  const wrapper = shallow(<app />);
+  const wrapper = shallow(<App/>);
   // expect(wrapper).toMatchSnapshot();
-
   // expect(toJson(wrapper)).toMatchSnapshot();
   });
-    it('renders correctly', () => {
+  it('renders correctly', () => {
       const tree = renderer
-        .create(<app/>)
+        .create(<App/>)
         .toJSON();
       expect(tree).toMatchSnapshot();
     });
