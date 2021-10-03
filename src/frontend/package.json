@@ -19,6 +19,16 @@
   },
   "jest": {
     "setupFilesAfterEnv": [
+      "<rootDir>setupTests.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    },
+    "testEnvironment": "jsdom",
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
       "<rootDir>/setupTests.js"
     ]
   },
@@ -48,10 +58,12 @@
   },
   "proxy": "http://localhost:8080",
   "devDependencies": {
-    "@babel/preset-env": "@7.15.6",
-    "@babel/preset-react": "@7.14.5",
-    "babel-jest": "@27.2.4",
-    "jest": "@27.2.4",
-    "react-test-renderer": "@17.0.2"
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-react": "^7.14.5",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
+    "babel-jest": "^27.2.4",
+    "identity-obj-proxy": "^3.0.0",
+    "jest-environment-jsdom": "^27.0.6",
+    "react-test-renderer": "^17.0.2"
   }
 }
