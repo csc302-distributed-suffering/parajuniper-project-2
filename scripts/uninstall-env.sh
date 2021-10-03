@@ -15,6 +15,8 @@ echo "You must be the superuser to run this script. Please rerun the script usin
 exit 1
 fi
 
+docker system prune -a --volumes
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # mac
     echo "OS is Mac"

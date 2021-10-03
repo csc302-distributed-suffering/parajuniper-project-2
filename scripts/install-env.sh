@@ -38,21 +38,21 @@ install_curl() {
         ubuntu|debian|raspbian)
             echo "Using apt-get..."
             apt-get install curl
-            exit 0
+            return 0
             ;;
         centos|fedora|rhel)
             echo "Using yum..."
             yum install curl
-            exit 0
+            return 0
             ;;
         sles)
             echo "Using zypper..."
             zypper install curl
-            exit 0
+            return 0
             ;;
         *)
             echo "Unsupported distribution. Installation cannot continue." 
-            exit 1
+            return 1
             ;;
     esac
 }
@@ -97,12 +97,7 @@ else
     if [ $? -eq 130 ]; then
         echo "Installation interrupted. Exiting..."
         exit 1
-    fi  
-
-    # create docker group for non-root access
-    groupadd docker
-    usermod -aG docker $SUDO_USER 
-    newgrp docker 
+    fi   
 
     curl -L --fail https://github.com/docker/compose/releases/download/1.29.2/run.sh -o /usr/local/bin/docker-compose # download compose
     chmod +x /usr/local/bin/docker-compose
@@ -114,4 +109,5 @@ else
     usermod -aG docker $SUDO_USER
     echo "Starting docker service"
     service docker start
+    su $SUDO_USER
 fi

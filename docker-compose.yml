@@ -32,7 +32,6 @@ services:
         ports:
             - 80:80
         profiles: ["test"]
-        command: npm run test
 
 networks:
     parajuniper2:
