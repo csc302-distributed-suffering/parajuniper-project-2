@@ -25,4 +25,6 @@ else
 
     curl -fsSL https://get.docker.com -o get-docker.sh
     sh get-docker.sh
+    curl -L --fail https://github.com/docker/compose/releases/download/1.29.2/run.sh -o /usr/local/bin/docker-compose # download compose
+    chmod +x /usr/local/bin/docker-compose
 fi
