@@ -42,7 +42,7 @@ else
 
             echo "Removing docker group"
             groupdel docker
-            return 0
+            break 
             ;;
         centos|fedora|rhel)
             echo "Using yum..."
@@ -57,7 +57,7 @@ else
                   docker-selinux \
                   docker-engine-selinux \
                   docker-engine 
-            return 0
+            break 
             ;;
         sles)
             echo "Using zypper..."
@@ -71,11 +71,11 @@ else
                   docker-logrotate \
                   docker-engine \
                   runc
-            return 0
+            break
             ;;
         *)
             echo "Unsupported distribution. Cannot continue." 
-            return 1
+            break 
             ;;
     esac  
 

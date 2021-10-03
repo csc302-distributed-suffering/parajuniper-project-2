@@ -106,4 +106,12 @@ else
 
     curl -L --fail https://github.com/docker/compose/releases/download/1.29.2/run.sh -o /usr/local/bin/docker-compose # download compose
     chmod +x /usr/local/bin/docker-compose
+
+    # create docker group for non-root access
+    echo "Creating docker group"
+    groupadd docker 2> /dev/null
+    echo "Adding $SUDO_USER to group docker"
+    usermod -aG docker $SUDO_USER
+    echo "Starting docker service"
+    service docker start
 fi
