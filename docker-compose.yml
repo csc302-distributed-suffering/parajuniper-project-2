@@ -1,0 +1,38 @@
+version: "3.7"
+
+services: 
+    client:
+        stdin_open: true
+        tty: true
+        build:
+            dockerfile: Dockerfile
+            context: './src/client'
+        ports:
+            - 3000:3000
+        depends_on:
+            - "server"
+        networks:
+            - parajuniper2
+
+    server:
+        tty: true
+        build:
+            dockerfile: Dockerfile
+            context: './src/server'
+        ports:
+            - 5000:5000
+        networks:
+            - parajuniper2
+
+    test:
+        build:
+            context: '.'
+        environment:
+            - CI=true
+        ports:
+            - 80:80
+        profiles: ["test"]
+
+networks:
+    parajuniper2:
+        driver: bridge
