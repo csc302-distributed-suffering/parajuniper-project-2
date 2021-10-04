@@ -5,6 +5,7 @@ An application meant for gathering patient data from FHIR databases.
 For documentation, please see the [documentation](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation) folder. There you can find our [meeting minutes](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/meeting%20minutes) and [milestones for development](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/milestones.md).
 
 # Table of Contents
+- [Description and Implementation](#description-and-implementation)
 - [Installation](#installation)
   - [Unix Installation](#unix-installation-instructions)
   - [Windows Installation](#windows-installation-instructions)
@@ -12,6 +13,52 @@ For documentation, please see the [documentation](https://github.com/csc302-dist
 - [Building the Application](#building-the-application)
 - [Running Tests](#running-tests)
 - [Appendix](#appendix)
+
+## Description and Implementation
+
+Directory Structure:
+```
+parajuniper-project-2
+├── Dockerfile
+├── README.md
+├── docker-compose.yml
+├── documentation
+│   ├── meeting minutes
+│   └── milestones.md
+├── package-lock.json
+├── package.json
+├── scripts
+│   ├── install-env.sh
+│   └── uninstall-env.sh
+└── src
+    ├── client
+    │   ├── Dockerfile
+    │   ├── package-lock.json
+    │   ├── package.json
+    │   ├── public
+    │   │   ├── favicon.ico
+    │   │   ├── index.html
+    │   │   ├── logo192.png
+    │   │   ├── logo512.png
+    │   │   ├── manifest.json
+    │   │   └── robots.txt
+    │   └── src
+    │       ├── App.css
+    │       ├── App.js
+    │       ├── App.test.js
+    │       ├── __snapshots__
+    │       │   └── App.test.js.snap
+    │       ├── index.css
+    │       └── index.js
+    └── server
+        ├── Dockerfile
+        ├── package-lock.json
+        ├── package.json
+        ├── routes
+        │   ├── demo.js
+        │   └── demo.test.js
+        └── server.js
+```
 
 ## Installation
 
