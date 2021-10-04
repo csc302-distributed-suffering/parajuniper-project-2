@@ -127,8 +127,13 @@ sudo sh scripts/uninstall-env.sh
 For more information about any of the resources mentioned here, please navigate to the links below:
 
 - [FHIR Documentation](http://www.hl7.org/fhir/documentation.html)
+- [React](https://reactjs.org/docs/react-api.html)
+- [Express](https://expressjs.com/en/4x/api.html)
+- [Jest](https://jestjs.io/docs/getting-started)
+- [Typescript](https://www.typescriptlang.org/docs/handbook/intro.html)
+- [Node.js](https://nodejs.org/dist/latest-v16.x/docs/api/)
 - [Docker Reference](https://docs.docker.com/)
-- [`docker-compose` reference]()
+- [`docker-compose` reference](https://docs.docker.com/compose/)
 - [Homebrew](https://brew.sh/)
 - [`cURL`](https://curl.se/)
 - [Installing WSL](https://docs.microsoft.com/en-us/windows/wsl/install)
