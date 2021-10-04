@@ -1,4 +1,4 @@
-# Oct 3 Meeting Minutes:
+# Minutes - October 3, 2021
 
 
 Progress Update
