@@ -8,8 +8,9 @@ orbs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-    test:
+    parajuniper:
       jobs:
         - node/test:
+            setup: 
+              - run: npm run init-setup
             run-command: test 
-            version: '16.10' 
