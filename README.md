@@ -2,7 +2,7 @@
 
 An application meant for gathering patient data from FHIR databases. 
 
-For documentation, please see the [documentation](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation) folder. There you can find our [meeting minutes](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/meeting%20minutes) and [milestones for development](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/milestones.md).
+For documentation, please see the [documentation](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation) folder. There you can find our [meeting minutes](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/meeting%20minutes), [milestones for development](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/milestones.md) and [technology stack summary](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/Tech%20Stack.md).
 
 # Table of Contents
 - [Description and Implementation](#description-and-implementation)
