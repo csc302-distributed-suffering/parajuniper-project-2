@@ -1,4 +1,4 @@
-# Sept 29 2021
+# Minutes - September 29th, 2021
 - Created git repo
 - Discussed tech stack
   - Front-end: React (familiarity, widely used, easy to find resources)
