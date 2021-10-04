@@ -1,5 +1,5 @@
-September 26th Meeting Minutes:
--
+# Minutes - September 26th, 2021:
+
 ### Who's going to be the minute taker?
 - Rotating in alphabetical order
 
