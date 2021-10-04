@@ -14,7 +14,7 @@
     - Script for docker install and setting up docker image
     - CI set up for repo
   - Viktar
-    - Set up React front end
+    - Set up React frontend
     - Set up backend server and connect it to frontend
 
 ## Milestone 2: Rough Implementation
