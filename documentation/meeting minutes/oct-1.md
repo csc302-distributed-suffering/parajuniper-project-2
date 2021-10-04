@@ -1,5 +1,5 @@
-Minutes - October 1st, 2021
--
+# Minutes - October 1st, 2021
+
 - Google Cloud v. Docker
     - Cant assume TA will have Google account, go with Docker
 Docker
