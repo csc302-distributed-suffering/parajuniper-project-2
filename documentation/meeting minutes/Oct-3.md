@@ -1,4 +1,4 @@
-# Minutes - October 3, 2021
+# Minutes - October 3rd, 2021
 
 
 Progress Update
