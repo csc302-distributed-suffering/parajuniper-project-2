@@ -5,7 +5,7 @@ Here we provide an overview of our technological stack and the reasons why we ch
 We are building a web app with a React frontend and Node/Express backend. The application will allow users to search for patient data
 based on multiple parameters that will be determined in Milestone 2. The application will run in the two most popular browsers (Firefox and Chrome).
 Making API requests to our server will parse the request data and pass it on to the FHIRKit Client object which will query the demo FHIR database for
-the data. The data will then be parsed again to the server and passed tot he UI which will display it to the user.
+the data. The data will then be parsed again to the server and passed to the UI which will display it to the user.
 
 ### Language
 Both the frontend and backend are going to be written in TypeScript. There are typings available for the FHIRKit Client, React and Node that will enable us to support
@@ -46,8 +46,7 @@ The main choices we considered for our container solution were Docker and Google
   This was a very important point for us as we want the experience of installing and running a container with our application in it to be as simple as possible so users
   with a varied technical experience can do it. 
 - Docker offered fast and clear tutorials.
-- Docker is one of the most widely used container technologies meaning if this project gets passed on to another developer, they can get started with it quickly as most developers
-  are already used to working with Docker.
+- Docker is one of the most widely used container technologies meaning if this project gets passed on to another developer, they can get started with it quickly as most developers are already used to working with Docker.
 
 ### QA
 For testing we decided to initially use Enzyme for frontend testing and Jest for backend testing. We also want to integrate CircleCI for continuous integration to ensure
