@@ -16,7 +16,7 @@ class App extends Component{
                 <button onClick={() => {
                   fetch('/demo/demoRoute')
                     .then(res => res.json())
-                    .then(json => document.getElementById("hiddenDiv")!.textContent = json.text)
+                    .then(json => document.getElementById("hiddenDiv").textContent = json.text)
                 }}>Click Me, I dare you! ;)</button>
                 <div id="hiddenDiv"></div>
               </header>

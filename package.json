@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-app": "concurrently \"cd src/server && npm start\" \"cd src/frontend && npm start\"",
+    "start-app": "concurrently \"cd src/server && npm start\" \"cd src/client && npm start\"",
     "start-client": "cd src/client && npm start",
     "start-server": "cd src/server && npm start",
     "init-setup": "npm install && concurrently \"cd src/client && npm install\" \"cd src/server && npm install\"",
