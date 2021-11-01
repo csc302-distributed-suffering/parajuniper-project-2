@@ -20,6 +20,11 @@ router.get('/patientInfo', (req, res) => {
 
         }).then((data) => {
             if (isBundle(data)) {
+                if (data.total === 0 || !data.entry) {
+                    res.status(200).send({});
+                    return;
+                }
+
                 const responseData = {
                     nextPageLink: '',
                     totalMatches: 0,
@@ -52,6 +57,171 @@ router.get('/patientInfo', (req, res) => {
         console.error(`${msg}.\n`);
         console.error(e);
         res.status(500).send(msg);
+    }
+});
+
+/*
+* SUMMARIES:
+* Allergies
+* Conditions
+* Procedures
+* Family History
+* Clinical Impressions
+*/
+router.get('/patientSummaryInfo', async (req, res) => {
+    const pId = req.body.id ?? -1;
+
+    if (pId == -1) {
+        console.error('No patient id found for request.');
+        res.status(400).send();
+        return;
+    }
+});
+
+/*
+* DIAGNOSTIC:
+* Observations
+* Media
+* Diagnostic Reports
+* Specimens
+* BodyStructure
+* Imaging Studies
+* Questionnaire Responses
+* Molecular Sequencing Info
+*/
+router.get('/patientDiagnosticInfo', async (req, res) => {
+    const pId = req.body.id ?? -1;
+
+    if (pId == -1) {
+        console.error('No patient id found for request.');
+        res.status(400).send();
+        return;
+    }
+});
+
+/*
+* MEDICATIONS:
+* Medication Requests
+* Administered Medication
+* Dispensed Medication
+* Medication Statement
+* Immunizations
+* Immunization Evaluations
+* Recommended Immunizations
+*/
+router.get('/patientMedicationInfo', async (req, res) => {
+    const pId = req.body.id ?? -1;
+
+    if (pId == -1) {
+        console.error('No patient id found for request.');
+        res.status(400).send();
+        return;
+    }
+});
+
+/*
+* CARE PROVISION:
+* Care Plan
+* Care Team
+* Care Goals
+* Service Request
+* Nutrition Order
+* Vision Prescription
+* Risk Assessments
+* Request Groups
+*/
+router.get('/patientCareInfo', async (req, res) => {
+    const pId = req.body.id ?? -1;
+
+    if (pId == -1) {
+        console.error('No patient id found for request.');
+        res.status(400).send();
+        return;
+    }
+});
+
+/*
+* COMMUNICATIONS:
+* Communication
+* Communication Request
+* Device Requests
+* Device Use Statement
+* Supply Request
+* Supply Delivery
+*/
+router.get('/patientCommunicationsInfo', async (req, res) => {
+    const pId = req.body.id ?? -1;
+
+    if (pId == -1) {
+        console.error('No patient id found for request.');
+        res.status(400).send();
+        return;
+    }
+});
+
+/*
+* SUPPORT:
+* Coverage
+* Coverage Eligibility Requests
+* Coverage Eligibility Responses
+* Enrollment Requests
+* Enrollment Responses
+*/
+router.get('/patientSupportInfo', async (req, res) => {
+    const pId = req.body.id ?? -1;
+
+    if (pId == -1) {
+        console.error('No patient id found for request.');
+        res.status(400).send();
+        return;
+    }
+});
+
+/*
+* BILLING:
+* Claims
+* Claim Responses
+* Invoices
+*/
+router.get('/patientBilingInfo', async (req, res) => {
+    const pId = req.body.id ?? -1;
+
+    if (pId == -1) {
+        console.error('No patient id found for request.');
+        res.status(400).send();
+        return;
+    }
+});
+
+/*
+* PAYMENT:
+* Payment Notices
+* Payment Reconciliations
+*/
+router.get('/patientPaymentInfo', async (req, res) => {
+    const pId = req.body.id ?? -1;
+
+    if (pId == -1) {
+        console.error('No patient id found for request.');
+        res.status(400).send();
+        return;
+    }
+});
+
+/*
+* GENERAL:
+* Account(s)
+* Charged Items
+* Explanation of Benefits
+* Research Subject
+*/
+router.get('/patientGeneralInfo', async (req, res) => {
+    const pId = req.body.id ?? -1;
+
+    if (pId == -1) {
+        console.error('No patient id found for request.');
+        res.status(400).send();
+        return;
     }
 });
 
