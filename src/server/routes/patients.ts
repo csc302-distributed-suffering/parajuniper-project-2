@@ -1,13 +1,13 @@
 import express = require('express');
 import Client from 'fhir-kit-client';
-import {BundleLink} from 'fhir/r4';
+import {BundleLink, Resource, Patient} from 'fhir/r4';
 const router = express.Router();
-const config = {baseUrl: 'https://r3.smarthealthit.org/'};
+const config = {baseUrl: 'http://hapi.fhir.org/baseR4'};
 const fhirKitClient = require('fhir-kit-client');
 const client: Client = new fhirKitClient(config);
 
-
-router.get('/patientInfo', (req, res) => {
+// TODO: add more queries for listing patients?
+router.get('/patientList', (req, res) => {
     const patientName = req.body.name ?? '';
     const count = req.body.count ?? '10'; // TODO: FHIR only supports client-side pagination. So we need to return a link to the next page and the client side needs to make sure it gets loaded. FUN...
     const msg = `An error occurred while fetch result for patient ${patientName}.`;
@@ -49,182 +49,55 @@ router.get('/patientInfo', (req, res) => {
                 res.status(400).send();
             }
         }).catch((e) => {
-            console.error(`${msg}.\n`);
+            console.error(`${msg}\n`);
             console.error(e);
             res.status(500).send(msg);
         });
     } catch (e) {
-        console.error(`${msg}.\n`);
+        console.error(`${msg}\n`);
         console.error(e);
         res.status(500).send(msg);
     }
 });
 
-/*
-* SUMMARIES:
-* Allergies
-* Conditions
-* Procedures
-* Family History
-* Clinical Impressions
-*/
-router.get('/patientSummaryInfo', async (req, res) => {
-    const pId = req.body.id ?? -1;
+router.get('/patientInfo', async (req, res) => {
+    const pId: string = req.body.id ?? '';
 
-    if (pId == -1) {
-        console.error('No patient id found for request.');
+    if (pId == '') {
+        console.error('No id provided.');
         res.status(400).send();
         return;
     }
-});
 
-/*
-* DIAGNOSTIC:
-* Observations
-* Media
-* Diagnostic Reports
-* Specimens
-* BodyStructure
-* Imaging Studies
-* Questionnaire Responses
-* Molecular Sequencing Info
-*/
-router.get('/patientDiagnosticInfo', async (req, res) => {
-    const pId = req.body.id ?? -1;
+    try {
+        const response = await client.search({
+            resourceType: '$everything',
+            compartment: {resourceType: 'Patient', id: pId},
+        });
 
-    if (pId == -1) {
-        console.error('No patient id found for request.');
-        res.status(400).send();
-        return;
+        if (response.total === 0 || !response.entry) {
+            console.error(`Could not find patient with ID ${pId}`);
+            res.status(404).send();
+            return;
+        }
+
+        let patient : fhir4.Patient = {} as Patient;
+        const pInfo : [Resource] = [] as unknown as [Resource];
+        for (const entry of response.entry) {
+            if (entry.resource.id === pId) {
+                patient = entry.resource;
+            } else {
+                pInfo.push(entry.resource);
+            }
+        }
+
+        const parsedData = parseData(patient, pInfo);
+        res.status(200).send(parsedData);
+    } catch (e) {
+        console.error(e);
+        res.status(500).send();
     }
 });
-
-/*
-* MEDICATIONS:
-* Medication Requests
-* Administered Medication
-* Dispensed Medication
-* Medication Statement
-* Immunizations
-* Immunization Evaluations
-* Recommended Immunizations
-*/
-router.get('/patientMedicationInfo', async (req, res) => {
-    const pId = req.body.id ?? -1;
-
-    if (pId == -1) {
-        console.error('No patient id found for request.');
-        res.status(400).send();
-        return;
-    }
-});
-
-/*
-* CARE PROVISION:
-* Care Plan
-* Care Team
-* Care Goals
-* Service Request
-* Nutrition Order
-* Vision Prescription
-* Risk Assessments
-* Request Groups
-*/
-router.get('/patientCareInfo', async (req, res) => {
-    const pId = req.body.id ?? -1;
-
-    if (pId == -1) {
-        console.error('No patient id found for request.');
-        res.status(400).send();
-        return;
-    }
-});
-
-/*
-* COMMUNICATIONS:
-* Communication
-* Communication Request
-* Device Requests
-* Device Use Statement
-* Supply Request
-* Supply Delivery
-*/
-router.get('/patientCommunicationsInfo', async (req, res) => {
-    const pId = req.body.id ?? -1;
-
-    if (pId == -1) {
-        console.error('No patient id found for request.');
-        res.status(400).send();
-        return;
-    }
-});
-
-/*
-* SUPPORT:
-* Coverage
-* Coverage Eligibility Requests
-* Coverage Eligibility Responses
-* Enrollment Requests
-* Enrollment Responses
-*/
-router.get('/patientSupportInfo', async (req, res) => {
-    const pId = req.body.id ?? -1;
-
-    if (pId == -1) {
-        console.error('No patient id found for request.');
-        res.status(400).send();
-        return;
-    }
-});
-
-/*
-* BILLING:
-* Claims
-* Claim Responses
-* Invoices
-*/
-router.get('/patientBilingInfo', async (req, res) => {
-    const pId = req.body.id ?? -1;
-
-    if (pId == -1) {
-        console.error('No patient id found for request.');
-        res.status(400).send();
-        return;
-    }
-});
-
-/*
-* PAYMENT:
-* Payment Notices
-* Payment Reconciliations
-*/
-router.get('/patientPaymentInfo', async (req, res) => {
-    const pId = req.body.id ?? -1;
-
-    if (pId == -1) {
-        console.error('No patient id found for request.');
-        res.status(400).send();
-        return;
-    }
-});
-
-/*
-* GENERAL:
-* Account(s)
-* Charged Items
-* Explanation of Benefits
-* Research Subject
-*/
-router.get('/patientGeneralInfo', async (req, res) => {
-    const pId = req.body.id ?? -1;
-
-    if (pId == -1) {
-        console.error('No patient id found for request.');
-        res.status(400).send();
-        return;
-    }
-});
-
 
 // ---------------- Util Methods ----------------
 const findNextPageLink = (links: BundleLink[]) => {
@@ -235,6 +108,13 @@ const findNextPageLink = (links: BundleLink[]) => {
     }
 
     return '';
+};
+
+const parseData = (patient: Patient, pInfo: [Resource]) => {
+    return {
+        patient,
+        ...pInfo,
+    };
 };
 
 // ---------------- Type Guards ----------------
