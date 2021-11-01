@@ -13,9 +13,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/fhir": "0.0.34",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "fhir-kit-client": "^1.7.2",
+    "fhir-kit-client": "^1.8.0",
+    "json-patch": "^0.7.0",
     "ts-node": "^10.2.1"
   },
   "devDependencies": {

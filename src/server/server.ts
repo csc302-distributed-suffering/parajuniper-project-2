@@ -13,8 +13,8 @@ app.use(express.urlencoded({ extended: false }));
 
 
 //routes config
-const demoRoutes = require('./routes/demo.js')
-app.use('/demo', demoRoutes)
+const patientRoutes = require('./routes/patients')
+app.use('/patients', patientRoutes)
 
 
 //SERVER
