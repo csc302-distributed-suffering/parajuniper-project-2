@@ -1,4 +1,4 @@
-const express = require('express')
+import * as express from 'express';
 const path = require('path')
 
 
@@ -19,7 +19,7 @@ app.use('/demo', demoRoutes)
 
 //SERVER
 if(process.env.NODE_ENV === 'production'){
-    app.use(express.static(path.join(__dirname, '../frontend/build')));
+    app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
 app.listen(app.get('port'), () => {
