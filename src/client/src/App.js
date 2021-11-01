@@ -37,7 +37,7 @@ class App extends Component {
             <div className="App">
               <div id='searchbar'>
                 <Searchbox type='search' placeholder='What are you looking for today?'/>
-                <button id='editButton' title='Change displayed fields' class="vertical-center">
+                <button id='editButton' title='Change displayed fields' className="vertical-center">
                   <img src={editIcon} alt='Edit' id='editIcon'/>
                   </button>
               </div>
