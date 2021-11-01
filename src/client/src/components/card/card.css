@@ -1,0 +1,12 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 2px;
+    padding: 25px;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.01)
+}
