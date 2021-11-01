@@ -1,6 +1,7 @@
 import * as express from 'express';
 const path = require('path')
 
+require('source-map-support').install();
 
 require('dotenv').config()
 

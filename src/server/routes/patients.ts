@@ -14,7 +14,7 @@ router.get('/patientInfo', (req, res) => {
     try{
         client.search({
             resourceType: "Patient",
-            searchParams: {name: patientName, _count: count, _page: "3"}
+            searchParams: {name: patientName, _count: count, _page: "3"} // TODO: how do we deal with name collisions? maybe add diff search params?
 
         }).then((data) => {
             if(isBundle(data)){
