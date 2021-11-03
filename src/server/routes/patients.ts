@@ -8,7 +8,7 @@ const fhirKitClient = require('fhir-kit-client');
 const client: Client = new fhirKitClient(config);
 
 // TODO: add more queries for listing patients?
-router.get('/patientList', (req: Request, res: Response) => {
+router.get('/list', (req: Request, res: Response) => {
     // const patientName = req.body.name ?? '';
     // const count = req.body.count ?? '10'; // TODO: FHIR only supports client-side pagination. So we need to return a link to the next page and the client side needs to make sure it gets loaded. FUN...
     const msg = `An error occurred while listing patients.`; // TODO should probably make this more descriptive
@@ -58,7 +58,7 @@ router.get('/patientList', (req: Request, res: Response) => {
     }
 });
 
-router.get('/patientInfo', async (req, res) => {
+router.get('/info', async (req, res) => {
     const pId: string = req.query.id as string ?? '';
 
     if (pId == '') {
@@ -121,7 +121,8 @@ const getSearchParams = (req: Request): SParams => {
         resourceType: 'Patient',
         searchParams: {
             _count: '0',
-            _page: '3',
+            name: "",
+            family: ""
         },
     };
 
@@ -136,9 +137,9 @@ const getSearchParams = (req: Request): SParams => {
         } else if (key === 'count') {
             const count: string = req.query.count as string;
             params.searchParams._count = count.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
-        } else if (key === 'pages') {
-            const pages: string = req.query.pages as string;
-            params.searchParams._page = pages.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
+        } else if (key === 'family') {
+            const name: string = req.query.name as string;
+            params.searchParams.name = name.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
         }
     }
 
