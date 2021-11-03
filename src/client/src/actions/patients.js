@@ -44,7 +44,7 @@ const getPatient = async (id, count) => {
 
 
 
-export {getPatientsWName}
+export {getPatientsWName, getPatient}
 
 
 
