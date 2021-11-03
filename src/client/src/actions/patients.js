@@ -1,5 +1,3 @@
-
-
 const getPatientsWName = async (firstName, lastName, count) => {    
     
     const url = `/patients/list?name=${firstName}&${lastName}&count=${count}`
