@@ -13,9 +13,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/fhir": "0.0.34",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "fhir-kit-client": "^1.7.2",
+    "fhir-kit-client": "^1.8.0",
+    "json-patch": "^0.7.0",
     "ts-node": "^10.2.1"
   },
   "devDependencies": {
@@ -24,9 +26,14 @@
     "@babel/preset-typescript": "^7.15.0",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
     "babel-jest": "^27.2.4",
-    "eslint": "^7.32.0",
+    "eslint": "^8.1.0",
+    "eslint-config-google": "^0.14.0",
     "jest": "^27.2.4",
+    "source-map-support": "^0.5.20",
+    "supertest": "^6.1.6",
     "typescript": "^4.4.3"
   }
 }
