@@ -1,30 +1,28 @@
-import express = require('express');
-import Client from 'fhir-kit-client';
+const express = require('express');
+import {Request, Response} from 'express';
+import Client, {SearchParams} from 'fhir-kit-client';
 import {BundleLink, Resource, Patient} from 'fhir/r4';
 const router = express.Router();
-const config = {baseUrl: 'http://hapi.fhir.org/baseR4'};
+const config = {baseUrl: 'https://r4.smarthealthit.org/'};
 const fhirKitClient = require('fhir-kit-client');
 const client: Client = new fhirKitClient(config);
 
 // TODO: add more queries for listing patients?
-router.get('/patientList', (req, res) => {
-    const patientName = req.body.name ?? '';
-    const count = req.body.count ?? '10'; // TODO: FHIR only supports client-side pagination. So we need to return a link to the next page and the client side needs to make sure it gets loaded. FUN...
-    const msg = `An error occurred while fetch result for patient ${patientName}.`;
+router.get('/patientList', (req: Request, res: Response) => {
+    // const patientName = req.body.name ?? '';
+    // const count = req.body.count ?? '10'; // TODO: FHIR only supports client-side pagination. So we need to return a link to the next page and the client side needs to make sure it gets loaded. FUN...
+    const msg = `An error occurred while listing patients.`; // TODO should probably make this more descriptive
+    const sParams: SParams = getSearchParams(req);
 
     try {
-        client.search({
-            resourceType: 'Patient',
-            // TODO: how do we deal with name collisions? maybe add diff search params?
-            searchParams: {name: patientName, _count: count, _page: '3'},
-
-        }).then((data) => {
+        client.search(sParams).then((data) => {
             if (isBundle(data)) {
                 if (data.total === 0 || !data.entry) {
                     res.status(200).send({});
                     return;
                 }
 
+                const count = sParams.searchParams.count as string;
                 const responseData = {
                     nextPageLink: '',
                     totalMatches: 0,
@@ -61,7 +59,7 @@ router.get('/patientList', (req, res) => {
 });
 
 router.get('/patientInfo', async (req, res) => {
-    const pId: string = req.body.id ?? '';
+    const pId: string = req.query.id as string ?? '';
 
     if (pId == '') {
         console.error('No id provided.');
@@ -117,6 +115,36 @@ const parseData = (patient: Patient, pInfo: [Resource]) => {
     };
 };
 
+// TODO: Add more params/restructure this?
+const getSearchParams = (req: Request): SParams => {
+    const params : SParams = {
+        resourceType: 'Patient',
+        searchParams: {
+            _count: '0',
+            _page: '3',
+        },
+    };
+
+    if (!req.query) {
+        return params;
+    }
+
+    for (const key in req.query) {
+        if (key === 'name') {
+            const name: string = req.query.name as string;
+            params.searchParams.name = name.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
+        } else if (key === 'count') {
+            const count: string = req.query.count as string;
+            params.searchParams._count = count.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
+        } else if (key === 'pages') {
+            const pages: string = req.query.pages as string;
+            params.searchParams._page = pages.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
+        }
+    }
+
+    return params;
+};
+
 // ---------------- Type Guards ----------------
 const isPatient = (resource: fhir4.Resource): resource is fhir4.Patient => {
     return resource.resourceType === 'Patient';
@@ -125,5 +153,10 @@ const isPatient = (resource: fhir4.Resource): resource is fhir4.Patient => {
 const isBundle = (resource: fhir4.Resource): resource is fhir4.Bundle => {
     return resource.resourceType === 'Bundle';
 };
+
+interface SParams {
+    resourceType: string,
+    searchParams?: SearchParams,
+}
 
 module.exports = router;
