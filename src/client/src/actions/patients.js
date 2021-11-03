@@ -45,13 +45,3 @@ const getPatient = async (id, count) => {
 
 
 export {getPatientsWName, getPatient}
-
-
-
-
-
-
-
-
-
-
