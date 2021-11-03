@@ -8,53 +8,47 @@ const fhirKitClient = require('fhir-kit-client');
 const client: Client = new fhirKitClient(config);
 
 // TODO: add more queries for listing patients?
-router.get('/list', (req: Request, res: Response) => {
+router.get('/list', async (req: Request, res: Response) => {
     // const patientName = req.body.name ?? '';
     // const count = req.body.count ?? '10'; // TODO: FHIR only supports client-side pagination. So we need to return a link to the next page and the client side needs to make sure it gets loaded. FUN...
     const msg = `An error occurred while listing patients.`; // TODO should probably make this more descriptive
     const sParams: SParams = getSearchParams(req);
 
     try {
-        client.search(sParams).then((data) => {
-            if (isBundle(data)) {
-                if (data.total === 0 || !data.entry) {
-                    res.status(200).send({});
-                    return;
-                }
-
-                const count = sParams.searchParams.count as string;
-                const responseData = {
-                    nextPageLink: '',
-                    totalMatches: 0,
-                    returnedMatches: 0,
-                    patients: [],
-                };
-                responseData.totalMatches = data.total;
-                responseData.nextPageLink = findNextPageLink(data.link);
-                responseData.returnedMatches = responseData.totalMatches > parseInt(count) ?
-                    parseInt(count) :
-                    responseData.totalMatches;
-
-                for (const entry of data.entry) {
-                    if (isPatient(entry.resource)) {
-                        responseData.patients.push(entry.resource);
-                    }
-                }
-
-                res.status(200).send(responseData);
-            } else {
-                console.warn('Response was not a bundle.');
-                res.status(400).send();
+        const data = await client.search(sParams);
+        if (isBundle(data)) {
+            if (data.total === 0 || !data.entry) {
+                res.status(200).send({});
+                return;
             }
-        }).catch((e) => {
-            console.error(`${msg}\n`);
-            console.error(e);
-            res.status(500).send(msg);
-        });
+
+            const count = sParams.searchParams.count as string;
+            const responseData = {
+                nextPageLink: '',
+                totalMatches: 0,
+                returnedMatches: 0,
+                patients: [],
+            };
+            responseData.totalMatches = data.total;
+            responseData.nextPageLink = findNextPageLink(data.link);
+            responseData.returnedMatches = responseData.totalMatches > parseInt(count) ?
+                parseInt(count) :
+                responseData.totalMatches;
+
+            for (const entry of data.entry) {
+                if (isPatient(entry.resource)) {
+                    responseData.patients.push(entry.resource);
+                }
+            }
+
+            res.status(200).send(responseData);
+        } else {
+            console.warn('Response was not a bundle.');
+            res.status(400).send();
+        }
     } catch (e) {
-        console.error(`${msg}\n`);
-        console.error(e);
-        res.status(500).send(msg);
+        console.error(`${msg}\n${e}`);
+        res.status(500).send('test');
     }
 });
 
