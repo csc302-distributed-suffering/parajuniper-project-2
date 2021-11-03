@@ -110,8 +110,8 @@ const findNextPageLink = (links: BundleLink[]) => {
 
 const parseData = (patient: Patient, pInfo: [Resource]) => {
     return {
-        patient,
-        ...pInfo,
+        patient: patient,
+        records: [...pInfo],
     };
 };
 
