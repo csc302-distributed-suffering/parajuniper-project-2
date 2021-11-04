@@ -24,8 +24,13 @@ parajuniper-project-2
 ├── README.md
 ├── docker-compose.yml
 ├── documentation
-│   ├── meeting minutes
-│   └── milestones.md
+│   ├── A1
+│   │   ├── meeting minutes
+│   │   ├── Tech Stack.md
+│   │   └── milestones.md
+│   └── A2
+│       ├── Meeting Minutes
+│       └── milestone2.md
 ├── package-lock.json
 ├── package.json
 ├── scripts
