@@ -96,7 +96,7 @@ To build the application after installing Docker, simply navigate to the root di
 docker-compose up
 ```
 
-This command will build all containers and run them. After the build is complete, you should be able to navigate to http://localhost:3000 to see a stub implemenation of our application. To terminate, simply interrupt using `Ctrl+C` in terminal, manually stop the containers in the Docker GUI, or run
+This command will build all containers and run them. After the build is complete, you should be able to navigate to http://localhost:3000 to see our rough implementation. Searching for a name will result in the results being displayed back on the UI. To terminate, simply interrupt using `Ctrl+C` in terminal, manually stop the containers in the Docker GUI, or run
 
 ```
 docker-compose down

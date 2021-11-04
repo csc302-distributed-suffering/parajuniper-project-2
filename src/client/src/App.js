@@ -59,7 +59,7 @@ class App extends Component {
     this.setState({loading: true}, async () => {
       const res = await getPatientsWName(this.state.searchPatientFirstName, this.state.searchPatientLastName, this.state.searchCount);
 
-      if (res.status != 200) {
+      if (res.status !== 200) {
         console.error(`Error retrieving patients. Code ${res.status}`);
         return;
       }
