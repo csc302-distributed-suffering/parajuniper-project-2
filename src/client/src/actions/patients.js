@@ -1,6 +1,9 @@
-const getPatientsWName = async (firstName, lastName, count) => {    
+const getPatientsWName = async (firstName, lastName, count) => {   
     
-    const url = `/patients/list?name=${firstName}&family=${lastName}&count=${count}`
+    const given = firstName === '' ? '' : `&given=${firstName}`;
+    const family = lastName === '' ? '' : `&family=${lastName}`;
+    
+    const url = `/patients/list?count=${count}${given}${family}`;
     const request = new Request(url, {
         method: 'GET',
         headers: {
