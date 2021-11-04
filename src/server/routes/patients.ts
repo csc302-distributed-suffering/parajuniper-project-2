@@ -115,8 +115,6 @@ const getSearchParams = (req: Request): SParams => {
         resourceType: 'Patient',
         searchParams: {
             _count: '0',
-            name: "",
-            family: ""
         },
     };
 
@@ -125,15 +123,15 @@ const getSearchParams = (req: Request): SParams => {
     }
 
     for (const key in req.query) {
-        if (key === 'name') {
-            const name: string = req.query.name as string;
-            params.searchParams.name = name.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
-        } else if (key === 'count') {
+        if (key === 'given' && req.query[key] !== '') {
+            const given: string = req.query.given as string;
+            params.searchParams.given = given.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
+        } else if (key === 'count' && req.query[key] !== '') {
             const count: string = req.query.count as string;
             params.searchParams._count = count.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
-        } else if (key === 'family') {
-            const name: string = req.query.name as string;
-            params.searchParams.name = name.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
+        } else if (key === 'family' && req.query[key] !== '') {
+            const family: string = req.query.family as string;
+            params.searchParams.family = family.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
         }
     }
 
