@@ -31,7 +31,7 @@ class App extends Component {
       searchPatientLastName: "",
       searchCount: 200,
       nextPageLink: "",
-      patientInfoLoaded: false
+      patientInfoLoaded: true,
     }
   }
 
@@ -49,10 +49,7 @@ class App extends Component {
                   <img src={searchIcon} alt='Search' id='searchIcon'/>
                   </button>
               </div>
-              { this.patientInfoLoaded
-                ? <CardList patients={this.state.patients}/>
-                : null
-              }
+              <CardList patients={this.state.patients}/>
             </div>
             )}
           />          
@@ -66,30 +63,35 @@ class App extends Component {
   }
 
   handlePatientListSearch = async () => {
+    this.patientInfoLoaded = false;
     const res = await getPatientsWName(this.state.searchPatientFirstName, this.state.searchPatientLastName, this.state.searchCount);
 
     if (res.status != 200) {
       console.error(`Error retrieving patients. Code ${res.status}`);
+      this.patientInfoLoaded = true;
       return;
     }
 
+    this.patientList = []
     if (res.data.patients) {
-      this.patientList = []
-      for (const patient of res.data.patients) {
-        const name = getPatient(patient);
+      for (const p of res.data.patients) {
+        const name = this.getPatientName(p);
 
         const patient = {
           name: name,
-          id: patient.id,
-          sex: patient.sex,
-          birthdate: '',
+          id: p.id,
+          gender: p.gender,
+          birthdate: p.birthDate,
         };
 
         this.patientList.push(patient);
       }
     }
 
-    this.patientInfoLoaded = true;
+    this.setState({
+      patients: this.patientList,
+      patientInfoLoaded: true,
+    });
   };
 
   getPatientName = (patient) => {
