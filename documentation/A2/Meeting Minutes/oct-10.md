@@ -5,7 +5,7 @@ Progress Update
 - Completed postmortem for A1 (see postmortem.md)
 	
 Milestone Updates
-- N/A
+- N/A (A2 not released yet)
 
 Decisions Made
-- N/A
+- N/A (A2 not released yet)
