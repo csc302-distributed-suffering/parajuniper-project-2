@@ -9,7 +9,7 @@
     "start-server": "cd src/server && npm start",
     "init-setup": "npm install && concurrently \"cd src/client && npm install\" \"cd src/server && npm install\"",
     "init-setup-run": "npm run init-setup && npm run start-app",
-    "test": "(cd src/client && npm run test -- --watchAll=false) && (cd src/server && npm run test -- --watchAll=false)"
+    "test": "(cd src/client && npm run test -- --watchAll=false); (cd $INIT_CWD/src/server && npm run test -- --watchAll=false)"
   },
   "keywords": [],
   "author": "",
