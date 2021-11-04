@@ -3,4 +3,4 @@ WORKDIR /app
 COPY package.json ./
 COPY ./ ./
 RUN npm run init-setup 
-CMD [ "npm", "run", "test" ]
+CMD [ "npm", "run", "test-ci" ]

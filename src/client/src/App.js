@@ -6,32 +6,22 @@ import searchIcon from './icons/search.png';
 import { CardList } from './components/cardlist/cardlist';
 import { Searchbox } from './components/searchbox/searchbox';
 import { getPatientsWName, getPatient } from './actions/patients';
+import BeatLoader from "react-spinners/BeatLoader";
+
 
 class App extends Component {
-  patientlist = [
-    {
-      name: 'John Smith',
-      id: '1',
-      sex: 'Male',
-      birthdate: '09/12/1947'
-    },
-    {
-      name: 'Jean Levin',
-      id: '2',
-      sex: 'Female',
-      birthdate: '02/24/1987'
-    }
-  ]
+  patientList = []
 
   constructor() {
     super();
     this.state = {
-      patients: this.patientlist,
+      patients: this.patientList,
       searchPatientFirstName: "",
       searchPatientLastName: "",
-      searchCount: 10,
+      searchCount: 200,
       nextPageLink: "",
-      patientInfoLoaded: false
+      loading: false,
+      searchResult: true,
     }
   }
 
@@ -49,7 +39,10 @@ class App extends Component {
                   <img src={searchIcon} alt='Search' id='searchIcon'/>
                   </button>
               </div>
-              <CardList patients={this.state.patients}/>
+              { this.state.loading
+               ? <BeatLoader color="rgb(97, 208, 255)"></BeatLoader>
+               : <CardList patients={this.state.patients} searchResult={this.state.searchResult}/>
+              }
             </div>
             )}
           />          
@@ -63,8 +56,50 @@ class App extends Component {
   }
 
   handlePatientListSearch = async () => {
-    const res = await getPatientsWName(this.state.searchPatientFirstName, this.state.searchPatientLastName, this.state.searchCount);
-  }
+    this.setState({loading: true}, async () => {
+      const res = await getPatientsWName(this.state.searchPatientFirstName, this.state.searchPatientLastName, this.state.searchCount);
+
+      if (res.status != 200) {
+        console.error(`Error retrieving patients. Code ${res.status}`);
+        return;
+      }
+  
+      this.patientList = []
+      if (res.data.patients) {
+        for (const p of res.data.patients) {
+          const name = this.getPatientName(p);
+  
+          const patient = {
+            name: name,
+            id: p.id,
+            gender: p.gender,
+            birthdate: p.birthDate,
+          };
+  
+          this.patientList.push(patient);
+        }
+      }
+  
+      this.setState({
+        patients: this.patientList,
+        loading: false,
+        searchResult: this.patientList.length !== 0,
+      });
+    })
+  };
+
+  getPatientName = (patient) => {
+    let cName = '';
+    for (const name of patient.name) {
+      if (name.use === 'official') {
+        return `${name.given} ${name.family}`; 
+      }
+
+      cName = `${name.given} ${name.family}`
+    }
+
+    return cName;
+  };
 
   handleSpecificPatientSearch = async () => {
     const res = await getPatient(this.state.searchPatientId, this.state.searchCount);
