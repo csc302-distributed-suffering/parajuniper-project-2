@@ -1,3 +1,12 @@
+# Summary:
+This document is a summary of how this milestones was organized, what decisions were made and how the tasks were prioritized, partitioned and assigned. It also contains all other information required for A2. For specific information pertaining to decisions made please see the Meeting Notes section. 
+
+## Meeting Minutes
+Can be found [here](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/A2/Meeting%20Minutes)
+
+## Figma Mockup
+Can be found [here](https://www.figma.com/file/X4uUMh7wDcmLqqV0uVRCeV/Untitled?node-id=0%3A1)
+
 # Specific Tasks to be Accomplished
 
 
