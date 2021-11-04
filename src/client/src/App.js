@@ -8,28 +8,28 @@ import { Searchbox } from './components/searchbox/searchbox';
 import { getPatientsWName, getPatient } from './actions/patients';
 
 class App extends Component {
-  patientlist = [
-    {
-      name: 'John Smith',
-      id: '1',
-      sex: 'Male',
-      birthdate: '09/12/1947'
-    },
-    {
-      name: 'Jean Levin',
-      id: '2',
-      sex: 'Female',
-      birthdate: '02/24/1987'
-    }
+  patientList = [
+    // {
+    //   name: 'John Smith',
+    //   id: '1',
+    //   sex: 'Male',
+    //   birthdate: '09/12/1947'
+    // },
+    // {
+    //   name: 'Jean Levin',
+    //   id: '2',
+    //   sex: 'Female',
+    //   birthdate: '02/24/1987'
+    // }
   ]
 
   constructor() {
     super();
     this.state = {
-      patients: this.patientlist,
+      patients: this.patientList,
       searchPatientFirstName: "",
       searchPatientLastName: "",
-      searchCount: 10,
+      searchCount: 200,
       nextPageLink: "",
       patientInfoLoaded: false
     }
@@ -49,7 +49,10 @@ class App extends Component {
                   <img src={searchIcon} alt='Search' id='searchIcon'/>
                   </button>
               </div>
-              <CardList patients={this.state.patients}/>
+              { this.patientInfoLoaded
+                ? <CardList patients={this.state.patients}/>
+                : null
+              }
             </div>
             )}
           />          
@@ -64,7 +67,43 @@ class App extends Component {
 
   handlePatientListSearch = async () => {
     const res = await getPatientsWName(this.state.searchPatientFirstName, this.state.searchPatientLastName, this.state.searchCount);
-  }
+
+    if (res.status != 200) {
+      console.error(`Error retrieving patients. Code ${res.status}`);
+      return;
+    }
+
+    if (res.data.patients) {
+      this.patientList = []
+      for (const patient of res.data.patients) {
+        const name = getPatient(patient);
+
+        const patient = {
+          name: name,
+          id: patient.id,
+          sex: patient.sex,
+          birthdate: '',
+        };
+
+        this.patientList.push(patient);
+      }
+    }
+
+    this.patientInfoLoaded = true;
+  };
+
+  getPatientName = (patient) => {
+    let cName = '';
+    for (const name of patient.name) {
+      if (name.use === 'official') {
+        return `${name.given} ${name.family}`; 
+      }
+
+      cName = `${name.given} ${name.family}`
+    }
+
+    return cName;
+  };
 
   handleSpecificPatientSearch = async () => {
     const res = await getPatient(this.state.searchPatientId, this.state.searchCount);
