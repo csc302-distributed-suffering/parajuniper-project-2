@@ -137,8 +137,8 @@ we transmit it and prevent processing of it on the client-side (which, in any ca
 </br> 
  
 2. **Decide on display format for data - Decision - Everyone - Complete - Due: 17/10/2021**
-        - Decide on how exactly patient records will be displayed.
-        - Decided on a grid layout for patient cards that are loaded after a search. Clicking a card will display a floating window with detailed patient information.
+   - Decide on how exactly patient records will be displayed.
+   - Decided on a grid layout for patient cards that are loaded after a search. Clicking a card will display a floating window with detailed patient information.
    
    #### Priority Rationale:
     - In addition to the above, before development could start, we needed to decide how patient   data will be displayed. We were planning on having a mockup of the UI being done and therefore, we needed to decide on this before we started working on it.
