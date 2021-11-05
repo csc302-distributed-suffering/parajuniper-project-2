@@ -10,7 +10,6 @@ Everyone completed their high priority tasks and a functional stub project was b
 
 ### Goals That Have Not Been Achived:
 - CircleCI was not integrated into the project due to some late issues with it.
-- 
 
 
 ### Adjustments to be Made:
