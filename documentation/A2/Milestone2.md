@@ -1,6 +1,8 @@
 # Summary:
 This document is a summary of how this milestones was organized, what decisions were made and how the tasks were prioritized, partitioned and assigned. It also contains all other information required for A2. For specific information pertaining to decisions made please see the Meeting Notes section. 
 
+When running the application, some example names that can searched are 'Chauncey Johnston', 'Clorinda Wilkinson', and 'Eddie Lankin'.
+
 ## Meeting Minutes
 Can be found [here](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/A2/Meeting%20Minutes)
 
