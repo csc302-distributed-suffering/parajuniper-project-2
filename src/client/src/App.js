@@ -5,8 +5,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import searchIcon from './icons/search.png';
 import { CardList } from './components/cardlist/cardlist';
 import { Searchbox } from './components/searchbox/searchbox';
+import { PatientModal } from './components/patientmodal/PatientModal';
 import { getPatientsWName, getPatient } from './actions/patients';
 import BeatLoader from "react-spinners/BeatLoader";
+// import {View, Modal, Text} from 'react-native'
 
 
 class App extends Component {
@@ -31,8 +33,9 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render={() => (
             <div className="App">
+              
               <div id='searchbar'>
-                <Searchbox type='search' id="patientSearch-1" name="searchPatientFirstName" placeholder='First Name' onInputChange={this.handleSearchInputChange}/>
+                    <Searchbox type='search' id="patientSearch-1" name="searchPatientFirstName" placeholder='First Name' onInputChange={this.handleSearchInputChange}/>
                 <Searchbox type='search' id="patientSearch-2" name="searchPatientLastName" placeholder='Last Name' onInputChange={this.handleSearchInputChange}/>
 
                 <button id='searchButton' title='Change displayed fields' className="vertical-center" onClick={this.handlePatientListSearch}>
