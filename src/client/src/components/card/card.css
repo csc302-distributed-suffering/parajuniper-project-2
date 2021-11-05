@@ -5,8 +5,24 @@
     border-radius: 2px;
     padding: 25px;
     cursor: pointer;
+    font-family: Tahoma;
+    border-radius: 10px;
+    box-shadow: "7px 7px 15rgba(0, 0, 0, 0.1)0,0,.6)";
+    position: relative;
 }
+.button {
+    background: #76B3FA;
+    border-radius: 100px;
+    padding: 20px 60px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.45em;
+    margin: 0 15px;
+    margin-top: 110px;
+
+  }
 
 .card:hover {
-    transform: scale(1.01)
+    /* transform: scale(1.01) */
+    
 }
