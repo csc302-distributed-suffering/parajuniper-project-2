@@ -2,7 +2,6 @@ import './Modal.css';
 
 export const Modal = ({ patient_info, handleClose, show,}) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
-  console.log(patient_info);
   return (
     <div className={showHideClassName}>
       <section className="modal-main">
