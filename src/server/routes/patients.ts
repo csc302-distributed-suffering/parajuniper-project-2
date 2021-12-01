@@ -7,6 +7,16 @@ const config = {baseUrl: 'https://r4.smarthealthit.org/'};
 const fhirKitClient = require('fhir-kit-client');
 const client: Client = new fhirKitClient(config);
 
+const patientResourceCategories = [
+    "Annotation", "Signature", "Account", "AdverseEvent", "AllergyIntolerance", "Appointment", "AppointmentResponse", "AuditEvent", "Basic", "BiologicallyDerivedProduct", "BodyStructure", "CarePlan",
+    "CareTeam", "ChargeItem", "Claim", "ClaimResponse", "ClinicalImpression", "Communication", "CommunicationRequest", "Composition", "Condition", "Consent", "Contract", "Coverage",
+    "CoverageEligibilityRequest", "CoverageEligibilityResponse", "DetectedIssue", "Device", "DeviceRequest", "DeviceUseStatement", "DiagnosticReport", "DocumentManifest", "DocumentReference",
+    "Encounter", "EnrollmentRequest", "EpisodeOfCare", "ExplanationOfBenefit", "FamilyMemberHistory", "Flag", "Goal", "Group", "GuidanceResponse", "ImagingStudy", "Immunization",
+    "ImmunizationEvaluation", "ImmunizationRecommendation", "Invoice", "List", "MeasureReport", "Media", "MedicationAdministration", "MedicationDispense", "MedicationRequest",
+    "MedicationStatement", "MolecularSequence", "NutritionOrder", "Observation", "Person", "Procedure", "Provenance", "QuestionnaireResponse", "RelatedPerson", "RequestGroup", 
+    "ResearchSubject", "RiskAssessment", "Schedule", "ServiceRequest", "Specimen", "SupplyDelivery", "SupplyRequest", "Task", "VisionPrescription"
+]
+
 // TODO: add more queries for listing patients?
 router.get('/list', async (req: Request, res: Response) => {
     // const patientName = req.body.name ?? '';
@@ -103,9 +113,18 @@ const findNextPageLink = (links: BundleLink[]) => {
 };
 
 const parseData = (patient: Patient, pInfo: [Resource]) => {
+    const data = {}
+    for(const res of patientResourceCategories){
+        data[res] = []
+    }
+
+    for(const res of pInfo){
+        data[res.resourceType].push(res)
+    }
+
     return {
         patient: patient,
-        records: [...pInfo],
+        records: data,
     };
 };
 
