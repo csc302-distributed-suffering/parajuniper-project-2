@@ -29,7 +29,7 @@ const bundleResponse: Bundle = {
         resource: {
             resourceType: 'Patient',
             id: '123',
-        }
+        },
     }],
     link: [],
     total: 2,
