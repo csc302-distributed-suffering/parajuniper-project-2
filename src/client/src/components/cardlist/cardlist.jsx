@@ -7,7 +7,7 @@ export class CardList extends React.Component {
     SearchRender = () => {
         if (this.props.searchResult) {
             return this.props.patients.map(patient => (
-                <Card key={patient.id} patient={patient}/>
+                <Card key={patient.id} patient={patient} handlePatientSearch={this.props.handlePatientSearch}/>
             ))
         } else {
             return <p>No results found!</p>

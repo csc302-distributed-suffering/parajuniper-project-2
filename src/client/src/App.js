@@ -44,7 +44,7 @@ class App extends Component {
               </div>
               { this.state.loading
                ? <BeatLoader color="rgb(97, 208, 255)"></BeatLoader>
-               : <CardList patients={this.state.patients} searchResult={this.state.searchResult}/>
+               : <CardList patients={this.state.patients} searchResult={this.state.searchResult} handlePatientSearch={this.handleSpecificPatientSearch}/>
               }
             </div>
             )}
@@ -104,8 +104,15 @@ class App extends Component {
     return cName;
   };
 
-  handleSpecificPatientSearch = async () => {
-    const res = await getPatient(this.state.searchPatientId, this.state.searchCount);
+  handleSpecificPatientSearch = async (id, count = 100) => {
+    const res = await getPatient(id, count);
+    
+    if(res.status !== 200){
+      console.error(`Error retrieving patients. Code ${res.status}`);
+      return null;
+    }
+
+    return res.data
   }
 }
 
