@@ -116,9 +116,13 @@ class App extends Component {
     
     this.setState({loading: true}, async () => {
       const res = await getPatient(id, this.state.searchCount);
+      if (!res){
+        console.log("no patient with such id")
+        return;
+      }
       if (res.status !== 200) {
         console.error(`Error retrieving patients. Code ${res.status}`);
-        return;
+        
       }
   
       this.patientList = []
@@ -166,35 +170,12 @@ class App extends Component {
     return res.data
   }
   
-  handleDelete(i) {
-    const { tags } = this.state;
-    this.setState({
-     tags: tags.filter((tag, index) => index !== i),
-    });
-    this.props.onInputChange(this.state.tags, 'del')
-    console.log('tag deleted')
-    if (this.state.tags[i].type == 'id'){
-      this.handlePatientListSearch()
-
-    }
-  }
-
-  handleAddition(tag) {
-      tag.value = tag.text
-      tag.text = this.state.field[0].value + ': ' + tag.text
-      tag.type = this.state.field[0].value
-      tag.id = tag.text
-      // console.log('handle add tags: ' + String(this.state.tags))
-      this.setState(state => ({ tags: [...state.tags, tag] }));
-      this.props.onInputChange([tag], 'add')
-  }
-  
   handleTagUpdates = (tags, type='add') => {
     for (let i = 0; i < tags.length; i++) {
       var tag = tags[i]
       if (tag.type == 'id'){
-        
-        this.handlePatientIdSearch(tag.value)
+        var that = this
+        that.handlePatientIdSearch(tag.value)
         
       }
       else if (tag.type == 'firstName' || tag.type == 'lastName'){
@@ -217,6 +198,28 @@ class App extends Component {
       }
     }
 
+  }
+  handleDelete(i) {
+    const { tags } = this.state;
+    this.setState({
+     tags: tags.filter((tag, index) => index !== i),
+    });
+    this.props.onInputChange(this.state.tags, 'del')
+    console.log('tag deleted')
+    if (this.state.tags[i].type == 'id'){
+      this.handlePatientListSearch()
+
+    }
+  }
+
+  handleAddition(tag) {
+      tag.value = tag.text
+      tag.text = this.state.field[0].value + ': ' + tag.text
+      tag.type = this.state.field[0].value
+      tag.id = tag.text
+      // console.log('handle add tags: ' + String(this.state.tags))
+      this.setState(state => ({ tags: [...state.tags, tag] }));
+      this.props.onInputChange([tag], 'add')
   }
 }
 
