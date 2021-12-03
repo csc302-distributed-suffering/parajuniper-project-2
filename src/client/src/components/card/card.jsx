@@ -39,6 +39,7 @@ export class Card extends React.Component {
                     <h1>{this.props.patient.name}</h1>
                     <p>{this.props.patient.sex}</p>
                     <p>{this.props.patient.birthdate}</p>
+                    
                     <button className="button" onClick={this.handleClick}> "view details"</button>
                 </div>
             </div>
