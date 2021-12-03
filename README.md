@@ -41,7 +41,7 @@ parajuniper-project-2
 │   │   ├── meeting minutes
 │   │   ├── Tech Stack.md
 │   │   └── milestones.md
-│   └── A2
+│   ├── A2
 │   |   ├── Meeting Minutes
 │   |   └── milestone2.md
 │   └── A3
