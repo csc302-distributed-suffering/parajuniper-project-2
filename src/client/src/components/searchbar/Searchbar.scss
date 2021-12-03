@@ -1,0 +1,56 @@
+.search_wrapper{
+    position: relative;
+    width: 100%;
+    font-family: IBM Plex, sans-serif;
+}
+react-tags-wrapper {
+
+    position: absolute;
+    top:30%;
+    
+}
+.tag-wrapper{
+    color: #fff;
+    font-weight: bold;
+    background: #3498db;
+    padding: 5px 10px;
+    border-radius: 10em;
+    margin: 5px;
+
+}
+.ReactTags__remove{
+    background-color: transparent;
+    border: none;
+    color:rgb(218, 214, 214);
+    display: inline-block;
+    &:hover {
+        color:white;
+    }
+}
+
+.ReactTags__tagInputField {
+    margin-top: 20px;
+    border: none;
+    outline: none;
+    padding: 10px;
+    width: 35vw;
+    line-height: 30px;
+    border-radius: 4px;
+    height: 36px;
+}
+
+.css-b62m3t-container{
+    position: absolute;
+    width: 20%;
+    left: 70%;
+    top: 100px;
+
+    .css-6j8wv5-Input{
+        border: none;
+        outline: none;
+        padding: 10px;
+        line-height: 30px;
+        border-radius: 4px;
+        text-align: center;
+    }
+}
