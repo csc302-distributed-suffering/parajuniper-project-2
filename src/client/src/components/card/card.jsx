@@ -37,7 +37,6 @@ export class Card extends React.Component {
                     {this.state.modal_loading ? <BeatLoader color="rgb(97, 208, 255)"></BeatLoader> : <Modal patient_info={this.props.patient} patient_data={this.state.patientData} show={this.state.modal_open} handleClose={this.handleClick}> this.props.patient.name </Modal>}
                     <h1>{this.props.patient.name}</h1>
                     <div className='card-content'>
-                        <p>{this.props.patient.gender}</p>
                         <p>{this.props.patient.birthdate}</p>
                     </div>
                 </div>

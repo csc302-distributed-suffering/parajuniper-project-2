@@ -58,15 +58,11 @@ class App extends Component {
               </div>
               { this.state.loading
                ? <BeatLoader color="rgb(97, 208, 255)"></BeatLoader>
-<<<<<<< HEAD
-               : <CardList patients={this.state.patients} searchResult={this.state.searchResult} handlePatientSearch={this.handlePatientDataSearch}/>
-=======
                : <div>
                   <CardList patients={this.state.patients} searchResult={this.state.searchResult} handlePatientSearch={this.handleSpecificPatientSearch}/>
                   <Navbuttons patientNum={this.state.patients.length} searchResult={this.state.searchResult} 
                     handleNext={this.handleNextPage} handlePrev={this.handlePrevPage} nextLink={this.state.nextPageLink} page={this.state.page}/>
                  </div>
->>>>>>> Add pagination
               }
             </div>
             )}
@@ -187,17 +183,6 @@ class App extends Component {
     return res.data
   }
 
-<<<<<<< HEAD
-  handlePatientDataSearch = async (id, count = 100) => {
-    const res = await getAllPatientData(id, count);
-    
-    if(res.status !== 200){
-      console.error(`Error retrieving patient data. Code ${res.status}`);
-      return null;
-    }
-
-    return res.data
-=======
   handlePrevPage = () => {
     if (!this.state.previousPageLink || this.state.page === 1) {
       console.log("No prev page");
@@ -259,7 +244,6 @@ class App extends Component {
       });
       console.log('STATE AFTER', this.state);
     })
->>>>>>> Add pagination
   }
 }
 
