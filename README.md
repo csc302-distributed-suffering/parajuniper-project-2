@@ -10,12 +10,12 @@ For documentation, please see the [documentation](https://github.com/csc302-dist
 ### A2 
 [Assignment 2 Folder](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/A2) <br/>
 [Assignment 2 Meeting Minutes](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/A2/Meeting%20Minutes) <br/>
-[Assignment 1 Post Mortem](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/A2/Meeting%20Minutes/postmortem.md)
+[Assignment 1 Postmortem](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/A2/Meeting%20Minutes/postmortem.md)
 
 ### A3 
 [Assignment 3 Folder](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/A3) <br/>
 [Assignment 3 Meeting Minutes](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/A3/Meeting%20Minutes) <br/>
-[Assignment 2 Post Mortem](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/A3/A2%20Post%20Mortem.md) 
+[Assignment 2 Postmortem](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/A3/A2%20Post%20Mortem.md) 
 
 
 # Table of Contents
