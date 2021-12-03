@@ -1,7 +1,7 @@
 const express = require('express');
 import {Request, Response} from 'express';
 import Client, {SearchParams} from 'fhir-kit-client';
-import {BundleLink, Resource, Patient} from 'fhir/r4';
+import {BundleLink, Resource, Patient, Bundle} from 'fhir/r4';
 const router = express.Router();
 const config = {baseUrl: 'https://r4.smarthealthit.org/'};
 const fhirKitClient = require('fhir-kit-client');
@@ -21,7 +21,7 @@ const patientResourceCategories = [
     'MedicationStatement', 'MolecularSequence', 'NutritionOrder', 'Observation', 'Person',
     'Procedure', 'Provenance', 'QuestionnaireResponse', 'RelatedPerson', 'RequestGroup',
     'ResearchSubject', 'RiskAssessment', 'Schedule', 'ServiceRequest', 'Specimen', 'SupplyDelivery',
-    'SupplyRequest', 'Task', 'VisionPrescription',
+    'SupplyRequest', 'Task', 'VisionPrescription', 'Practitioner', 'Organization',
 ];
 
 // TODO: add more queries for listing patients?
@@ -79,7 +79,9 @@ router.get('/info', async (req, res) => {
     }
 
     try {
-        const response = await client.search({
+        const pInfo : [Resource] = [] as unknown as [Resource];
+
+        let response = await client.search({
             resourceType: '$everything',
             compartment: {resourceType: 'Patient', id: pId},
         });
@@ -90,9 +92,16 @@ router.get('/info', async (req, res) => {
             return;
         }
 
+
+        let result = [];
+        while (response && response.entry && response.entry.length > 0) {
+            console.log(response.entry.length);
+            result = result.concat(response.entry);
+            response = await client.nextPage({bundle: response as Bundle});
+        }
+
         let patient : fhir4.Patient = {} as Patient;
-        const pInfo : [Resource] = [] as unknown as [Resource];
-        for (const entry of response.entry) {
+        for (const entry of result) {
             if (entry.resource.id === pId) {
                 patient = entry.resource;
             } else {
@@ -152,12 +161,26 @@ const getSearchParams = (req: Request): SParams => {
         if (key === 'given' && req.query[key] !== '') {
             const given: string = req.query.given as string;
             params.searchParams.given = given.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
-        } else if (key === 'count' && req.query[key] !== '') {
-            const count: string = req.query.count as string;
+        } else if (key === '_count' && req.query[key] !== '') {
+            const count: string = req.query._count as string;
             params.searchParams._count = count.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
         } else if (key === 'family' && req.query[key] !== '') {
             const family: string = req.query.family as string;
             params.searchParams.family = family.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
+        } else if (key === '_getpages' && req.query[key] !== '') {
+            const getPages: string = req.query._getpages as string;
+            params.searchParams._getpages = getPages.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
+        } else if (key === '_getpagesoffset' && req.query[key] !== '') {
+            const getPagesOffset: string = req.query._getpagesoffset as string;
+            params.searchParams._getpagesoffset = getPagesOffset.replace(
+                /[&\/\\#,+()$~%.":*?<>{}]/g, '',
+            );
+        } else if (key === '_bundletype' && req.query[key] !== '') {
+            const bundleType: string = req.query._bundletype as string;
+            params.searchParams._bundletype = bundleType.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
+        } else if (key === '_pretty' && req.query[key] !== '') {
+            const pretty: string = req.query._pretty as string;
+            params.searchParams._pretty = pretty.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
         }
     }
 
