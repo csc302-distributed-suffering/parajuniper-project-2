@@ -22,6 +22,25 @@ const getPatientsWName = async (firstName, lastName, count) => {
     }
 }
 
+const getPatientsWLink = async (link) => {
+    const request = new Request(link, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json text/plain, */*',
+            'Content-Type': 'application/json'
+        }
+    })
+
+    try {
+        const response = await fetch(request)
+        const jsonData = await response.json()
+
+        return {status: response.status, data: jsonData}
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
 const getPatient = async (id, count) => {    
     
     const url = `/patients/info?id=${id}&count=${count}`
@@ -65,4 +84,4 @@ const getAllPatientData = async (id, count) => {
 }
 
 
-export {getPatientsWName, getPatient, getAllPatientData}
+export {getPatientsWName, getPatientsWLink,getPatient}

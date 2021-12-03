@@ -1,11 +1,13 @@
 import './App.scss';
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 
 import searchIcon from './icons/search.png';
 import { CardList } from './components/cardlist/cardlist';
 import { Searchbox } from './components/searchbox/searchbox';
-import { getPatientsWName, getPatient, getAllPatientData } from './actions/patients';
+import { Navbuttons } from './components/navbuttons/navbuttons';
+import { PatientModal } from './components/patientmodal/PatientModal';
+import { getPatientsWName, getPatientsWLink, getPatient } from './actions/patients';
 import BeatLoader from "react-spinners/BeatLoader";
 // import {View, Modal, Text} from 'react-native'
 
@@ -19,8 +21,9 @@ class App extends Component {
       patients: this.patientList,
       searchPatientFirstName: "",
       searchPatientLastName: "",
-      searchCount: 200,
+      searchCount: 40,
       nextPageLink: "",
+      previousPageLink: "",
       loading: false,
       searchResult: true,
     }
@@ -55,7 +58,15 @@ class App extends Component {
               </div>
               { this.state.loading
                ? <BeatLoader color="rgb(97, 208, 255)"></BeatLoader>
+<<<<<<< HEAD
                : <CardList patients={this.state.patients} searchResult={this.state.searchResult} handlePatientSearch={this.handlePatientDataSearch}/>
+=======
+               : <div>
+                  <CardList patients={this.state.patients} searchResult={this.state.searchResult} handlePatientSearch={this.handleSpecificPatientSearch}/>
+                  <Navbuttons patientNum={this.state.patients.length} searchResult={this.state.searchResult} 
+                    handleNext={this.handleNextPage} handlePrev={this.handlePrevPage} nextLink={this.state.nextPageLink} prevLink={this.state.previousPageLink}/>
+                 </div>
+>>>>>>> Add pagination
               }
             </div>
             )}
@@ -98,6 +109,8 @@ class App extends Component {
         patients: this.patientList,
         loading: false,
         searchResult: this.patientList.length !== 0,
+        nextPageLink: res.data.nextPageLink,
+        previousPageLink: ""
       });
     })
   };
@@ -126,6 +139,7 @@ class App extends Component {
     return res.data
   }
 
+<<<<<<< HEAD
   handlePatientDataSearch = async (id, count = 100) => {
     const res = await getAllPatientData(id, count);
     
@@ -135,6 +149,72 @@ class App extends Component {
     }
 
     return res.data
+=======
+  handlePrevPage = () => {
+    if (!this.state.previousPageLink) {
+      console.log("No prev page");
+      return;
+    }
+    this.handlePagination(this.state.previousPageLink);
+  }
+
+  handleNextPage = () => {
+    if (!this.state.nextPageLink) {
+      console.log("No next page");
+      return;
+    }
+    this.handlePagination(this.state.nextPageLink);
+  }
+
+  handlePagination = (url) => {
+    this.setState({loading: true}, async () => {
+      const res = await getPatientsWLink(this.state.nextPageLink);
+
+      if (res.status !== 200) {
+        console.error(`Error retrieving patients. Code ${res.status}`);
+        return;
+      }
+      
+      this.patientList = []
+      if (res.data.entry) {
+        for (const p of res.data.entry) {
+          if (!p.resource) {
+            continue;
+          }
+          const resource = p.resource
+          const name = this.getPatientName(resource);
+  
+          const patient = {
+            name: name,
+            id: resource.id,
+            gender: resource.gender,
+            birthdate: resource.birthDate,
+          };
+  
+          this.patientList.push(patient);
+        }
+      }
+
+      const links = {next: "", previous: ""};
+      if (res.data.link) {
+        for (const l of res.data.link) {
+          if (l.relation === "next") {
+            links.next = l.url;
+          } else if (l.relation === "previous") {
+            links.previous = l.url
+          }
+        }
+      }
+  
+      this.setState({
+        patients: this.patientList,
+        loading: false,
+        searchResult: this.patientList.length !== 0,
+        previousPageLink: links.previous,
+        nextPageLink: links.next
+      });
+    })
+>>>>>>> Add pagination
   }
 }
 
