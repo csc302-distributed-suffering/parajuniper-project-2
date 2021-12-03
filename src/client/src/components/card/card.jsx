@@ -23,7 +23,7 @@ export class Card extends React.Component {
         }
         else{
             this.setState({modal_loading: true}, async () => {
-                const patientData = await this.props.handlePatientSearch(this.props.patient.id);
+                const patientData = await this.props.handlePatientSearch(this.props.patient.id, 500);
 
                 this.setState({modal_loading: false, modal_open: true, patientData: patientData})
             })

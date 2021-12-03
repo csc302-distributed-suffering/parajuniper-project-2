@@ -6,7 +6,7 @@ import searchIcon from './icons/search.png';
 import { CardList } from './components/cardlist/cardlist';
 import { Searchbox } from './components/searchbox/searchbox';
 import { PatientModal } from './components/patientmodal/PatientModal';
-import { getPatientsWName, getPatient } from './actions/patients';
+import { getPatientsWName, getPatient, getAllPatientData } from './actions/patients';
 import BeatLoader from "react-spinners/BeatLoader";
 // import {View, Modal, Text} from 'react-native'
 
@@ -44,7 +44,7 @@ class App extends Component {
               </div>
               { this.state.loading
                ? <BeatLoader color="rgb(97, 208, 255)"></BeatLoader>
-               : <CardList patients={this.state.patients} searchResult={this.state.searchResult} handlePatientSearch={this.handleSpecificPatientSearch}/>
+               : <CardList patients={this.state.patients} searchResult={this.state.searchResult} handlePatientSearch={this.handlePatientDataSearch}/>
               }
             </div>
             )}
@@ -109,6 +109,17 @@ class App extends Component {
     
     if(res.status !== 200){
       console.error(`Error retrieving patients. Code ${res.status}`);
+      return null;
+    }
+
+    return res.data
+  }
+
+  handlePatientDataSearch = async (id, count = 100) => {
+    const res = await getAllPatientData(id, count);
+    
+    if(res.status !== 200){
+      console.error(`Error retrieving patient data. Code ${res.status}`);
       return null;
     }
 
