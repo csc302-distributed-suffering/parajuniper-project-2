@@ -1,0 +1,49 @@
+# Minutes - October 1st, 2021
+
+- Google Cloud v. Docker
+    - Cant assume TA will have Google account, go with Docker
+Docker
+    - Aim to get Docker containerization set up before Sunday evening
+    - Cant assume TA will have Docker installed
+    - TODO: write script to install docker and then run image
+- Aim to decide to on clear responsibilities today, reconvene on Sunday
+- Testing:
+    - Mocha vs Jest
+        - Decision: Jest
+        - Mocha requires more dependencies for same function
+        - Jest is simpler, has mocking built in
+    - Look if there’s a way to combine testing with enzyme + jest in circle ci
+    - Snapshot testing can be finicky - potential range for testing frontend
+- Milestones
+    - Decide on features?
+    - Flesh out 3rd and 4th milestones
+    - As changes pushed - enforce 75% code coverage
+    - In milestone 4 - aim for 85% code coverage
+        - Potential additions: integration testing, user testing
+- Questions for Alex
+    - Are our milestones plausible?
+    - Send message to Alex after meeting
+- Focus right now:
+    - Get repo working and set up, then worry about documentation
+    - Responsibilities for milestone 1 (Stub webpage in Docker container)
+- Todo:
+    - Add minutes to github (author of each doc add to GH)
+    - Write development plan (do this as a team on Sunday)
+        - Also need responsibilities for later milestones
+    - Implementation of tech stack
+        - Script for docker install and setting up docker image
+        - front end page
+        - server
+        - Testing framework
+        - CI set up for repo
+    - Eric
+        - Script for docker install and setting up docker image
+    - Felicia
+        - Testing framework
+    - Victor
+        - front end page
+        - server
+    - Nikita
+        - Script for docker install and setting up docker image
+- CI set up for repo
+- Next meeting: Sunday 1PM
