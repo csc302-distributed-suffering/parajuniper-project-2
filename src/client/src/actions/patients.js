@@ -3,7 +3,7 @@ const getPatientsWName = async (firstName, lastName, count) => {
     const given = firstName === '' ? '' : `&given=${firstName}`;
     const family = lastName === '' ? '' : `&family=${lastName}`;
     
-    const url = `/patients/list?count=${count}${given}${family}`;
+    const url = `/patients/list?_count=${count}${given}${family}`;
     const request = new Request(url, {
         method: 'GET',
         headers: {
@@ -22,8 +22,14 @@ const getPatientsWName = async (firstName, lastName, count) => {
     }
 }
 
-const getPatientsWLink = async (link) => {
-    const request = new Request(link, {
+const getPatientList = async (params) => {
+    const qParams = [];
+    for (const key in params) {
+        qParams.push(`${key}=${params[key]}`);
+    }
+    const url = '/patients/list?' + qParams.join('&');
+
+    const request = new Request(url, {
         method: 'GET',
         headers: {
             'Accept': 'application/json text/plain, */*',
@@ -41,9 +47,8 @@ const getPatientsWLink = async (link) => {
     }
 }
 
-const getPatient = async (id, count) => {    
-    
-    const url = `/patients/info?id=${id}&count=${count}`
+const getPatientByID = async (id, count) => {
+    const url = `/patients/info?id=${id}&_count=${count}`
     const request = new Request(url, {
         method: 'GET',
         headers: {
@@ -84,4 +89,4 @@ const getAllPatientData = async (id, count) => {
 }
 
 
-export {getPatientsWName, getPatientsWLink,getPatient}
+export {getPatientsWName, getPatientByID, getPatientList}

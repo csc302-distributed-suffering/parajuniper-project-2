@@ -6,8 +6,7 @@ import searchIcon from './icons/search.png';
 import { CardList } from './components/cardlist/cardlist';
 import { Searchbox } from './components/searchbox/searchbox';
 import { Navbuttons } from './components/navbuttons/navbuttons';
-import { PatientModal } from './components/patientmodal/PatientModal';
-import { getPatientsWName, getPatientsWLink, getPatient } from './actions/patients';
+import { getPatientsWName, getPatientByID, getPatientList,  } from './actions/patients';
 import BeatLoader from "react-spinners/BeatLoader";
 // import {View, Modal, Text} from 'react-native'
 
@@ -24,6 +23,7 @@ class App extends Component {
       searchCount: 40,
       nextPageLink: "",
       previousPageLink: "",
+      page: 1,
       loading: false,
       searchResult: true,
     }
@@ -64,7 +64,7 @@ class App extends Component {
                : <div>
                   <CardList patients={this.state.patients} searchResult={this.state.searchResult} handlePatientSearch={this.handleSpecificPatientSearch}/>
                   <Navbuttons patientNum={this.state.patients.length} searchResult={this.state.searchResult} 
-                    handleNext={this.handleNextPage} handlePrev={this.handlePrevPage} nextLink={this.state.nextPageLink} prevLink={this.state.previousPageLink}/>
+                    handleNext={this.handleNextPage} handlePrev={this.handlePrevPage} nextLink={this.state.nextPageLink} page={this.state.page}/>
                  </div>
 >>>>>>> Add pagination
               }
@@ -128,8 +128,27 @@ class App extends Component {
     return cName;
   };
 
+  parseQueryString = (url) => {
+    const urlSplit = url.split('?');
+    if (urlSplit.length !== 2) {
+      return {};
+    }
+
+    const qString = urlSplit[1];
+    const params = qString.split('&');
+    const queries = {};
+    for (const q of params) {
+      const qSplit = q.split('=');
+      if (qSplit.length !== 2) continue;
+      queries[qSplit[0]] = qSplit[1];
+    }
+
+    return queries;
+  }
+
   handleSpecificPatientSearch = async (id, count = 100) => {
-    const res = await getPatient(id, count);
+    console.log(id, count);
+    const res = await getPatientByID(id, count);
     
     if(res.status !== 200){
       console.error(`Error retrieving patients. Code ${res.status}`);
@@ -151,11 +170,11 @@ class App extends Component {
     return res.data
 =======
   handlePrevPage = () => {
-    if (!this.state.previousPageLink) {
+    if (!this.state.previousPageLink || this.state.page === 1) {
       console.log("No prev page");
       return;
     }
-    this.handlePagination(this.state.previousPageLink);
+    this.handlePagination(this.state.previousPageLink, 'PREV');
   }
 
   handleNextPage = () => {
@@ -163,12 +182,14 @@ class App extends Component {
       console.log("No next page");
       return;
     }
-    this.handlePagination(this.state.nextPageLink);
+    this.handlePagination(this.state.nextPageLink, 'NEXT');
   }
 
-  handlePagination = (url) => {
+  handlePagination = (url, method) => {
     this.setState({loading: true}, async () => {
-      const res = await getPatientsWLink(this.state.nextPageLink);
+      const params = this.parseQueryString(url);
+      // const res = await getPatientsWLink(this.state.nextPageLink);
+      const res = await getPatientList(params);
 
       if (res.status !== 200) {
         console.error(`Error retrieving patients. Code ${res.status}`);
@@ -176,34 +197,40 @@ class App extends Component {
       }
       
       this.patientList = []
-      if (res.data.entry) {
-        for (const p of res.data.entry) {
-          if (!p.resource) {
+      if (res.data.patients) {
+        for (const p of res.data.patients) {
+
+          if (p.resourceType !== 'Patient') {
             continue;
           }
-          const resource = p.resource
-          const name = this.getPatientName(resource);
+          const name = this.getPatientName(p);
   
           const patient = {
             name: name,
-            id: resource.id,
-            gender: resource.gender,
-            birthdate: resource.birthDate,
+            id: p.id,
+            gender: p.gender,
+            birthdate: p.birthDate,
           };
   
           this.patientList.push(patient);
         }
       }
 
-      const links = {next: "", previous: ""};
-      if (res.data.link) {
-        for (const l of res.data.link) {
-          if (l.relation === "next") {
-            links.next = l.url;
-          } else if (l.relation === "previous") {
-            links.previous = l.url
-          }
+      const links = {next: this.state.nextPageLink, previous: this.state.previousPageLink};
+      let page = this.state.page;
+      console.log(res.data);
+      if (method === 'NEXT' && res.data.nextPageLink) {
+        if (res.data.prevPageLink) {
+          links.previous = res.data.prevPageLink;
+        } else {
+          links.previous = '';
         }
+        links.next = res.data.nextPageLink;
+        page++;
+      } else {
+        page--;
+        links.next = res.data.nextPageLink ? res.data.nextPageLink : '';
+        links.previous = page === 1 ? '' : res.data.prevPageLink;
       }
   
       this.setState({
@@ -211,8 +238,10 @@ class App extends Component {
         loading: false,
         searchResult: this.patientList.length !== 0,
         previousPageLink: links.previous,
-        nextPageLink: links.next
+        nextPageLink: links.next,
+        page: page
       });
+      console.log('STATE AFTER', this.state);
     })
 >>>>>>> Add pagination
   }

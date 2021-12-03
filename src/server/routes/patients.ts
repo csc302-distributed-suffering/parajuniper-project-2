@@ -21,7 +21,7 @@ const patientResourceCategories = [
     'MedicationStatement', 'MolecularSequence', 'NutritionOrder', 'Observation', 'Person',
     'Procedure', 'Provenance', 'QuestionnaireResponse', 'RelatedPerson', 'RequestGroup',
     'ResearchSubject', 'RiskAssessment', 'Schedule', 'ServiceRequest', 'Specimen', 'SupplyDelivery',
-    'SupplyRequest', 'Task', 'VisionPrescription', 'Practitioner', 'Organization',
+    'SupplyRequest', 'Task', 'VisionPrescription', 'Practitioner', 'Organization', 'Patient',
 ];
 
 // TODO: add more queries for listing patients?
@@ -42,12 +42,15 @@ router.get('/list', async (req: Request, res: Response) => {
             const count = sParams.searchParams.count as string;
             const responseData = {
                 nextPageLink: '',
+                prevPageLink: '',
                 totalMatches: 0,
                 returnedMatches: 0,
                 patients: [],
             };
             responseData.totalMatches = data.total;
-            responseData.nextPageLink = findNextPageLink(data.link);
+            const links = findLinks(data.link);
+            responseData.nextPageLink = links.next;
+            responseData.prevPageLink = links.prev;
             responseData.returnedMatches = responseData.totalMatches > parseInt(count) ?
                 parseInt(count) :
                 responseData.totalMatches;
@@ -70,6 +73,7 @@ router.get('/list', async (req: Request, res: Response) => {
 });
 
 router.get('/info', async (req, res) => {
+    console.log(req.query);
     const pId: string = req.query.id as string ?? '';
 
     if (pId == '') {
@@ -86,6 +90,8 @@ router.get('/info', async (req, res) => {
             compartment: {resourceType: 'Patient', id: pId},
         });
 
+        console.log('RESPONSE: received');
+
         if (response.total === 0 || !response.entry) {
             console.error(`Could not find patient with ID ${pId}`);
             res.status(404).send();
@@ -95,10 +101,12 @@ router.get('/info', async (req, res) => {
 
         let result = [];
         while (response && response.entry && response.entry.length > 0) {
-            console.log(response.entry.length);
             result = result.concat(response.entry);
             response = await client.nextPage({bundle: response as Bundle});
+            console.log('========================\nresponse page:', response);
         }
+
+        console.log('Parsed pages');
 
         let patient : fhir4.Patient = {} as Patient;
         for (const entry of result) {
@@ -118,14 +126,18 @@ router.get('/info', async (req, res) => {
 });
 
 // ---------------- Util Methods ----------------
-const findNextPageLink = (links: BundleLink[]) => {
+const findLinks = (links: BundleLink[]) => {
+    console.log(links);
+    const parsedLinks = {next: '', prev: ''};
     for (const link of links) {
         if (link.relation === 'next') {
-            return link.url;
+            parsedLinks.next = link.url;
+        } else if (link.relation === 'previous') {
+            parsedLinks.prev = link.url;
         }
     }
 
-    return '';
+    return parsedLinks;
 };
 
 const parseData = (patient: Patient, pInfo: [Resource]) => {
@@ -135,6 +147,9 @@ const parseData = (patient: Patient, pInfo: [Resource]) => {
     }
 
     for (const res of pInfo) {
+        console.log('====================\nTYPE', res.resourceType);
+        console.log('RES', res);
+        console.log('====================');
         data[res.resourceType].push(res);
     }
 
@@ -181,6 +196,9 @@ const getSearchParams = (req: Request): SParams => {
         } else if (key === '_pretty' && req.query[key] !== '') {
             const pretty: string = req.query._pretty as string;
             params.searchParams._pretty = pretty.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
+        } else if (key === 'id' && req.query[key] !== '') {
+            const id: string = req.query.id as string;
+            params.searchParams.id = id.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
         }
     }
 
