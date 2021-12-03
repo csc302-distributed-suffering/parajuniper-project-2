@@ -33,7 +33,7 @@ export class Card extends React.Component {
 
         return(
             <div>
-                <div className='card' >
+                <div className='card' onClick={this.handleClick}>
                     {this.state.modal_loading ? <BeatLoader color="rgb(97, 208, 255)"></BeatLoader> : <Modal patient_info={this.props.patient} patient_data={this.state.patientData} show={this.state.modal_open} handleClose={this.handleClick}> this.props.patient.name </Modal>}
                     <h1>{this.props.patient.name}</h1>
                     <p>{this.props.patient.birthdate}</p>
