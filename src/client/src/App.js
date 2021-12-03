@@ -25,10 +25,34 @@ class App extends Component {
       nextPageLink: "",
       loading: false,
       searchResult: true,
-      
+      tags: [
+        { type: "firstName", value: "Harland", text: "firstName: Harland", id: "firstName: Harland"}
+     ],
+     suggestions: [
+      { type: "firstName", value: "John", text: "firstName: John" },
+      ],
+      field: [{ value: 'firstName', label: 'firstName' }]
     }
   }
+  handleDelete(i) {
+    const { tags } = this.state;
+    this.setState({
+     tags: tags.filter((tag, index) => index !== i),
+    });
+    const tag_type = this.state.tags[i].type
+    this.props.onInputChange(this.state.tags, 'del')
+    console.log('tag deleted')
+}
 
+handleAddition(tag) {
+    tag.value = tag.text
+    tag.text = this.state.field[0].value + ': ' + tag.text
+    tag.type = this.state.field[0].value
+    tag.id = tag.text
+    // console.log('handle add tags: ' + String(this.state.tags))
+    this.setState(state => ({ tags: [...state.tags, tag] }));
+    this.props.onInputChange([tag], 'add')
+}
 
   render(){
       return (
@@ -37,7 +61,13 @@ class App extends Component {
           <Route exact path='/' render={() => (
             <div className="App">
               <div>
-              <SearchBar onInputChange={this.handleTagUpdates}/>
+              <SearchBar 
+              onInputChange={this.handleTagUpdates} 
+              handleDelete={this.handleDelete}
+              handleAddition={this.handleAddition}
+              tags={this.state.tags}
+              field={this.state.field}
+              />
               </div>
               <div id='searchbar'>
                     <Searchbox type='search' id="patientSearch-1" name="searchPatientFirstName" placeholder='First Name' onInputChange={this.handleSearchInputChange}/>
@@ -123,29 +153,31 @@ class App extends Component {
     return res.data
   }
   
-  handleTagUpdates = (tags) => {
-    this.setState({searchPatientFirstName: ''})
-    this.setState({searchPatientLastName: ''})
+  handleTagUpdates = (tags, type='add') => {
     for (let i = 0; i < tags.length; i++) {
       var tag = tags[i]
       if (tag.type == 'id'){
         this.handleSpecificPatientSearch(tag.value)
       }
       else if (tag.type == 'firstName' || tag.type == 'lastName'){
+        
         if (tag.type == 'firstName'){
-          console.log("firstname called")
+          if (type=="del"){
+            this.setState({searchPatientFirstName: ''})
+            return
+          }
           this.setState({searchPatientFirstName: tag.value})
-          
         }
         else if (tag.type == 'lastName'){
+          if (type=='del'){
+            this.setState({searchPatientLastName: ''})
+          }
           this.setState({searchPatientLastName: tag.value})
         }
   
       }
     }
-    console.log("IT WAS CALLED" + String(tags))
-    console.log(tags)
-    console.log(this.state)
+
   }
 }
 

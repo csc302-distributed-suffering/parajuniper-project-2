@@ -19,15 +19,14 @@ const delimiters = [...KeyCodes.enter, KeyCodes.comma];
 export class SearchBar extends React.Component {
     constructor(props) {
         super(props);
+        this.handleDelete = props.handleDelete
+        this.handleAddition = props.handleAddition
         this.state = {
-            tags: [
-                { type: "firstName", value: "John", text: "firstName: John", id: "firstName: John"},
-                { type: "lastName", value: "Doe", text: "lastName: Doe",  id: "lastName: Doe" }
-             ],
             suggestions: [
                 { type: "firstName", value: "John", text: "firstName: John" },
              ],
-            field: [{ value: 'firstName', label: 'firstName' }]
+            field: props.field,
+            tags: props.tags,
             
         };
         
@@ -40,24 +39,6 @@ export class SearchBar extends React.Component {
     handleFieldChange(e) {
         this.setState({ field: [e] });
       }
-    handleDelete(i) {
-        const { tags } = this.state;
-        this.setState({
-         tags: tags.filter((tag, index) => index !== i),
-        });
-        this.props.onInputChange(this.state.tags)
-    }
-
-    handleAddition(tag) {
-        
-        tag.value = tag.text
-        tag.text = this.state.field[0].value + ': ' + tag.text
-        tag.type = this.state.field[0].value
-        tag.id = tag.text
-        // console.log('handle add tags: ' + String(this.state.tags))
-        this.props.onInputChange(this.state.tags)
-        this.setState(state => ({ tags: [...state.tags, tag] }));
-    }
 
     handleDrag(tag, currPos, newPos) {
         const tags = [...this.state.tags];
