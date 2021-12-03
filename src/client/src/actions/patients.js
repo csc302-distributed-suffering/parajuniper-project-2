@@ -43,6 +43,7 @@ const getPatientList = async (params) => {
 
         return {status: response.status, data: jsonData}
     } catch (error) {
+        console.error(JSON.stringify(error));
         throw new Error(error)
     }
 }
@@ -88,5 +89,27 @@ const getAllPatientData = async (id, count) => {
     }
 }
 
+const getPage = async (url) => {
+    console.log(url);
+    const request = new Request(url, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json text/plain, */*',
+            'Content-Type': 'application/json'
+        }
+    })
 
-export {getPatientsWName, getPatientByID, getPatientList}
+    try {
+        const response = await fetch(request)
+        const jsonData = await response.json()
+
+        return {status: response.status, data: jsonData}
+    } catch (error) {
+        console.error(JSON.stringify(error));
+        throw new Error(error)
+    }
+}
+
+
+
+export {getPatientsWName, getPatientByID, getPatientList, getPage}

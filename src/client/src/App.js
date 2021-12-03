@@ -1,12 +1,12 @@
 import './App.scss';
 import React, { Component } from 'react';
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import searchIcon from './icons/search.png';
 import { CardList } from './components/cardlist/cardlist';
 import { Searchbox } from './components/searchbox/searchbox';
 import { Navbuttons } from './components/navbuttons/navbuttons';
-import { getPatientsWName, getPatientByID, getPatientList,  } from './actions/patients';
+import { getPatientsWName, getPatientByID, getPatientList, getPage,  } from './actions/patients';
 import BeatLoader from "react-spinners/BeatLoader";
 // import {View, Modal, Text} from 'react-native'
 
@@ -80,9 +80,30 @@ class App extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
+  getLinks = (bundle) => {
+    console.log('BUNDLE', bundle);
+    const links = {next: '', previous: ''};
+
+    if (!bundle.link) {
+      return links;
+    }
+
+  
+    for (const link of bundle.link) {
+      if (link.relation === 'next') {
+        links.next = link.url;
+      } else if (link.relation === 'previous') {
+        links.previous = link.url;
+      }
+    }
+    return links;
+  }
+
   handlePatientListSearch = async () => {
     this.setState({loading: true}, async () => {
       const res = await getPatientsWName(this.state.searchPatientFirstName, this.state.searchPatientLastName, this.state.searchCount);
+
+      console.log(res);
 
       if (res.status !== 200) {
         console.error(`Error retrieving patients. Code ${res.status}`);
@@ -92,6 +113,7 @@ class App extends Component {
       this.patientList = []
       if (res.data.patients) {
         for (const p of res.data.patients) {
+          console.log(p.id);
           const name = this.getPatientName(p);
   
           const patient = {
@@ -104,6 +126,8 @@ class App extends Component {
           this.patientList.push(patient);
         }
       }
+
+      // const links = this.getLinks(res.data);
   
       this.setState({
         patients: this.patientList,
@@ -117,6 +141,11 @@ class App extends Component {
 
   getPatientName = (patient) => {
     let cName = '';
+
+    if (!patient.name) {
+      return 'Unknown';
+    }
+
     for (const name of patient.name) {
       if (name.use === 'official') {
         return `${name.given} ${name.family}`; 
@@ -128,23 +157,23 @@ class App extends Component {
     return cName;
   };
 
-  parseQueryString = (url) => {
-    const urlSplit = url.split('?');
-    if (urlSplit.length !== 2) {
-      return {};
-    }
+  // parseQueryString = (url) => {
+  //   const urlSplit = url.split('?');
+  //   if (urlSplit.length !== 2) {
+  //     return {};
+  //   }
 
-    const qString = urlSplit[1];
-    const params = qString.split('&');
-    const queries = {};
-    for (const q of params) {
-      const qSplit = q.split('=');
-      if (qSplit.length !== 2) continue;
-      queries[qSplit[0]] = qSplit[1];
-    }
+  //   const qString = urlSplit[1];
+  //   const params = qString.split('&');
+  //   const queries = {};
+  //   for (const q of params) {
+  //     const qSplit = q.split('=');
+  //     if (qSplit.length !== 2) continue;
+  //     queries[qSplit[0]] = qSplit[1];
+  //   }
 
-    return queries;
-  }
+  //   return queries;
+  // }
 
   handleSpecificPatientSearch = async (id, count = 100) => {
     console.log(id, count);
@@ -187,22 +216,19 @@ class App extends Component {
 
   handlePagination = (url, method) => {
     this.setState({loading: true}, async () => {
-      const params = this.parseQueryString(url);
-      // const res = await getPatientsWLink(this.state.nextPageLink);
-      const res = await getPatientList(params);
+      const res = await getPage(url);
 
       if (res.status !== 200) {
         console.error(`Error retrieving patients. Code ${res.status}`);
         return;
       }
+
+      const links = this.getLinks(res.data);
       
       this.patientList = []
-      if (res.data.patients) {
-        for (const p of res.data.patients) {
-
-          if (p.resourceType !== 'Patient') {
-            continue;
-          }
+      if (res.data.entry){
+        for (const entry of res.data.entry) {
+          const p = entry.resource;
           const name = this.getPatientName(p);
   
           const patient = {
@@ -211,26 +237,16 @@ class App extends Component {
             gender: p.gender,
             birthdate: p.birthDate,
           };
-  
+
           this.patientList.push(patient);
         }
       }
 
-      const links = {next: this.state.nextPageLink, previous: this.state.previousPageLink};
       let page = this.state.page;
-      console.log(res.data);
-      if (method === 'NEXT' && res.data.nextPageLink) {
-        if (res.data.prevPageLink) {
-          links.previous = res.data.prevPageLink;
-        } else {
-          links.previous = '';
-        }
-        links.next = res.data.nextPageLink;
+      if (method === 'NEXT') {
         page++;
       } else {
         page--;
-        links.next = res.data.nextPageLink ? res.data.nextPageLink : '';
-        links.previous = page === 1 ? '' : res.data.prevPageLink;
       }
   
       this.setState({

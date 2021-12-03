@@ -3,7 +3,7 @@ import {Request, Response} from 'express';
 import Client, {SearchParams} from 'fhir-kit-client';
 import {BundleLink, Resource, Patient, Bundle} from 'fhir/r4';
 const router = express.Router();
-const config = {baseUrl: 'https://r4.smarthealthit.org/'};
+const config = {baseUrl: 'http://hapi.fhir.org/baseR4'};
 const fhirKitClient = require('fhir-kit-client');
 const client: Client = new fhirKitClient(config);
 
@@ -22,6 +22,7 @@ const patientResourceCategories = [
     'Procedure', 'Provenance', 'QuestionnaireResponse', 'RelatedPerson', 'RequestGroup',
     'ResearchSubject', 'RiskAssessment', 'Schedule', 'ServiceRequest', 'Specimen', 'SupplyDelivery',
     'SupplyRequest', 'Task', 'VisionPrescription', 'Practitioner', 'Organization', 'Patient',
+    'Location',
 ];
 
 // TODO: add more queries for listing patients?
@@ -55,8 +56,8 @@ router.get('/list', async (req: Request, res: Response) => {
                 parseInt(count) :
                 responseData.totalMatches;
 
-            for (const entry of data.entry) {
-                if (isPatient(entry.resource)) {
+            for (const entry of data.entry) { // TODO: FILTER NAMELESS PATIENTS, LEAVE THIS IN?
+                if (isPatient(entry.resource) && entry.resource.name) {
                     responseData.patients.push(entry.resource);
                 }
             }
@@ -67,13 +68,12 @@ router.get('/list', async (req: Request, res: Response) => {
             res.status(400).send();
         }
     } catch (e) {
-        console.error(`${msg}\n${e}`);
+        console.error(`${msg}\n${JSON.stringify(e)}`);
         res.status(500).send('test');
     }
 });
 
 router.get('/info', async (req, res) => {
-    console.log(req.query);
     const pId: string = req.query.id as string ?? '';
 
     if (pId == '') {
@@ -90,8 +90,6 @@ router.get('/info', async (req, res) => {
             compartment: {resourceType: 'Patient', id: pId},
         });
 
-        console.log('RESPONSE: received');
-
         if (response.total === 0 || !response.entry) {
             console.error(`Could not find patient with ID ${pId}`);
             res.status(404).send();
@@ -103,10 +101,8 @@ router.get('/info', async (req, res) => {
         while (response && response.entry && response.entry.length > 0) {
             result = result.concat(response.entry);
             response = await client.nextPage({bundle: response as Bundle});
-            console.log('========================\nresponse page:', response);
         }
 
-        console.log('Parsed pages');
 
         let patient : fhir4.Patient = {} as Patient;
         for (const entry of result) {
