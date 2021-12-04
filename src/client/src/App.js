@@ -39,6 +39,8 @@ class App extends Component {
                 <p >
                    A FHIR based someting blah blah that gets you patient data
                 </p>
+                <a className="header-link" href="https://www.hl7.org/fhir/" target="_blank">About FHIR </a>
+                <i class="fas fa-fire-alt"></i>
               </div>
 
               <div id='searchbar'>

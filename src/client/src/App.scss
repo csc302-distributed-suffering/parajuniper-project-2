@@ -45,8 +45,13 @@
   padding-top: 70px;
   padding-bottom: 20px;
   font-family: Helvetica, ibm-plex, sans-serif;
+  box-shadow: -1px 0px 9px -5px rgba(0, 0, 0, 0.4);
 }
 
 .header-title{
   margin:0;
+}
+
+.header-link{
+  color:white;
 }
