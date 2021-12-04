@@ -6,6 +6,7 @@
     z-index: 999;
     left: 0%;
     top: 0%;
+    font-family: 'IBM Plex Sans Condensed', sans-serif;
     
   }
 
@@ -25,7 +26,7 @@
     justify-content: 'center';
 	  align-items: 'center';
     height: 80%;
-    width: 80%;
+    width: 60%;
     z-index: 1000;
     border-radius: 20px;
     box-shadow: "7px 7px 15rgba(0, 0, 0, 0.1)0,0,.6)";
@@ -72,16 +73,37 @@
     padding: 20px 60px;
     color: #fff;
     text-decoration: none;
-    font-size: 1.45em;
+    font-size: 1em;
+    font-family: 'ibm-plex', sans-serif;
     margin: 0 15px;
-    margin-top: 0px;
     &:hover{
       background: #222222;;
     }
+    &.card{
+      margin-top: 0px;
+      position: absolute;
+      height: 20%;
+      bottom: 10%;
+    }
+    &.close{
+      margin-top: 40px;
+    }
   }
 
-  .open_button {
-    margin-top: 70px;
+  .close_button {
+    background: #4b4b4b; 
+    border-radius: 100px;
+    padding: 20px 60px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+    font-family: 'ibm-plex', sans-serif;
+    margin: 0 15px;
+    &:hover{
+      background: #222222;;
+    }
+
+    margin-top: 40px;
   }
   
   .button:hover { 

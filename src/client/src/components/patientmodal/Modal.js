@@ -173,7 +173,7 @@ export class Modal extends React.Component {
           <div className="patient-field">birthdate: {patient_info.birthdate} </div>
           <Select className="group-field" options={this.state.options} value={this.state.selectedGroup} onChange={this.handleSelection}/>
           {this.generate_table(this.state.selectedGroup)}
-          <button className="button open_button" type="button" onClick={handleClose}>
+          <button className="button close" type="button" onClick={handleClose}>
             Close
           </button>
           </div>

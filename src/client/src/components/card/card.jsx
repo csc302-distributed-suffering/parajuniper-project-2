@@ -1,5 +1,5 @@
 import React from 'react';
-import './card.css';
+import './card.scss';
 import { Modal } from '../patientmodal/Modal';
 import BeatLoader from "react-spinners/BeatLoader";
 
@@ -37,9 +37,9 @@ export class Card extends React.Component {
                 <div className='card' >
                     {this.state.modal_loading ? <BeatLoader color="rgb(97, 208, 255)"></BeatLoader> : <Modal patient_info={this.props.patient} patient_data={this.state.patientData} show={this.state.modal_open} handleClose={this.handleClick}> this.props.patient.name </Modal>}
                     <h1>{this.props.patient.name}</h1>
-                    <p>{this.props.patient.sex}</p>
+                    {/* <p>{this.props.patient.sex}</p> */}
                     <p>{this.props.patient.birthdate}</p>
-                    <button className="button" onClick={this.handleClick}> "view details"</button>
+                    <button className="button card" onClick={this.handleClick}> "view details"</button>
                 </div>
             </div>
         )

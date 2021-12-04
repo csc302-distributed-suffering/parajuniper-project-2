@@ -9,18 +9,14 @@
     border-radius: 10px;
     box-shadow: "7px 7px 15rgba(0, 0, 0, 0.1)0,0,.6)";
     position: relative;
-}
-.button {
-    background: #76B3FA;
-    border-radius: 100px;
-    padding: 20px 60px;
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.45em;
-    margin: 0 15px;
-    margin-top: 110px;
+    width: 40vh;
+    height: 40vh;
+    align-items: center;
 
-  }
+    h1{
+        font-size: 30px;
+    }
+}
 
 .card:hover {
     /* transform: scale(1.01) */
