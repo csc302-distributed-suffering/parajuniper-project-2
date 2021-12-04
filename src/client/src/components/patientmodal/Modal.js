@@ -26,20 +26,6 @@ export class Modal extends React.Component {
     return path.split(".").reduce((out, key) => out ? out[key] : undefined, obj)
   }
 
-  handleDownload = ()=>{
-    const doc = new jsPDF();
-    const id = this.state.groups['Patient'][0]['resource']['id']
-    const last_name = this.state.groups['Patient'][0]['resource']['name'][0]['family']
-    const first_name = this.state.groups['Patient'][0]['resource']['name'][0]['given'][0]
-    doc.text("GROUP" + this.state.selectedGroup.value, 20, 20);
-    doc.text(JSON.stringify(this.state.columns), 20, 30);
-    var cur_row = 40
-    this.state.rows.forEach(row=>{
-      doc.text(JSON.stringify(row), 20, cur_row);
-      cur_row += 10;
-    })
-    doc.save(first_name + ' ' + last_name + ' ' + this.state.selectedGroup + ".pdf");
-  }
 
   getGroups = (data) => {
     if (!data || !data.entry) {
@@ -70,6 +56,7 @@ export class Modal extends React.Component {
           groups[resourceType].push(entry)
         }
     })
+    console.log(groups)
     return groups
   }
 
@@ -218,6 +205,7 @@ export class Modal extends React.Component {
   render = () => {
     const {patient_info, handleClose, show} = this.props;
     const showHideClassName = show ? "modal display-block" : "modal display-none";
+    
     return (
       <div className={showHideClassName}>
         <section className="modal-main">
@@ -229,7 +217,16 @@ export class Modal extends React.Component {
           <button className="button close" type="button" onClick={handleClose}>
             Close
           </button>
-          <CSVLink className="button download " data={this.state.rows}>Download</CSVLink>
+          <CSVLink className="button download " data={this.state.rows}>Download Table</CSVLink>
+          <a className="button close json"
+            type="button"
+            href={`data:text/json;charset=utf-8,${encodeURIComponent(
+              JSON.stringify(this.state.groups, null, 4)
+            )}`}
+            download={patient_info.name + ".json"}
+          >
+            Download All
+          </a>
           </div>
         </section>
       </div>

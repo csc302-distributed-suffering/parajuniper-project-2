@@ -98,10 +98,16 @@
       background: #4b4b4b; 
       margin-left: 15px;
       margin-right: 15px;
+      &.json{
+        height: 7vh;
+        text-align: center;
+        line-height: 1;
+      }
     }
 
     &:hover{
-      background: #222222;;
+      background: #222222;
+      color: white;
     }
   }
 
