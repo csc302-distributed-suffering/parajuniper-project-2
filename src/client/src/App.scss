@@ -1,7 +1,19 @@
+@import "~bootstrap/scss/bootstrap";
+
 .App {
   text-align: center;
   background-color: rgb(233, 233, 233);
   min-height: 100vh;
+  position: relative;
+}
+
+.navbar {
+  background-color: none;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 3vh;
+  color:white;
 }
 
 .vertical-center {

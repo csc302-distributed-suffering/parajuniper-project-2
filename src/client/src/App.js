@@ -5,6 +5,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import searchIcon from './icons/search.png';
 import { CardList } from './components/cardlist/cardlist';
 import { Searchbox } from './components/searchbox/searchbox';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
 import { PatientModal } from './components/patientmodal/PatientModal';
 import { getPatientsWName, getPatient, getAllPatientData } from './actions/patients';
 import BeatLoader from "react-spinners/BeatLoader";
@@ -36,6 +39,15 @@ class App extends Component {
             <div className="App">
 
               <div className='header'>
+                {/* <Navbar className='navbar' variant="light">
+                  <Container>
+                  <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+                  <Nav className="me-auto">
+                    <Nav.Link href="#home">Logout</Nav.Link>
+                    <Nav.Link href="#features">About FHIR</Nav.Link>
+                  </Nav>
+                  </Container>
+                </Navbar> */}
                 <div className="header-content">
                   <h1 className="header-title" >Suffering</h1>
                   <p >

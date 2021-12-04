@@ -28,12 +28,9 @@ export class Modal extends React.Component {
 
   handleDownload = ()=>{
     const doc = new jsPDF();
-    console.log("here")
-    console.log(this.state.groups)
     const id = this.state.groups['Patient'][0]['resource']['id']
     const last_name = this.state.groups['Patient'][0]['resource']['name'][0]['family']
     const first_name = this.state.groups['Patient'][0]['resource']['name'][0]['given'][0]
-    console.log(first_name + ' ' + last_name)
     doc.text("GROUP" + this.state.selectedGroup.value, 20, 20);
     doc.text(JSON.stringify(this.state.columns), 20, 30);
     var cur_row = 40
@@ -73,8 +70,6 @@ export class Modal extends React.Component {
           groups[resourceType].push(entry)
         }
     })
-    console.log('here')
-    console.log(groups)
     return groups
   }
 
@@ -122,7 +117,7 @@ export class Modal extends React.Component {
     
     rows_data.forEach(row_value => {
       var row_clean = []
-      console.log('row.value[resource] ' + JSON.stringify(row_value['resource'], null, 4))
+      // console.log('row.value[resource] ' + JSON.stringify(row_value['resource'], null, 4))
       var entry = {}
       var row_res = row_value['resource']
       
@@ -182,36 +177,64 @@ export class Modal extends React.Component {
     return <Table columns={columns} data={rows_final} />
   }
   
-  modcheck = () => {
-    console.log('downloaded values')
-    console.log(this.state)
-    console.log([this.state.columns].concat(this.state.rows))
+  generate_basic_info = () => {
+    // creates the basic info for a patient
+ 
+    if (this.state.groups){
+   
+      const patient_data = this.state.groups['Patient'][0]['resource']
+      const patient_basic_info = this.props;
+      const gender = patient_basic_info['patient_info'].gender
+      const id = patient_basic_info['patient_info'].id
+      const birthdate = patient_basic_info['patient_info'].birthdate
+      const phone = (patient_data['telecom'] ? patient_data['telecom'][0]['value'] : 'Unknown')
+      const email = (patient_data['email'] ? patient_data['email'][0]: 'Unknown')
+      var address = ''
+      if (patient_data['address']){
+        var address_data = patient_data['address'][0]
+        address = 'Address: ' + address_data['line'][0] + ' ' + address_data['city'] 
+        + ' ' + address_data['state'] + ' ' + address_data['postalCode'] + ' ' + address_data['country'];
+      }
+      else {
+        const address = 'Address: Unknown' 
+      }
+
+      return (
+        <div className='basic-info'>
+        <div class="row">
+        <div class="col-sm-6">
+          <p><span className="strong-text"> Gender:</span> {gender}</p>
+          <p><span className="strong-text"> Born:</span> {birthdate}</p>
+          <p><span className="strong-text"> ID:</span> {id}</p>
+        </div>
+        <div class="col-sm-6" >
+          <p><span className="strong-text"> Phone: </span>{phone}</p>
+          <p><span className="strong-text"> Email: </span> {email}</p>
+          <p><span className="strong-text"> Address: </span> {address}</p>
+        </div>
+      </div>
+      </div>
+      )
+    }
+    
   }
   
   render = () => {
     const {patient_info, handleClose, show} = this.props;
     const showHideClassName = show ? "modal display-block" : "modal display-none";
-    const download_values = [this.state.columns].concat(this.state.rows)
-    const csvData = [
-      ["firstname", "lastname", "email"],
-      ["Ahmed", "Tomi", "ah@smthing.co.com"],
-      ["Raed", "Labes", "rl@smthing.co.com"],
-      ["Yezzi", "Min l3b", "ymin@cocococo.com"]
-    ];
+    const basic_info = [[patient_info.id, patient_info.gender], [patient_info.birthdate, patient_info.birthdate]]
     return (
       <div className={showHideClassName}>
         <section className="modal-main">
           <div className="modal_content">
           <div className="patient-field title"> {patient_info.name} </div>
-          <div className="patient-field">id: {patient_info.id} </div>
-          <div className="patient-field">gender: {patient_info.gender} </div>
-          <div className="patient-field">birthdate: {patient_info.birthdate} </div>
-          <Select className="group-field" options={this.state.options} value={this.state.selectedGroup} onChange={this.handleSelection}/>
+          {this.generate_basic_info()}
+          <Select className="group-field" options={this.state.options.sort((a, b) => a.value - b.value)} value={this.state.selectedGroup} onChange={this.handleSelection}/>
           {this.generate_table(this.state.selectedGroup)}
           <button className="button close" type="button" onClick={handleClose}>
             Close
           </button>
-          <CSVLink className="button close" onClick={this.modcheck} data={this.state.rows}>Download</CSVLink>
+          <CSVLink className="button download " data={this.state.rows}>Download</CSVLink>
           </div>
         </section>
       </div>
