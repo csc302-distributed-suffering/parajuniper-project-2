@@ -203,14 +203,14 @@ export class Modal extends React.Component {
         <div className='basic-info'>
         <div class="row">
         <div class="col-sm-6">
-          <p><span className="strong-text"> Gender:</span> {gender}</p>
-          <p><span className="strong-text"> Born:</span> {birthdate}</p>
-          <p><span className="strong-text"> ID:</span> {id}</p>
+          <p><span className="strong-text"> Gender:</span>  {gender}</p>
+          <p><span className="strong-text"> Born:</span>  {birthdate}</p>
+          <p><span className="strong-text"> ID:</span>  {id}</p>
         </div>
         <div class="col-sm-6" >
-          <p><span className="strong-text"> Phone: </span>{phone}</p>
-          <p><span className="strong-text"> Email: </span> {email}</p>
-          <p><span className="strong-text"> Address: </span> {address}</p>
+          <p><span className="strong-text"> Phone: </span>  {phone}</p>
+          <p><span className="strong-text"> Email: </span>  {email}</p>
+          <p><span className="strong-text"> Address: </span>  {address}</p>
         </div>
       </div>
       </div>
@@ -222,7 +222,6 @@ export class Modal extends React.Component {
   render = () => {
     const {patient_info, handleClose, show} = this.props;
     const showHideClassName = show ? "modal display-block" : "modal display-none";
-    const basic_info = [[patient_info.id, patient_info.gender], [patient_info.birthdate, patient_info.birthdate]]
     return (
       <div className={showHideClassName}>
         <section className="modal-main">

@@ -16,7 +16,7 @@
   }
   .strong-text{
     font-weight: strong;
-    color: rgb(82, 82, 82)
+    color: rgb(129, 129, 129)
   }
 
   .modal display-block{
@@ -49,16 +49,6 @@
   
 
   .modal_content {
-    // display: flex;
-    // flex-direction: column;
-    // position: relative;
-    // top: 50%;
-    // left: 50%;
-    
-    // transform: translate(-50%, -50%);
-    // overflow: 'auto';
-    // width: 100%;
-    // margin: 0 auto;
     margin-bottom: 40px;
     margin-top: 40px;
   }
@@ -78,6 +68,7 @@
       background-color: #e3e3e3;
       border-radius: 6px;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      color:rgb(82, 82, 82)
   }
   .button {
     /* background: linear-gradient(90deg, rgba(52,52,58,1) 12%, rgba(53,73,106,1) 55%); */
