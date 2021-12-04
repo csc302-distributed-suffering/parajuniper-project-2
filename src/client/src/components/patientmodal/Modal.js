@@ -4,6 +4,7 @@ import './Modal.scss';
 import './table.scss';
 import GROUP_MAPS from'./group_maps';
 import Table from 'rc-table';
+import { jsPDF } from "jspdf";
 
 export class Modal extends React.Component {
   constructor(props) {
@@ -13,13 +14,33 @@ export class Modal extends React.Component {
     this.state = {
       groups: groups,
       options: groupOptions,
-      selectedGroup: groupOptions[0]
+      selectedGroup: groupOptions[0],
+      columns: [],
+      rows: []
     };
     
   }
 
   getPath = (obj, path = "") => {
     return path.split(".").reduce((out, key) => out ? out[key] : undefined, obj)
+  }
+
+  handleDownload = ()=>{
+    const doc = new jsPDF();
+    console.log("here")
+    console.log(this.state.groups)
+    const id = this.state.groups['Patient'][0]['resource']['id']
+    const last_name = this.state.groups['Patient'][0]['resource']['name'][0]['family']
+    const first_name = this.state.groups['Patient'][0]['resource']['name'][0]['given'][0]
+    console.log(first_name + ' ' + last_name)
+    doc.text("GROUP" + this.state.selectedGroup.value, 20, 20);
+    doc.text(JSON.stringify(this.state.columns), 20, 30);
+    var cur_row = 40
+    this.state.rows.forEach(row=>{
+      doc.text(JSON.stringify(row), 20, cur_row);
+      cur_row += 10;
+    })
+    doc.save(first_name + ' ' + last_name + ' ' + this.state.selectedGroup + ".pdf");
   }
 
   getGroups = (data) => {
@@ -148,39 +169,9 @@ export class Modal extends React.Component {
       })
       rows_final.push(entry)
     })
-    var data = {}
-    //temp data below
-    const columns2 = [
-      {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        width: 100,
-      },
-      {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-        width: 100,
-      },
-      {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
-        width: 200,
-      },
-      {
-        title: 'Operations',
-        dataIndex: '',
-        key: 'operations',
-        render: () => <a href="#">Delete</a>,
-      },
-    ];
-    
-    const data2 = [
-      { name: 'Jack', age: 28, address: 'some where', key: '1' },
-      { name: 'Rose', age: 36, address: 'some where', key: '2' },
-    ];
+
+    this.state.columns = columns
+    this.state.rows = rows_final
     return <Table columns={columns} data={rows_final} />
   }
   
@@ -199,6 +190,9 @@ export class Modal extends React.Component {
           {this.generate_table(this.state.selectedGroup)}
           <button className="button close" type="button" onClick={handleClose}>
             Close
+          </button>
+          <button className="button close" type="button" onClick={this.handleDownload}>
+            Download
           </button>
           </div>
         </section>

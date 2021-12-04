@@ -26,6 +26,7 @@ class App extends Component {
       searchResult: true,
     }
   }
+  
 
   render(){
       return (
@@ -35,12 +36,14 @@ class App extends Component {
             <div className="App">
 
               <div className='header'>
-                <h1 className="header-title" >Suffering</h1>
-                <p >
-                   A FHIR based someting blah blah that gets you patient data
-                </p>
-                <a className="header-link" href="https://www.hl7.org/fhir/" target="_blank">About FHIR </a>
-                <i class="fas fa-fire-alt"></i>
+                <div className="header-content">
+                  <h1 className="header-title" >Suffering</h1>
+                  <p >
+                    A FHIR based someting blah blah that gets you patient data
+                  </p>
+                  <a className="header-link" href="https://www.hl7.org/fhir/" target="_blank">About FHIR </a>
+                  <i class="fas fa-fire-alt"></i>
+                </div>
               </div>
 
               <div id='searchbar'>
