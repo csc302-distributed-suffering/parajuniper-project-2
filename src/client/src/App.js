@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -33,7 +33,16 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render={() => (
             <div className="App">
-              
+
+              <div className='header'>
+                <h1 className="header-title" >Suffering</h1>
+                <p >
+                   A FHIR based someting blah blah that gets you patient data
+                </p>
+                <a className="header-link" href="https://www.hl7.org/fhir/" target="_blank">About FHIR </a>
+                <i class="fas fa-fire-alt"></i>
+              </div>
+
               <div id='searchbar'>
                     <Searchbox type='search' id="patientSearch-1" name="searchPatientFirstName" placeholder='First Name' onInputChange={this.handleSearchInputChange}/>
                 <Searchbox type='search' id="patientSearch-2" name="searchPatientLastName" placeholder='Last Name' onInputChange={this.handleSearchInputChange}/>
