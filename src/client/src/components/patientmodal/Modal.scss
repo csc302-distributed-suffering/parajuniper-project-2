@@ -6,28 +6,32 @@
     z-index: 999;
     left: 0%;
     top: 0%;
+    
   }
   
   .modal-main {
     position:fixed;
-    background: white;
+    background: linear-gradient(90deg, rgba(249,230,213,1) 12%, rgba(233,250,255,1) 55%);
+    background: rgb(247, 247, 247);
     width: 100%;
     float: left;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     justify-content: 'center';
-	align-items: 'center';
+	  align-items: 'center';
     height: 80%;
     width: 80%;
     z-index: 1000;
     border-radius: 20px;
     box-shadow: "7px 7px 15rgba(0, 0, 0, 0.1)0,0,.6)";
-    position: relative;
+    position: absolute;
     padding-left: 30px;
     padding-right: 30px;
-
+    overflow-y: auto;
+    font-family: 'IBM Plex Sans Condensed', sans-serif;
   }
+  
 
   .modal_content {
     display: flex;
@@ -43,7 +47,10 @@
   .patient-field{
       padding-top: 10px;
       padding-bottom: 10px;
-      font-family: Tahoma;
+  }
+  .group-field{
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .title{
@@ -51,7 +58,8 @@
       font-weight: bold;
   }
   .button {
-    background: #76B3FA;
+    /* background: linear-gradient(90deg, rgba(52,52,58,1) 12%, rgba(53,73,106,1) 55%); */
+    background: #4b4b4b; 
     border-radius: 100px;
     padding: 20px 60px;
     color: #fff;
@@ -59,6 +67,9 @@
     font-size: 1.45em;
     margin: 0 15px;
     margin-top: 0px;
+    &:hover{
+      background: #222222;;
+    }
   }
 
   .open_button {

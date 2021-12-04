@@ -1,6 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
-import './Modal.css';
+import './Modal.scss';
 import './table.scss';
 import GROUP_MAPS from'./group_maps';
 import Table from 'rc-table';
@@ -150,7 +150,7 @@ export class Modal extends React.Component {
           <div className="patient-field">id: {patient_info.id} </div>
           <div className="patient-field">gender: {patient_info.gender} </div>
           <div className="patient-field">birthdate: {patient_info.birthdate} </div>
-          <Select options={this.state.options} value={this.state.selectedGroup} onChange={this.handleSelection}/>
+          <Select className="group-field" options={this.state.options} value={this.state.selectedGroup} onChange={this.handleSelection}/>
           {this.generate_table(this.state.selectedGroup)}
           <button className="button open_button" type="button" onClick={handleClose}>
             Close
