@@ -77,6 +77,9 @@ export class Modal extends React.Component {
     var column_values = GROUP_MAPS[group.value]
     column_values.forEach(c => {
       var c_name = c[0]
+      if (c_name.split(".")[1]) {
+        c_name = c_name.split(".")[1]
+      }
       var c_width = c[1]
       columns.push({
           title: c_name,
@@ -95,11 +98,29 @@ export class Modal extends React.Component {
       var row_res = row_value['resource']
       column_values.forEach(c => {
         var c_name = c[0]
+        var c_name_t = c_name
+        if (c_name.split(".")[1]) {
+          const name = c_name.split(".")
+          c_name_t = name[1]
+          c_name = name[0]
+        }
         console.log('c_name ' + JSON.stringify(c_name, null, 4))
         console.log(row_res[c_name])
         // console.log('row_res ' + JSON.stringify(row_res, null, 4))
         // console.log('row_res[c_name]' + JSON.stringify(row_res.c_name, null, 4))
-        entry[c_name] = row_value['resource'][c_name]
+        if (c[2]) {
+          if (c[3] === "r") {
+            const values = []
+            row_value['resource'][c_name].forEach(e => {
+              values.push(e[c[2]])
+            })
+            entry[c_name_t] = values.join(", ");
+          } else {
+            entry[c_name_t] = row_value['resource'][c_name][c[2]]
+          }
+        } else {
+          entry[c_name_t] = row_value['resource'][c_name]
+        }
       })
       rows_final.push(entry)
     })
