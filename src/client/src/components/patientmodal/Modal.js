@@ -213,19 +213,32 @@ export class Modal extends React.Component {
           {this.generate_basic_info()}
           <Select className="group-field" options={this.state.options.sort((a, b) => a.value - b.value)} value={this.state.selectedGroup} onChange={this.handleSelection}/>
           {this.generate_table(this.state.selectedGroup)}
-          <button className="button close" type="button" onClick={handleClose}>
-            Close
+          <div class="row">
+          <div class="col">
+            <button className="button close" type="button" onClick={handleClose}>
+              Close
+            </button>
+            </div>
+            <div class="col">
+            <button className="button close ">
+          <CSVLink className='linktext' data={this.state.rows}>Download Table</CSVLink>
           </button>
-          <CSVLink className="button download " data={this.state.rows}>Download Table</CSVLink>
-          <a className="button close json"
-            type="button"
-            href={`data:text/json;charset=utf-8,${encodeURIComponent(
-              JSON.stringify(this.state.groups, null, 4)
-            )}`}
-            download={patient_info.name + ".json"}
-          >
-            Download All
-          </a>
+          </div>
+          <div class="col">
+            <button className="button close">
+              <a 
+                type="button"
+                className='linktext'
+                href={`data:text/json;charset=utf-8,${encodeURIComponent(
+                  JSON.stringify(this.state.groups, null, 4)
+                )}`}
+                download={patient_info.name + ".json"}
+              >
+                Download All
+              </a>
+            </button>
+          </div>
+          </div >
           </div>
         </section>
       </div>

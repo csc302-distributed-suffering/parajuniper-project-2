@@ -59,6 +59,10 @@
   .group-field{
     margin-top: 20px;
     margin-bottom: 20px;
+    cursor: pointer;
+    &:hover{
+      cursor: pointer;
+    }
   }
 
   .title{
@@ -69,6 +73,10 @@
       border-radius: 6px;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
       color:rgb(82, 82, 82)
+  }
+
+  .linktext{
+    color: white
   }
   .button {
     /* background: linear-gradient(90deg, rgba(52,52,58,1) 12%, rgba(53,73,106,1) 55%); */
@@ -96,8 +104,8 @@
     }
     &.close{
       background: #4b4b4b; 
-      margin-left: 15px;
-      margin-right: 15px;
+      color: white;
+      margin-bottom: 30px;
       &.json{
         height: 7vh;
         text-align: center;
