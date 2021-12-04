@@ -108,17 +108,41 @@ export class Modal extends React.Component {
         console.log(row_res[c_name])
         // console.log('row_res ' + JSON.stringify(row_res, null, 4))
         // console.log('row_res[c_name]' + JSON.stringify(row_res.c_name, null, 4))
-        if (c[2]) {
-          if (c[3] === "r") {
+        let skip = false
+        let current = ""
+        try{
+          current = row_value['resource'][c_name]
+          if (c[2]) {
+            const path = c[2].split(".")
+            path.pop()
+            path.forEach(name => {
+              current = current[name]
+            })
+          }
+        } catch (e) {
+          entry[c_name_t] = "N/A"
+          skip = true
+        }
+        if (c[2] && !skip) {
+          const lastKey = c[2].split(".").pop()
+          if (c[3] === "r" && !skip) {
             const values = []
-            row_value['resource'][c_name].forEach(e => {
-              values.push(e[c[2]])
+            current.forEach(e => {
+              try {
+                values.push(e[lastKey])
+              } catch (e) {
+                return
+              }
             })
             entry[c_name_t] = values.join(", ");
-          } else {
-            entry[c_name_t] = row_value['resource'][c_name][c[2]]
+          } else if (!skip) {
+            try {
+              entry[c_name_t] = current[lastKey]
+            } catch (e) {
+              entry[c_name_t] = "N/A"
+            }
           }
-        } else {
+        } else if (!skip){
           entry[c_name_t] = row_value['resource'][c_name]
         }
       })
