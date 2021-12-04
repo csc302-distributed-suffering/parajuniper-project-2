@@ -1,7 +1,15 @@
 import './Modal.css';
+import { jsPDF } from "jspdf";
 
 export const Modal = ({ patient_info, handleClose, show,}) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
+
+  const handleDownload = ()=>{
+    const doc = new jsPDF();
+    doc.text("Hello world!", 10, 10);
+    doc.save("a4.pdf");
+  }
+
   return (
     <div className={showHideClassName}>
       <section className="modal-main">
@@ -13,6 +21,8 @@ export const Modal = ({ patient_info, handleClose, show,}) => {
         <button className="button" type="button" onClick={handleClose}>
           Close
         </button>
+        <button onClick={handleDownload}>Download</button>
+        
         </div>
       </section>
     </div>
