@@ -1,6 +1,6 @@
 const GROUP_MAPS = {
-    // 'Patient': ['birthDate', 'gender', 'id'],
-    'Patient': ["id"],
+    'Patient': ['birthDate', 'gender', 'id'],
+    //'Patient': ["id"],
     'CarePlan': ["id", "status"]
 
 }

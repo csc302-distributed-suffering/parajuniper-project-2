@@ -84,6 +84,7 @@ export class Modal extends React.Component {
       }
       )
     });
+    var rows_final = []
     var rows_data = this.state.groups[group.value]
     // console.log('rows data')
     // console.log('rows_data ' + JSON.stringify(rows_data, null, 4))
@@ -100,9 +101,9 @@ export class Modal extends React.Component {
         console.log(row_res[c_name])
         // console.log('row_res ' + JSON.stringify(row_res, null, 4))
         // console.log('row_res[c_name]' + JSON.stringify(row_res.c_name, null, 4))
-        // entry[c_name] = row_value['resource'][c_name]
+        entry[c_name] = row_value['resource'][c_name]
       })
-      rows_data.push(entry)
+      rows_final.push(entry)
     })
     var data = {}
     //temp data below
@@ -137,7 +138,7 @@ export class Modal extends React.Component {
       { name: 'Jack', age: 28, address: 'some where', key: '1' },
       { name: 'Rose', age: 36, address: 'some where', key: '2' },
     ];
-    return <Table columns={columns2} data={data2} />
+    return <Table columns={columns} data={rows_final} />
   }
   
   render = () => {
