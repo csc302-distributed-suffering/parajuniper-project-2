@@ -113,11 +113,9 @@ export class Modal extends React.Component {
     });
     var rows_final = []
     var rows_data = this.state.groups[group.value]
-    // console.log('group.value ' + JSON.stringify(group.value, null, 4))
     
     rows_data.forEach(row_value => {
       var row_clean = []
-      // console.log('row.value[resource] ' + JSON.stringify(row_value['resource'], null, 4))
       var entry = {}
       var row_res = row_value['resource']
       
@@ -130,8 +128,6 @@ export class Modal extends React.Component {
           c_name_t = name[1]
           c_name = name[0]
         }
-        // console.log('row_res ' + JSON.stringify(row_res, null, 4))
-        // console.log('row_res[c_name]' + JSON.stringify(row_res.c_name, null, 4))
         let skip = false
         let current = ""
         try{

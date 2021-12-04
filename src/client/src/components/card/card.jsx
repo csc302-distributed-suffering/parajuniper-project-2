@@ -12,7 +12,6 @@ export class Card extends React.Component {
             modal_loading: false,
             patientData: null
         };
-        // this.modal_open = this.modal_open.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -37,7 +36,6 @@ export class Card extends React.Component {
                 <div className='card' >
                     {this.state.modal_loading ? <BeatLoader color="rgb(97, 208, 255)"></BeatLoader> : <Modal patient_info={this.props.patient} patient_data={this.state.patientData} show={this.state.modal_open} handleClose={this.handleClick}> this.props.patient.name </Modal>}
                     <h1>{this.props.patient.name}</h1>
-                    {/* <p>{this.props.patient.sex}</p> */}
                     <p>{this.props.patient.birthdate}</p>
                     <button className="button card" onClick={this.handleClick}> Details</button>
                 </div>
