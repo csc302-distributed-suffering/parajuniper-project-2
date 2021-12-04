@@ -56,7 +56,6 @@ export class Modal extends React.Component {
           groups[resourceType].push(entry)
         }
     })
-    console.log(groups)
     return groups
   }
 
