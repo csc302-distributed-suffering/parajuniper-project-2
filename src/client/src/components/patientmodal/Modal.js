@@ -5,6 +5,7 @@ import './table.scss';
 import GROUP_MAPS from'./group_maps';
 import Table from 'rc-table';
 import { jsPDF } from "jspdf";
+import { CSVLink, CSVDownload } from "react-csv";
 
 export class Modal extends React.Component {
   constructor(props) {
@@ -93,6 +94,8 @@ export class Modal extends React.Component {
   }
 
   generate_table = (group) => {
+    this.state.rows = []
+    this.state.columns = []
     if (Object.keys(group).length === 0){
       return
     }
@@ -108,27 +111,30 @@ export class Modal extends React.Component {
           title: c_name,
           dataIndex: c_name,
           key: c_name,
-          width: c[1] != 0? c[1] : 150
+          width: c_width != 0? c_width : 150
       }
       )
+      this.state.columns.push(c_name)
     });
     var rows_final = []
     var rows_data = this.state.groups[group.value]
     // console.log('group.value ' + JSON.stringify(group.value, null, 4))
+    
     rows_data.forEach(row_value => {
+      var row_clean = []
       console.log('row.value[resource] ' + JSON.stringify(row_value['resource'], null, 4))
       var entry = {}
       var row_res = row_value['resource']
+      
       column_values.forEach(c => {
         var c_name = c[0]
+        row_clean.push(row_res[c_name])
         var c_name_t = c_name
         if (c_name.split(".")[1]) {
           const name = c_name.split(".")
           c_name_t = name[1]
           c_name = name[0]
         }
-        console.log('c_name ' + JSON.stringify(c_name, null, 4))
-        console.log(row_res[c_name])
         // console.log('row_res ' + JSON.stringify(row_res, null, 4))
         // console.log('row_res[c_name]' + JSON.stringify(row_res.c_name, null, 4))
         let skip = false
@@ -170,16 +176,28 @@ export class Modal extends React.Component {
         }
       })
       rows_final.push(entry)
+      this.state.rows.push(row_clean)
     })
-
-    this.state.columns = columns
     this.state.rows = rows_final
     return <Table columns={columns} data={rows_final} />
+  }
+  
+  modcheck = () => {
+    console.log('downloaded values')
+    console.log(this.state)
+    console.log([this.state.columns].concat(this.state.rows))
   }
   
   render = () => {
     const {patient_info, handleClose, show} = this.props;
     const showHideClassName = show ? "modal display-block" : "modal display-none";
+    const download_values = [this.state.columns].concat(this.state.rows)
+    const csvData = [
+      ["firstname", "lastname", "email"],
+      ["Ahmed", "Tomi", "ah@smthing.co.com"],
+      ["Raed", "Labes", "rl@smthing.co.com"],
+      ["Yezzi", "Min l3b", "ymin@cocococo.com"]
+    ];
     return (
       <div className={showHideClassName}>
         <section className="modal-main">
@@ -193,9 +211,7 @@ export class Modal extends React.Component {
           <button className="button close" type="button" onClick={handleClose}>
             Close
           </button>
-          <button className="button close" type="button" onClick={this.handleDownload}>
-            Download
-          </button>
+          <CSVLink className="button close" onClick={this.modcheck} data={this.state.rows}>Download</CSVLink>
           </div>
         </section>
       </div>
