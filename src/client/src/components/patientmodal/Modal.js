@@ -65,10 +65,12 @@ export class Modal extends React.Component {
             resourceType += " - " + subType;
         }
         
-        if (!Array.isArray(groups[resourceType])) {
+        if (resourceType in GROUP_MAPS) {
+          if (!Array.isArray(groups[resourceType])) {
             groups[resourceType] = []
+          }
+          groups[resourceType].push(entry)
         }
-        groups[resourceType].push(entry)
     })
     console.log('here')
     console.log(groups)
