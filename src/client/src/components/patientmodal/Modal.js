@@ -75,28 +75,26 @@ export class Modal extends React.Component {
     }
     var columns = []
     var column_values = GROUP_MAPS[group.value]
-    column_values.forEach(c_name => {
+    column_values.forEach(c => {
+      var c_name = c[0]
+      var c_width = c[1]
       columns.push({
           title: c_name,
           dataIndex: c_name,
           key: c_name,
-          width: 100 
+          width: c[1] != 0? c[1] : 150
       }
       )
     });
     var rows_final = []
     var rows_data = this.state.groups[group.value]
-    // console.log('rows data')
-    // console.log('rows_data ' + JSON.stringify(rows_data, null, 4))
-    // console.log('this.state.groups ' + JSON.stringify(this.state.groups, null, 4))
     // console.log('group.value ' + JSON.stringify(group.value, null, 4))
     rows_data.forEach(row_value => {
-      // console.log('row value')
-      // console.log(row_value)
       console.log('row.value[resource] ' + JSON.stringify(row_value['resource'], null, 4))
       var entry = {}
       var row_res = row_value['resource']
-      column_values.forEach(c_name => {
+      column_values.forEach(c => {
+        var c_name = c[0]
         console.log('c_name ' + JSON.stringify(c_name, null, 4))
         console.log(row_res[c_name])
         // console.log('row_res ' + JSON.stringify(row_res, null, 4))
