@@ -13,8 +13,13 @@ const getPatientsWName = async (firstName, lastName, count) => {
     })
 
     try {
-        const response = await fetch(request)
-        const jsonData = await response.json()
+        const response = await fetch(request);
+
+        if (response.status !== 200) {
+            return {status: response.status, data: {}};
+        }
+
+        const jsonData = await response.json();
 
         return {status: response.status, data: jsonData}
     } catch (error) {
@@ -38,8 +43,13 @@ const getPatientList = async (params) => {
     })
 
     try {
-        const response = await fetch(request)
-        const jsonData = await response.json()
+        const response = await fetch(request);
+
+        if (response.status !== 200) {
+            return {status: response.status, data: {}};
+        }
+
+        const jsonData = await response.json();
 
         return {status: response.status, data: jsonData}
     } catch (error) {
@@ -60,12 +70,16 @@ const getPatientByID = async (id, count) => {
 
     try {
         const response = await fetch(request)
-        const jsonData = await response.json()
 
-        console.log(jsonData);
+        if (response.status !== 200) {
+            return {status: response.status, data: {}};
+        }
+
+        const jsonData = await response.json();
 
         return {status: response.status, data: jsonData}
     } catch (error) {
+        console.error(JSON.stringify(error));
         throw new Error(error)
     }
 }
@@ -81,8 +95,13 @@ const getPage = async (url) => {
     })
 
     try {
-        const response = await fetch(request)
-        const jsonData = await response.json()
+        const response = await fetch(request);
+
+        if (response.status !== 200) {
+            return {status: response.status, data: {}};
+        }
+
+        const jsonData = await response.json();
 
         return {status: response.status, data: jsonData}
     } catch (error) {
