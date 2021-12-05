@@ -3,7 +3,7 @@ import {Request, Response} from 'express';
 import Client, {SearchParams} from 'fhir-kit-client';
 import {BundleLink, Bundle} from 'fhir/r4';
 const router = express.Router();
-const config = {baseUrl: 'https://r4.smarthealthit.org'};
+const config = {baseUrl: 'https://hapi.fhir.org/baseR4'};
 const fhirKitClient = require('fhir-kit-client');
 const client: Client = new fhirKitClient(config);
 
