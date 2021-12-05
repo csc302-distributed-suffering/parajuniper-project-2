@@ -1,0 +1,25 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 2px;
+    padding: 25px;
+    cursor: pointer;
+    font-family: Tahoma;
+    border-radius: 10px;
+    box-shadow: "7px 7px 15rgba(0, 0, 0, 0.1)0,0,.6)";
+    position: relative;
+    height: 200px;
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card:hover {
+    /* transform: scale(1.01) */
+    
+}

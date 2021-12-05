@@ -3,7 +3,7 @@ const getPatientsWName = async (firstName, lastName, count) => {
     const given = firstName === '' ? '' : `&given=${firstName}`;
     const family = lastName === '' ? '' : `&family=${lastName}`;
     
-    const url = `/patients/list?count=${count}${given}${family}`;
+    const url = `/patients/list?_count=${count}${given}${family}`;
     const request = new Request(url, {
         method: 'GET',
         headers: {
@@ -22,9 +22,13 @@ const getPatientsWName = async (firstName, lastName, count) => {
     }
 }
 
-const getPatient = async (id, count) => {    
-    
-    const url = `/patients/info?id=${id}&count=${count}`
+const getPatientList = async (params) => {
+    const qParams = [];
+    for (const key in params) {
+        qParams.push(`${key}=${params[key]}`);
+    }
+    const url = '/patients/list?' + qParams.join('&');
+
     const request = new Request(url, {
         method: 'GET',
         headers: {
@@ -39,13 +43,35 @@ const getPatient = async (id, count) => {
 
         return {status: response.status, data: jsonData}
     } catch (error) {
+        console.error(JSON.stringify(error));
         throw new Error(error)
     }
 }
 
-const getAllPatientData = async (id, count) => {    
-    
-    const url = `https://r4.smarthealthit.org/Patient/${id}/$everything?_count=${count}`
+const getPatientByID = async (id, count) => {
+    const url = `/patients/info?id=${id}&_count=${count}`
+    const request = new Request(url, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json text/plain, */*',
+            'Content-Type': 'application/json'
+        }
+    })
+
+    try {
+        const response = await fetch(request)
+        const jsonData = await response.json()
+
+        console.log(jsonData);
+
+        return {status: response.status, data: jsonData}
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+const getPage = async (url) => {
+    console.log(url);
     const request = new Request(url, {
         method: 'GET',
         headers: {
@@ -60,9 +86,11 @@ const getAllPatientData = async (id, count) => {
 
         return {status: response.status, data: jsonData}
     } catch (error) {
+        console.error(JSON.stringify(error));
         throw new Error(error)
     }
 }
 
 
-export {getPatientsWName, getPatient, getAllPatientData}
+
+export {getPatientsWName, getPatientByID, getPatientList, getPage}
