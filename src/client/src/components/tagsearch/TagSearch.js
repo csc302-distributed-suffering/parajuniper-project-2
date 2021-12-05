@@ -54,13 +54,6 @@ export class TagSearch extends React.Component {
         const { tags, suggestions } = this.state;
         return (
             <div className='search_wrapper'>
-                <Select
-                className="input-group" 
-                options={options} 
-                placeholder= 'Pick field'
-                value={this.state.field}
-                onChange={this.handleFieldChange}
-                />
                 <ReactTags 
                     className='tag-search input-group'
                     tags={tags}
@@ -71,6 +64,13 @@ export class TagSearch extends React.Component {
                     delimiters={delimiters} 
                     placeholder={"enter field value"}
                     inputFieldPosition="bottom"
+                />
+                <Select
+                className="select" 
+                options={options} 
+                placeholder= 'Pick field'
+                value={this.state.field}
+                onChange={this.handleFieldChange}
                 />
 
             </div>

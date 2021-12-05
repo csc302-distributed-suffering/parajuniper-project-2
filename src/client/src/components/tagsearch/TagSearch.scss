@@ -2,16 +2,10 @@
     position: relative;
     width: 100%;
     font-family: IBM Plex, sans-serif;
-    height: 17vh;
+    height: auto;
     margin-bottom: 50px;
-    .ReactTags__tags {
-        &.react-tags-wrapper{
-        position: absolute;
-        bottom: 0;
-        left: 25%;
-        }
-    }
-
+    margin-top: 50px;
+    text-align: -webkit-center;
     .tag-wrapper{
         color: #fff;
         font-weight: bold;
@@ -46,10 +40,7 @@
 
     .css-b62m3t-container{
         width: 20%;
-        left: 63%;
-        top: 100px;
-        position: absolute !important;
-        bottom: 0 !important;
+        margin-top: 20px;
         color:rgb(70, 70, 70);
         font-family: 'ibm-plex', Helvetica, sans-serif;
         .css-6j8wv5-Input{
@@ -62,16 +53,13 @@
         }
     }
     .css-1s2u09g-control{
-        position: absolute !important;
-        bottom: 0 !important;
+
         width: 230px;
         height: 7.5vh;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }
 
     .css-1pahdxg-control{
-        position: absolute !important;
-        bottom: 0 !important;
         width: 230px;
         height: 7.5vh;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
