@@ -138,16 +138,34 @@ class App extends Component {
   getPatientName = (patient) => {
     let cName = '';
 
-    if (!patient.name) {
+    console.log(patient.name);
+
+    if (!patient.name || patient.name.length === 0) {
       return 'Unknown';
     }
 
     for (const name of patient.name) {
+      cName = '';
       if (name.use === 'official') {
+        let n = '';
+        if (name.given) {
+          n += name.given + ' ';
+        } 
+
+        if (name.family) {
+          n += name.family;
+        }
+
         return `${name.given} ${name.family}`; 
       }
 
-      cName = `${name.given} ${name.family}`
+      if (name.given) {
+        cName += name.given + ' ';
+      } 
+
+      if (name.family) {
+        cName += name.family;
+      }
     }
 
     return cName;
