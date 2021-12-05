@@ -3,11 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "jest": {
-    "moduleNameMapper": {
-      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
-    }
-  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@testing-library/jest-dom": "^5.11.4",
@@ -19,11 +14,15 @@
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.3",
     "react-csv": "^2.0.3",
+    "react-dnd": "^14.0.4",
+    "react-dnd-html5-backend": "^14.0.2",
     "react-dom": "^17.0.2",
+    "react-native-autocomplete-dropdown": "^1.1.5",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "react-select": "^5.2.1",
     "react-spinners": "^0.11.0",
+    "react-tag-input": "^6.7.3",
     "sass": "1.44.0",
     "web-vitals": "^1.0.1"
   },
@@ -31,8 +30,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
-    "eject": "react-scripts eject",
-    "coverage": "jest --coverage"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -54,7 +52,6 @@
   },
   "proxy": "http://server:5000/",
   "devDependencies": {
-    "jest": "^26.6.0",
     "react-test-renderer": "^17.0.2"
   }
 }
