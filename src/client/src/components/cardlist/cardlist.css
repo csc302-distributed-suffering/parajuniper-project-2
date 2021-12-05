@@ -5,3 +5,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 20px
 }
+
+.center-text {
+    text-align: center;
+}
