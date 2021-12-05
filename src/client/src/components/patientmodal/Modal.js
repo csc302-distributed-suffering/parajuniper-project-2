@@ -214,16 +214,21 @@ export class Modal extends React.Component {
           <Select className="group-field" options={this.state.options.sort((a, b) => a.value - b.value)} value={this.state.selectedGroup} onChange={this.handleSelection}/>
           {this.generate_table(this.state.selectedGroup)}
           <div class="row">
+          <div class="col-auto">
           <div class="col">
             <button className="button close" type="button" onClick={handleClose}>
               Close
             </button>
             </div>
+            </div>
+            <div class="col-auto">
             <div class="col">
             <button className="button close ">
           <CSVLink className='linktext' data={this.state.rows}>Download Table</CSVLink>
           </button>
           </div>
+          </div>
+          <div class="col-auto">
           <div class="col">
             <button className="button close">
               <a 
@@ -237,6 +242,7 @@ export class Modal extends React.Component {
                 Download All
               </a>
             </button>
+          </div>
           </div>
           </div >
           </div>
