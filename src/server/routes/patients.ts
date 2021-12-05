@@ -25,10 +25,7 @@ const client: Client = new fhirKitClient(config);
 //     'Location',
 // ];
 
-// TODO: add more queries for listing patients?
 router.get('/list', async (req: Request, res: Response) => {
-    // const patientName = req.body.name ?? '';
-    // const count = req.body.count ?? '10'; // TODO: FHIR only supports client-side pagination. So we need to return a link to the next page and the client side needs to make sure it gets loaded. FUN...
     const msg = `An error occurred while listing patients.`; // TODO should probably make this more descriptive
     const sParams: SParams = getSearchParams(req);
 
