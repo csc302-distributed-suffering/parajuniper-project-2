@@ -8,6 +8,7 @@ import { Searchbox } from './components/searchbox/searchbox';
 import { Navbuttons } from './components/navbuttons/navbuttons';
 import { getPatientsWName, getPatientByID, getPatientList, getPage,  } from './actions/patients';
 import BeatLoader from "react-spinners/BeatLoader";
+import { TagSearch } from './components/tagsearch/TagSearch.js';
 // import {View, Modal, Text} from 'react-native'
 
 
@@ -26,9 +27,103 @@ class App extends Component {
       page: 1,
       loading: false,
       searchResult: true,
+      tags: [
+        { type: "firstName", value: "Harland", text: "firstName: Harland", id: "firstName: Harland"}
+     ],
+     suggestions: [
+      { type: "firstName", value: "John", text: "firstName: John" },
+      ],
+      field: [{ value: 'firstName', label: 'firstName' }]
+    
     }
   }
-  
+  handlePatientIdSearch = async (id) => {
+    const patientData = await this.handleSpecificPatientSearch(id, 1);
+    if (patientData){
+      var p_data = null
+      patientData.entry.forEach(e => {
+        if (e.resource.resourceType == 'Patient'){
+          p_data = e['resource']
+        }
+      });
+      // const p_data = patientData['entry'][1]['resource']
+      const name = this.getPatientName(p_data);
+    
+      const patient = {
+        name: name,
+        id: p_data.id,
+        gender: p_data.gender,
+        birthdate: p_data.birthDate,
+      };
+      this.setState({
+        patients: [patient],
+        loading: false,
+        searchResult: true,
+        previousPageLink: ""
+      });
+    }
+    else{
+      this.setState({
+        patients: [],
+        loading: false,
+        searchResult: false,
+        previousPageLink: ""
+      });
+    }
+  }
+
+  handleTagUpdates = (tags, type='add') => {
+    for (let i = 0; i < tags.length; i++) {
+      var tag = tags[i]
+      if (tag.type == 'id'){
+        this.handlePatientIdSearch(tag.value)
+
+      }
+      else if (tag.type == 'firstName' || tag.type == 'lastName'){
+
+        if (tag.type == 'firstName'){
+          if (type=="del"){
+            this.setState({searchPatientFirstName: ''})
+            return
+          }
+          this.setState({searchPatientFirstName: tag.value})
+          this.handlePatientListSearch()
+        }
+        else if (tag.type == 'lastName'){
+          if (type=='del'){
+            this.setState({searchPatientLastName: ''})
+            return
+          }
+          this.setState({searchPatientLastName: tag.value})
+          this.handlePatientListSearch()
+        }
+
+      }
+    }
+
+  }
+  handleDelete(i) {
+    const { tags } = this.state;
+    this.setState({
+     tags: tags.filter((tag, index) => index !== i),
+    });
+    this.props.onInputChange(this.state.tags, 'del')
+    console.log('tag deleted')
+    if (this.state.tags[i].type == 'id'){
+      console.log('id deleted')
+
+    }
+  }
+
+  handleAddition(tag) {
+      tag.value = tag.text
+      tag.text = this.state.field[0].value + ': ' + tag.text
+      tag.type = this.state.field[0].value
+      tag.id = tag.text
+      // console.log('handle add tags: ' + String(this.state.tags))
+      this.setState(state => ({ tags: [...state.tags, tag] }));
+      this.props.onInputChange([tag], 'add')
+  }
 
   render(){
       return (
@@ -47,15 +142,21 @@ class App extends Component {
                   <i class="fas fa-fire-alt"></i>
                 </div>
               </div>
-
-              <div id='searchbar'>
+              <TagSearch
+                onInputChange={this.handleTagUpdates} 
+                handleDelete={this.handleDelete}
+                handleAddition={this.handleAddition}
+                tags={this.state.tags}
+                field={this.state.field}
+                />
+              {/* <div id='searchbar'>
                     <Searchbox type='search' id="patientSearch-1" name="searchPatientFirstName" placeholder='First Name' onInputChange={this.handleSearchInputChange}/>
                 <Searchbox type='search' id="patientSearch-2" name="searchPatientLastName" placeholder='Last Name' onInputChange={this.handleSearchInputChange}/>
 
                 <button id='searchButton' title='Change displayed fields' className="vertical-center" onClick={this.handlePatientListSearch}>
                   <img src={searchIcon} alt='Search' id='searchIcon'/>
                   </button>
-              </div>
+              </div> */}
               { this.state.loading
                ? <BeatLoader color="rgb(97, 208, 255)"></BeatLoader>
                : <div>
