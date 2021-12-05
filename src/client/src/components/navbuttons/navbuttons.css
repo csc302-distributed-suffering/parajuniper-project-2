@@ -1,0 +1,32 @@
+.navbuttons {
+    padding: 20px;
+}
+
+.navb {
+    margin: 8px 16px;
+    padding: 5px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5%;
+}
+
+.navb:hover:enabled {
+    background-color: rgb(192, 192, 192);
+    color:black;
+}
+
+.prev {
+    background-color: #f1f1f1;
+    color: black;
+    margin-right: 5px;
+}
+
+.next {
+    background-color: rgb(120, 178, 233);
+    color: white;
+}
+
+.navb:disabled {
+    background-color: #e0e0e0;
+    color: #c0c0c0;
+}
