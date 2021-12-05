@@ -1,4 +1,5 @@
 const express = require('express');
+import { WHILE_TYPES } from '@babel/types';
 import {Request, Response} from 'express';
 import Client, {SearchParams} from 'fhir-kit-client';
 import {BundleLink, Bundle} from 'fhir/r4';
@@ -95,15 +96,23 @@ router.get('/info', async (req, res) => {
 
         let result = [];
         const fResponse = Object.assign({}, response);
+        let initial = true
         while (response && response.entry && response.entry.length > 0) {
-            result = result.concat(response.entry);
+            if(!initial){
+                result.push(...response.entry);
+            } else{
+                initial = false
+            }
+
             if (response.link) {
                 for (const link of response.link) {
                     link.url = link.url.replace(/^http:\/\//i, 'https://');
                 }
             }
+
             response = await client.nextPage({bundle: response as Bundle});
         }
+
         fResponse.entry = fResponse.entry.concat(result);
         res.status(200).send(fResponse);
 
