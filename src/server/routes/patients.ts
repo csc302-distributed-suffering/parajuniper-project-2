@@ -1,29 +1,29 @@
 const express = require('express');
 import {Request, Response} from 'express';
 import Client, {SearchParams} from 'fhir-kit-client';
-import {BundleLink, Resource, Patient, Bundle} from 'fhir/r4';
+import {BundleLink, Bundle} from 'fhir/r4';
 const router = express.Router();
-const config = {baseUrl: 'http://hapi.fhir.org/baseR4'};
+const config = {baseUrl: 'https://r4.smarthealthit.org'};
 const fhirKitClient = require('fhir-kit-client');
 const client: Client = new fhirKitClient(config);
 
-const patientResourceCategories = [
-    'Annotation', 'Signature', 'Account', 'AdverseEvent', 'AllergyIntolerance', 'Appointment',
-    'AppointmentResponse', 'AuditEvent', 'Basic', 'BiologicallyDerivedProduct', 'BodyStructure',
-    'CarePlan', 'CareTeam', 'ChargeItem', 'Claim', 'ClaimResponse', 'ClinicalImpression',
-    'Communication', 'CommunicationRequest', 'Composition', 'Condition', 'Consent', 'Contract',
-    'Coverage', 'CoverageEligibilityRequest', 'CoverageEligibilityResponse', 'DetectedIssue',
-    'Device', 'DeviceRequest', 'DeviceUseStatement', 'DiagnosticReport', 'DocumentManifest',
-    'DocumentReference', 'Encounter', 'EnrollmentRequest', 'EpisodeOfCare', 'ExplanationOfBenefit',
-    'FamilyMemberHistory', 'Flag', 'Goal', 'Group', 'GuidanceResponse', 'ImagingStudy',
-    'Immunization', 'ImmunizationEvaluation', 'ImmunizationRecommendation', 'Invoice', 'List',
-    'MeasureReport', 'Media', 'MedicationAdministration', 'MedicationDispense', 'MedicationRequest',
-    'MedicationStatement', 'MolecularSequence', 'NutritionOrder', 'Observation', 'Person',
-    'Procedure', 'Provenance', 'QuestionnaireResponse', 'RelatedPerson', 'RequestGroup',
-    'ResearchSubject', 'RiskAssessment', 'Schedule', 'ServiceRequest', 'Specimen', 'SupplyDelivery',
-    'SupplyRequest', 'Task', 'VisionPrescription', 'Practitioner', 'Organization', 'Patient',
-    'Location',
-];
+// const patientResourceCategories = [
+//     'Annotation', 'Signature', 'Account', 'AdverseEvent', 'AllergyIntolerance', 'Appointment',
+//     'AppointmentResponse', 'AuditEvent', 'Basic', 'BiologicallyDerivedProduct', 'BodyStructure',
+//     'CarePlan', 'CareTeam', 'ChargeItem', 'Claim', 'ClaimResponse', 'ClinicalImpression',
+//     'Communication', 'CommunicationRequest', 'Composition', 'Condition', 'Consent', 'Contract',
+//     'Coverage', 'CoverageEligibilityRequest', 'CoverageEligibilityResponse', 'DetectedIssue',
+//     'Device', 'DeviceRequest', 'DeviceUseStatement', 'DiagnosticReport', 'DocumentManifest',
+//     'DocumentReference', 'Encounter', 'EnrollmentRequest', 'EpisodeOfCare', 'ExplanationOfBenefit',
+//     'FamilyMemberHistory', 'Flag', 'Goal', 'Group', 'GuidanceResponse', 'ImagingStudy',
+//     'Immunization', 'ImmunizationEvaluation', 'ImmunizationRecommendation', 'Invoice', 'List',
+//     'MeasureReport', 'Media', 'MedicationAdministration', 'MedicationDispense', 'MedicationRequest',
+//     'MedicationStatement', 'MolecularSequence', 'NutritionOrder', 'Observation', 'Person',
+//     'Procedure', 'Provenance', 'QuestionnaireResponse', 'RelatedPerson', 'RequestGroup',
+//     'ResearchSubject', 'RiskAssessment', 'Schedule', 'ServiceRequest', 'Specimen', 'SupplyDelivery',
+//     'SupplyRequest', 'Task', 'VisionPrescription', 'Practitioner', 'Organization', 'Patient',
+//     'Location',
+// ];
 
 // TODO: add more queries for listing patients?
 router.get('/list', async (req: Request, res: Response) => {
@@ -83,7 +83,7 @@ router.get('/info', async (req, res) => {
     }
 
     try {
-        const pInfo : [Resource] = [] as unknown as [Resource];
+        // const pInfo : [Resource] = [] as unknown as [Resource];
 
         let response = await client.search({
             resourceType: '$everything',
@@ -96,25 +96,29 @@ router.get('/info', async (req, res) => {
             return;
         }
 
-
         let result = [];
+        const fResponse = Object.assign({}, response);
         while (response && response.entry && response.entry.length > 0) {
             result = result.concat(response.entry);
             response = await client.nextPage({bundle: response as Bundle});
         }
+        fResponse.entry = fResponse.entry.concat(result);
+
+        console.log('DATA', fResponse);
+        res.status(200).send(fResponse);
 
 
-        let patient : fhir4.Patient = {} as Patient;
-        for (const entry of result) {
-            if (entry.resource.id === pId) {
-                patient = entry.resource;
-            } else {
-                pInfo.push(entry.resource);
-            }
-        }
+        // let patient : fhir4.Patient = {} as Patient;
+        // for (const entry of result) {
+        //     if (entry.resource.id === pId) {
+        //         patient = entry.resource;
+        //     } else {
+        //         pInfo.push(entry.resource);
+        //     }
+        // }
 
-        const parsedData = parseData(patient, pInfo);
-        res.status(200).send(parsedData);
+        // const parsedData = parseData(patient, pInfo);
+        // res.status(200).send(parsedData);
     } catch (e) {
         console.error(e);
         res.status(500).send();
@@ -123,7 +127,7 @@ router.get('/info', async (req, res) => {
 
 // ---------------- Util Methods ----------------
 const findLinks = (links: BundleLink[]) => {
-    console.log(links);
+    // console.log(links);
     const parsedLinks = {next: '', prev: ''};
     for (const link of links) {
         if (link.relation === 'next') {
@@ -136,24 +140,24 @@ const findLinks = (links: BundleLink[]) => {
     return parsedLinks;
 };
 
-const parseData = (patient: Patient, pInfo: [Resource]) => {
-    const data = {};
-    for (const res of patientResourceCategories) {
-        data[res] = [];
-    }
+// const parseData = (patient: Patient, pInfo: [Resource]) => {
+//     const data = {};
+//     for (const res of patientResourceCategories) {
+//         data[res] = [];
+//     }
 
-    for (const res of pInfo) {
-        console.log('====================\nTYPE', res.resourceType);
-        console.log('RES', res);
-        console.log('====================');
-        data[res.resourceType].push(res);
-    }
+//     for (const res of pInfo) {
+//         // console.log('====================\nTYPE', res.resourceType);
+//         // console.log('RES', res);
+//         // console.log('====================');
+//         data[res.resourceType].push(res);
+//     }
 
-    return {
-        patient: patient,
-        records: data,
-    };
-};
+//     return {
+//         patient: patient,
+//         records: data,
+//     };
+// };
 
 // TODO: Add more params/restructure this?
 const getSearchParams = (req: Request): SParams => {

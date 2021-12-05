@@ -62,6 +62,8 @@ const getPatientByID = async (id, count) => {
         const response = await fetch(request)
         const jsonData = await response.json()
 
+        console.log(jsonData);
+
         return {status: response.status, data: jsonData}
     } catch (error) {
         throw new Error(error)
