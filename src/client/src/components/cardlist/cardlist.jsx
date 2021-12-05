@@ -25,15 +25,3 @@ export class CardList extends React.Component {
         );
     }
 }
-
-// export const CardList = (props) => {
-//     return(
-//         <div className='cardlist'>
-//             {props.patients.length === 0 && props.searchResult
-//                 ? <p>Search for a patient name to get started!</p>
-//                 : props.patients.map(patient => (
-//                     <Card key={patient.id} patient={patient}/>
-//                 ))
-//             }
-//         </div>
-//     )}

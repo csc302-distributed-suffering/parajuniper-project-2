@@ -3,77 +3,78 @@
     width: 100%;
     font-family: IBM Plex, sans-serif;
     height: 17vh;
-}
-
-.ReactTags__tags {
-    &.react-tags-wrapper{
-    position: absolute;
-    bottom: 0;
-    left: 25%;
+    .ReactTags__tags {
+        &.react-tags-wrapper{
+        position: absolute;
+        bottom: 0;
+        left: 25%;
+        }
     }
-}
-
-.tag-wrapper{
-    color: #fff;
-    font-weight: bold;
-    background: #3a3a3a;
-    padding: 5px 10px;
-    border-radius: 10em;
-    margin: 5px;
-
-}
-.ReactTags__remove{
-    background-color: transparent;
-    border: none;
-    color:rgb(218, 214, 214);
-    display: inline-block;
-    &:hover {
-        color:white;
+    
+    .tag-wrapper{
+        color: #fff;
+        font-weight: bold;
+        background: #3a3a3a;
+        padding: 5px 10px;
+        border-radius: 10em;
+        margin: 5px;
+    
     }
-}
-
-.ReactTags__tagInputField {
-    margin-top: 20px;
-    border: none;
-    outline: none;
-    padding: 10px;
-    width: 35vw;
-    line-height: 30px;
-    border-radius: 4px;
-    height: 36px;
-    height: 7vh;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.css-b62m3t-container{
-    width: 20%;
-    left: 63%;
-    top: 100px;
-    position: absolute !important;
-    bottom: 0 !important;
-    color:rgb(70, 70, 70);
-    font-family: 'ibm-plex', Helvetica, sans-serif;
-    .css-6j8wv5-Input{
+    .ReactTags__remove{
+        background-color: transparent;
+        border: none;
+        color:rgb(218, 214, 214);
+        display: inline-block;
+        &:hover {
+            color:white;
+        }
+    }
+    
+    .ReactTags__tagInputField {
+        margin-top: 20px;
         border: none;
         outline: none;
         padding: 10px;
+        width: 35vw;
+        line-height: 30px;
         border-radius: 4px;
-        color:rgb(104, 104, 104);
-        text-align: center;
+        height: 36px;
+        height: 7vh;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }
-}
-.css-1s2u09g-control{
-    position: absolute !important;
-    bottom: 0 !important;
-    width: 230px;
-    height: 7.5vh;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    
+    .css-b62m3t-container{
+        width: 20%;
+        left: 63%;
+        top: 100px;
+        position: absolute !important;
+        bottom: 0 !important;
+        color:rgb(70, 70, 70);
+        font-family: 'ibm-plex', Helvetica, sans-serif;
+        .css-6j8wv5-Input{
+            border: none;
+            outline: none;
+            padding: 10px;
+            border-radius: 4px;
+            color:rgb(104, 104, 104);
+            text-align: center;
+        }
+    }
+    .css-1s2u09g-control{
+        position: absolute !important;
+        bottom: 0 !important;
+        width: 230px;
+        height: 7.5vh;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .css-1pahdxg-control{
+        position: absolute !important;
+        bottom: 0 !important;
+        width: 230px;
+        height: 7.5vh;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+    
 }
 
-.css-1pahdxg-control{
-    position: absolute !important;
-    bottom: 0 !important;
-    width: 230px;
-    height: 7.5vh;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}

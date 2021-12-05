@@ -37,8 +37,11 @@ class App extends Component {
   }
 
   handlePatientIdSearch = (id) => {
-    var res = this.handleSpecificPatientSearch(id)
-    console.log(res)
+    // var res = this.handleSpecificPatientSearch(id)
+    
+    console.log("RES HERE")
+    // console.log(res)
+    //console.log('chicken')
   }
 
   handleTagUpdates = (tags, type='add') => {
@@ -77,7 +80,7 @@ class App extends Component {
     this.props.onInputChange(this.state.tags, 'del')
     console.log('tag deleted')
     if (this.state.tags[i].type == 'id'){
-      this.handlePatientListSearch()
+      console.log('id deleted')
 
     }
   }
@@ -262,12 +265,13 @@ class App extends Component {
   // }
 
   handleSpecificPatientSearch = async (id, count = 100) => {
-    // console.log(id, count);
     const res = await getPatientByID(id, count);
+    
     if(res.status !== 200){
       console.error(`Error retrieving patients. Code ${res.status}`);
       return null;
     }
+
     return res.data
   }
 
