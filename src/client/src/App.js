@@ -21,6 +21,7 @@ class App extends Component {
       patients: this.patientList,
       searchPatientFirstName: "",
       searchPatientLastName: "",
+      searchPatientID: "",
       searchCount: 40,
       nextPageLink: "",
       previousPageLink: "",
@@ -73,10 +74,6 @@ class App extends Component {
   tagExists = (type) => {
 
      const tags_clean = this.state.tags.filter((tag, index) => tag.type !== type)
-     console.log('tag exists was called')
-     console.log(type)
-     console.log(this.state.tags)
-     console.log(tags_clean)
      this.setState({
       tags: tags_clean
      });
@@ -85,31 +82,24 @@ class App extends Component {
   handleTagUpdates = (tags, type='add') => {
     for (let i = 0; i < tags.length; i++) {
       var tag = tags[i]
+      if (type == 'del'){
+        this.setState({searchPatientFirstName: ''})
+        this.setState({searchPatientLastName: ''})
+        this.setState({searchPatientID: ''})
+      }
       if (type == 'add'){
         this.tagExists(tag.type)
       }
       if (tag.type == 'id'){
-        this.handlePatientIdSearch(tag.value)
-
+        this.setState({searchPatientID: tag.value})
       }
       else if (tag.type == 'firstName' || tag.type == 'lastName'){
 
         if (tag.type == 'firstName'){
-          if (type=="del"){
-            this.setState({searchPatientFirstName: ''})
-            return
-          }
-          
           this.setState({searchPatientFirstName: tag.value})
-          this.handlePatientListSearch()
         }
         else if (tag.type == 'lastName'){
-          if (type=='del'){
-            this.setState({searchPatientLastName: ''})
-            return
-          }
           this.setState({searchPatientLastName: tag.value})
-          this.handlePatientListSearch()
         }
 
       }
@@ -157,7 +147,7 @@ class App extends Component {
                 handleAddition={this.handleAddition}
                 tags={this.state.tags}
                 field={this.state.field}
-                handlePatientListSearch={this.handlePatientListSearch}
+                handlePatientListSearch={this.handleSearch}
                 />
               {/* <div id='searchbar'>
                     <Searchbox type='search' id="patientSearch-1" name="searchPatientFirstName" placeholder='First Name' onInputChange={this.handleSearchInputChange}/>
@@ -204,6 +194,15 @@ class App extends Component {
       }
     }
     return links;
+  }
+
+  handleSearch = async () => {
+    if (this.state.searchPatientID != ""){
+      this.handlePatientIdSearch(this.state.searchPatientID)
+    }
+    else {
+      this.handlePatientListSearch()
+    }
   }
 
   handlePatientListSearch = async () => {
