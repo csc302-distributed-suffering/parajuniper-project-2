@@ -90,7 +90,7 @@ describe('Patient Endpoints', () => {
             searchMock.mockReset();
         });
 
-        it('should list 2 patients', async () => {
+        it('should list duplicate patients', async () => {
             searchMock.mockImplementation(() => Promise.resolve(bundleResponse));
 
             const response = await request
@@ -99,6 +99,17 @@ describe('Patient Endpoints', () => {
 
             expect(response.statusCode).toBe(200);
             expect(Object.keys(response.body.patients).length).toBe(2);
+        });
+
+        it('should list single patients', async () => {
+            searchMock.mockImplementation(() => Promise.resolve(bundleResponseIdTest));
+
+            const response = await request
+                .get('/patients/list')
+                .query({name: 'John', count: '1', family: 'Smith', _page: 1});
+
+            expect(response.statusCode).toBe(200);
+            expect(Object.keys(response.body.patients).length).toBe(1);
         });
 
         it('should correctly handle empty bundle response', async () => {
