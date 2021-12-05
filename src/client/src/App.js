@@ -7,8 +7,8 @@ import { CardList } from './components/cardlist/cardlist';
 import { Searchbox } from './components/searchbox/searchbox';
 import { Navbuttons } from './components/navbuttons/navbuttons';
 import { getPatientsWName, getPatientByID, getPatientList, getPage,  } from './actions/patients';
+import { TagSearch } from './components/tagsearch/TagSearch.js';
 import BeatLoader from "react-spinners/BeatLoader";
-// import {View, Modal, Text} from 'react-native'
 
 
 class App extends Component {
@@ -18,7 +18,7 @@ class App extends Component {
     super();
     this.state = {
       patients: this.patientList,
-      searchPatientFirstName: "",
+      searchPatientFirstName: "Harland",
       searchPatientLastName: "",
       searchCount: 40,
       nextPageLink: "",
@@ -26,9 +26,71 @@ class App extends Component {
       page: 1,
       loading: false,
       searchResult: true,
+      tags: [
+        { type: "firstName", value: "Harland", text: "firstName: Harland", id: "firstName: Harland"}
+     ],
+     suggestions: [
+      { type: "firstName", value: "John", text: "firstName: John" },
+      ],
+      field: [{ value: 'firstName', label: 'firstName' }]
     }
   }
-  
+
+  handlePatientIdSearch = (id) => {
+    var res = this.handleSpecificPatientSearch(id)
+    console.log(res)
+  }
+
+  handleTagUpdates = (tags, type='add') => {
+    for (let i = 0; i < tags.length; i++) {
+      var tag = tags[i]
+      if (tag.type == 'id'){
+        this.handlePatientIdSearch(tag.value)
+
+      }
+      else if (tag.type == 'firstName' || tag.type == 'lastName'){
+
+        if (tag.type == 'firstName'){
+          if (type=="del"){
+            this.setState({searchPatientFirstName: ''})
+            return
+          }
+          this.setState({searchPatientFirstName: tag.value})
+        }
+        else if (tag.type == 'lastName'){
+          if (type=='del'){
+            this.setState({searchPatientLastName: ''})
+            return
+          }
+          this.setState({searchPatientLastName: tag.value})
+        }
+
+      }
+    }
+
+  }
+  handleDelete(i) {
+    const { tags } = this.state;
+    this.setState({
+     tags: tags.filter((tag, index) => index !== i),
+    });
+    this.props.onInputChange(this.state.tags, 'del')
+    console.log('tag deleted')
+    if (this.state.tags[i].type == 'id'){
+      this.handlePatientListSearch()
+
+    }
+  }
+
+  handleAddition(tag) {
+      tag.value = tag.text
+      tag.text = this.state.field[0].value + ': ' + tag.text
+      tag.type = this.state.field[0].value
+      tag.id = tag.text
+      // console.log('handle add tags: ' + String(this.state.tags))
+      this.setState(state => ({ tags: [...state.tags, tag] }));
+      this.props.onInputChange([tag], 'add')
+  }
 
   render(){
       return (
@@ -47,7 +109,13 @@ class App extends Component {
                   <i class="fas fa-fire-alt"></i>
                 </div>
               </div>
-
+              <TagSearch
+                onInputChange={this.handleTagUpdates} 
+                handleDelete={this.handleDelete}
+                handleAddition={this.handleAddition}
+                tags={this.state.tags}
+                field={this.state.field}
+                />
               <div id='searchbar'>
                     <Searchbox type='search' id="patientSearch-1" name="searchPatientFirstName" placeholder='First Name' onInputChange={this.handleSearchInputChange}/>
                 <Searchbox type='search' id="patientSearch-2" name="searchPatientLastName" placeholder='Last Name' onInputChange={this.handleSearchInputChange}/>
@@ -109,7 +177,7 @@ class App extends Component {
       this.patientList = []
       if (res.data.patients) {
         for (const p of res.data.patients) {
-          console.log(p.id);
+          // console.log(p.id);
           const name = this.getPatientName(p);
   
           const patient = {
@@ -194,14 +262,12 @@ class App extends Component {
   // }
 
   handleSpecificPatientSearch = async (id, count = 100) => {
-    console.log(id, count);
+    // console.log(id, count);
     const res = await getPatientByID(id, count);
-    
     if(res.status !== 200){
       console.error(`Error retrieving patients. Code ${res.status}`);
       return null;
     }
-
     return res.data
   }
 
