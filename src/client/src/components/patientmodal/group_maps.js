@@ -19,6 +19,7 @@ const GROUP_MAPS = {
     'Observation - Laboratory': [["code.name", 300, "text", "s"], ["valueQuantity.value", 0, "value", "s"], ["valueQuantity.unit", 0, "unit", "s"], ["issued", 0]],
     'Observation - Survey': [["code.name", 200, "text", "s"], ["valueCodeableConcept", 200, "text", "s"], ["issued", 0]],
     'Observation - Vital Signs': [["code.name", 300, "text", "s"], ["valueQuantity.value", 0, "value", "s"], ["valueQuantity.unit", 0, "unit", "s"], ["issued", 0]],
+    'Observation - Other': [["code.name", 300, "coding.display", "r"], ["meta.updated", 200, "lastUpdated", "s"]],
     'Procedure': [["id", 300], ["code.name", 300, "text", "s"], ["status", 0]],
     'ServiceRequest': [["id", 0], ["code.text", 300, "text", "s"], ["meta.updated", 200, "lastUpdated", "s"]]
 }
