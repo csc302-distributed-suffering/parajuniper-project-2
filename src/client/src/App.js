@@ -27,9 +27,7 @@ class App extends Component {
       page: 1,
       loading: false,
       searchResult: true,
-      tags: [
-        { type: "firstName", value: "Harland", text: "firstName: Harland", id: "firstName: Harland"}
-     ],
+      tags: [],
      suggestions: [
       { type: "firstName", value: "John", text: "firstName: John" },
       ],
@@ -72,9 +70,24 @@ class App extends Component {
     }
   }
 
+  tagExists = (type) => {
+
+     const tags_clean = this.state.tags.filter((tag, index) => tag.type !== type)
+     console.log('tag exists was called')
+     console.log(type)
+     console.log(this.state.tags)
+     console.log(tags_clean)
+     this.setState({
+      tags: tags_clean
+     });
+  }
+
   handleTagUpdates = (tags, type='add') => {
     for (let i = 0; i < tags.length; i++) {
       var tag = tags[i]
+      if (type == 'add'){
+        this.tagExists(tag.type)
+      }
       if (tag.type == 'id'){
         this.handlePatientIdSearch(tag.value)
 
@@ -86,6 +99,7 @@ class App extends Component {
             this.setState({searchPatientFirstName: ''})
             return
           }
+          
           this.setState({searchPatientFirstName: tag.value})
           this.handlePatientListSearch()
         }
@@ -108,11 +122,6 @@ class App extends Component {
      tags: tags.filter((tag, index) => index !== i),
     });
     this.props.onInputChange(this.state.tags, 'del')
-    console.log('tag deleted')
-    if (this.state.tags[i].type == 'id'){
-      console.log('id deleted')
-
-    }
   }
 
   handleAddition(tag) {
@@ -148,6 +157,7 @@ class App extends Component {
                 handleAddition={this.handleAddition}
                 tags={this.state.tags}
                 field={this.state.field}
+                handlePatientListSearch={this.handlePatientListSearch}
                 />
               {/* <div id='searchbar'>
                     <Searchbox type='search' id="patientSearch-1" name="searchPatientFirstName" placeholder='First Name' onInputChange={this.handleSearchInputChange}/>
@@ -299,9 +309,13 @@ class App extends Component {
     const res = await getPatientByID(id, count);
     
     if(res.status !== 200){
+      if (res.status == 404){
+        return null
+      }
       console.error(`Error retrieving patients. Code ${res.status}`);
       return null;
     }
+    
 
     return res.data
   }
