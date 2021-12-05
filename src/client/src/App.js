@@ -168,6 +168,10 @@ class App extends Component {
       }
     }
 
+    if (cName === '') {
+      return 'Unknown';
+    }
+
     return cName;
   };
 
