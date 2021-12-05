@@ -99,7 +99,6 @@ export class Modal extends React.Component {
     });
     var rows_final = []
     var rows_data = this.state.groups[group.value]
-    
     rows_data.forEach(row_value => {
       var row_clean = []
       var entry = {}
@@ -126,6 +125,10 @@ export class Modal extends React.Component {
             })
           }
         } catch (e) {
+          entry[c_name_t] = "N/A"
+          skip = true
+        }
+        if (current == undefined || current == null) {
           entry[c_name_t] = "N/A"
           skip = true
         }
