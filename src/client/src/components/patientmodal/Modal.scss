@@ -13,7 +13,7 @@
   .row{
     justify-content: center
   }
-  
+
   .basic-info{
     font-family: 'IBM Plex Sans Condensed', sans-serif;
     text-align: left;
@@ -114,6 +114,9 @@
         height: 7vh;
         text-align: center;
         line-height: 1;
+      }
+      &.red{
+        background: #b44c4c;
       }
     }
 

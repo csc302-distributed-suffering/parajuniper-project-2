@@ -219,7 +219,7 @@ export class Modal extends React.Component {
           <div class="row">
           <div class="col-auto">
           <div class="col">
-            <button className="button close" type="button" onClick={handleClose}>
+            <button className="button close red" type="button" onClick={handleClose}>
               Close
             </button>
             </div>
