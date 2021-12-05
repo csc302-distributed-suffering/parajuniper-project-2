@@ -10,6 +10,10 @@
     
   }
 
+  .row{
+    justify-content: center
+  }
+  
   .basic-info{
     font-family: 'IBM Plex Sans Condensed', sans-serif;
     text-align: left;
@@ -64,7 +68,7 @@
       cursor: pointer;
     }
   }
-
+  
   .title{
       font-size: larger;
       font-weight: bold;
