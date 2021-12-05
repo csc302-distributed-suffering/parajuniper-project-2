@@ -65,13 +65,19 @@ export class TagSearch extends React.Component {
                     placeholder={"enter field value"}
                     inputFieldPosition="bottom"
                 />
+                <div>
                 <Select
-                className="select" 
+                className="child-div" 
                 options={options} 
                 placeholder= 'Pick field'
                 value={this.state.field}
                 onChange={this.handleFieldChange}
                 />
+                <button 
+                className="search-button child-div"
+                onClick={this.props.handlePatientListSearch}
+                > Search </button>
+                </div>
 
             </div>
         )

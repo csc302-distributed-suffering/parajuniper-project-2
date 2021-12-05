@@ -64,5 +64,20 @@
         height: 7.5vh;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }
-
+    .search-button{
+        background: #5981cc; 
+        border-radius: 100px;
+        padding: 20px 60px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-family: 'ibm-plex', sans-serif;
+        font-weight: 500;
+        outline: none;
+        box-shadow: none;
+        vertical-align: middle;
+        line-height: 15px;
+        margin-top: 20px;
+      }
+      
 }

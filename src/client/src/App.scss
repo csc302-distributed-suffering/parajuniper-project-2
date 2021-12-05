@@ -106,3 +106,18 @@
     from { opacity: 0; }
     to   { opacity: 1; }
 }
+
+.search-button{
+  background: #4b4b4b; 
+  border-radius: 100px;
+  padding: 20px 60px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-family: 'ibm-plex', sans-serif;
+  font-weight: 500;
+  outline: none;
+  box-shadow: none;
+  vertical-align: middle;
+  line-height: 15px;
+}
