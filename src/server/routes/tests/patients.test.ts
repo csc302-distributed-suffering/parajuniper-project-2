@@ -20,7 +20,7 @@ fhirKitClient.prototype.search = searchMock;
 //     };
 // });
 
-const blankPatient = {resource: {resourceType: 'Patient'}};
+const blankPatient = {resource: {resourceType: 'Patient', id: "0"}};
 
 const bundleResponse: Bundle = {
     resourceType: 'Bundle',
@@ -29,11 +29,53 @@ const bundleResponse: Bundle = {
         resource: {
             resourceType: 'Patient',
             id: '123',
+            name: [
+                {
+                    given: [
+                        "John"
+                    ],
+                    family: "Smith"
+                }
+            ]
+        },
+    }, {
+        resource: {
+            resourceType: 'Patient',
+            id: '124',
+            name: [
+                {
+                    given: [
+                        "John"
+                    ],
+                    family: "Smith"
+                }
+            ]
         },
     }],
     link: [],
-    total: 2,
+    total: 3,
 };
+
+const bundleResponseIdTest: Bundle = {
+    resourceType: 'Bundle',
+    type: 'searchset',
+    entry: [{
+        resource: {
+            resourceType: 'Patient',
+            id: '124',
+            name: [
+                {
+                    given: [
+                        "John"
+                    ],
+                    family: "Smith"
+                }
+            ]
+        },
+    }],
+    link: [],
+    total: 1,
+}
 
 const emptyBundleResponse: Bundle = {
     resourceType: 'Bundle',
@@ -96,17 +138,19 @@ describe('Patient Endpoints', () => {
             searchMock.mockReset();
         });
 
-        it('should return all patient information given a patient ID', async () => {
-            searchMock.mockImplementation(() => Promise.resolve(bundleResponse));
+        it('should return patient information given a patient ID', async () => {
+            searchMock.mockImplementation(() => Promise.resolve(bundleResponseIdTest));
 
             const response = await request
                 .get('/patients/info')
-                .query({id: '123'});
+                .query({id: '124'});
 
             expect(response.statusCode).toBe(200);
-            expect(Object.keys(response.body).length).toBe(2);
-            expect(Object.keys(response.body)).toContain('patient');
-            expect(Object.keys(response.body)).toContain('records');
+            expect(Object.keys(response.body).length).toBe(5);
+            expect(Object.keys(response.body)).toContain('entry');
+            expect(Object.keys(response.body.entry[0])).toContain('resource')
+            expect(Object.keys(response.body.entry[0].resource)).toContain('id')
+            expect(response.body.entry[0].resource.id).toBe("124")
         });
 
         it('should return 400 when not provided a patient ID', async () => {
@@ -140,21 +184,9 @@ describe('Patient Endpoints', () => {
 });
 
 describe('Utility functions', () => {
-    describe('findNextPageLink', () => {
-        it('should correctly return next patient link', async () => {
-            expect(true);
-        });
-    });
-
-    describe('parseData', () => {
-        it('should correctly format and parse data', async () => {
-            expect(true);
-        });
-    });
-
     describe('getSearchParams', () => {
-        it('should correctly parse request query', async () => {
-            expect(true);
+        it('should correctly parse request query', () => {
+            expect(true)
         });
     });
 });
