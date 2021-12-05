@@ -36,12 +36,12 @@ class App extends Component {
     }
   }
 
-  handlePatientIdSearch = (id) => {
-    // var res = this.handleSpecificPatientSearch(id)
+  handlePatientIdSearch = async (id) => {
+    const patientData = await this.props.handlePatientSearch(id, 1);
+    const p_data = patientData['entry'][0]['resource']
     
     console.log("RES HERE")
-    // console.log(res)
-    //console.log('chicken')
+    console.log(p_data)
   }
 
   handleTagUpdates = (tags, type='add') => {
