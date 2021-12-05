@@ -97,11 +97,14 @@ router.get('/info', async (req, res) => {
         const fResponse = Object.assign({}, response);
         while (response && response.entry && response.entry.length > 0) {
             result = result.concat(response.entry);
+            if (response.link) {
+                for (const link of response.link) {
+                    link.url = link.url.replace(/^http:\/\//i, 'https://');
+                }
+            }
             response = await client.nextPage({bundle: response as Bundle});
         }
         fResponse.entry = fResponse.entry.concat(result);
-
-        console.log('DATA', fResponse);
         res.status(200).send(fResponse);
 
 
@@ -124,9 +127,9 @@ router.get('/info', async (req, res) => {
 
 // ---------------- Util Methods ----------------
 const findLinks = (links: BundleLink[]) => {
-    // console.log(links);
     const parsedLinks = {next: '', prev: ''};
     for (const link of links) {
+        link.url = link.url.replace(/^http:\/\//i, 'https://');
         if (link.relation === 'next') {
             parsedLinks.next = link.url;
         } else if (link.relation === 'previous') {

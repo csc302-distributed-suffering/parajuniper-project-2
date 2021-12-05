@@ -10,16 +10,16 @@ export class CardList extends React.Component {
                 <Card key={patient.id} patient={patient} handlePatientSearch={this.props.handlePatientSearch}/>
             ))
         } else {
-            return <p>No results found!</p>
+            return <div className='center-text'><p className='center-text'> No results found!</p></div>
         }
     }
 
     render() {
         return(
-            <div className='cardlist'>
+            <div className='center-text'>
                 {this.props.patients.length === 0 && this.props.searchResult
-                    ? <p>Search for a patient name to get started!</p>
-                    : <this.SearchRender />
+                    ? <p className='center-text'>Search for a patient name to get started!</p>
+                    : <div className='cardlist'><this.SearchRender /></div>
                 }
             </div>
         );
