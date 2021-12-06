@@ -21,10 +21,32 @@ Create tag searches, where each tag is structured as fieldtype: fieldvalue. The 
 
 ### Instructions:
 1. Select the tag you want to search by from the dropdown menu.
+![image](https://user-images.githubusercontent.com/44914019/144780186-1d63a6d7-68e2-4213-91e9-78a9522cae05.png)
+
+<br/>
+
 2. Type in a value for the tag in the input box.
+![image](https://user-images.githubusercontent.com/44914019/144780256-1b3e5c95-2024-4a1a-b864-be1a8d0cb271.png)
+
+<br/>
+
 3. Press ENTER to create a tag. 
-4. You can now click "Seach" or add more tags.
+![image](https://user-images.githubusercontent.com/44914019/144780318-6db0736c-c8d6-4f35-af4c-a8bf14443b60.png)
+
+<br/>
+
+4. You can now click "Search" or add more tags.
+![image](https://user-images.githubusercontent.com/44914019/144780417-7283146d-6c29-4a16-8f4f-ca732c77ad69.png)
+
+<br/>
+
 5. To clear a tag press the X button on the tag.
+![image](https://user-images.githubusercontent.com/44914019/144780466-2ccbc1a4-8790-4a38-97d7-7195ebd8aaa0.png)
+<br/>
+
+
+
+
 
 ### Negotiated Verification Criteria:
 Please see: [Client Acceptance Criteria Documenation](#client-acceptance-criteria-documenation) for documentation on our conversation with the industry partner. <br/>
