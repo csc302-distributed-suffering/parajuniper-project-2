@@ -86,6 +86,7 @@ class App extends Component {
         this.setState({searchPatientFirstName: ''})
         this.setState({searchPatientLastName: ''})
         this.setState({searchPatientID: ''})
+        return
       }
       if (type == 'add'){
         this.tagExists(tag.type)
