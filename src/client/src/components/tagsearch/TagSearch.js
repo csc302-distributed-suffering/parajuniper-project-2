@@ -59,10 +59,7 @@ export class TagSearch extends React.Component {
                     tags={tags}
                     suggestions={[]}
                     handleDelete={this.handleDelete}
-                    handleAddition={(tag) => {
-                        this.setState({currInput: ''});
-                        this.handleAddition(tag);
-                    }}
+                    handleAddition={this.handleAddition}
                     handleDrag={this.handleDrag}
                     delimiters={delimiters} 
                     placeholder={"enter field value"}
@@ -81,23 +78,7 @@ export class TagSearch extends React.Component {
                 />
                 <button 
                 className="search-button child-div"
-                onClick={(() => {
-                    let flag = true;
-                    if (this.state.currInput) {
-                        for (let tag of this.state.tags) {
-                            if (tag.type === this.state.field[0].value) {
-                                this.setState({currInput: ''});
-                                flag = false;
-                                break;
-                            }
-                        }
-
-                        if (flag) {
-                            this.handleAddition({text: this.state.currInput});
-                        }
-                    }
-                    this.props.handlePatientListSearch();
-                })}
+                onClick={this.props.handlePatientListSearch}
                 > Search </button>
                 </div>
 
