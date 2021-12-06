@@ -21,14 +21,20 @@ Other places of intereset:
 Create tag searches, where each tag is structured as fieldtype: fieldvalue. The user first selects a tag to search by from the dropdown and then enters a value for it by typing in the search bar. The user confirms the tag by pressing ENTER and then they are able to add additional tags. They user can alternatively click "Search" right away to search based on the current entered tags. Tags can be cleared by pressing the X on their float. Please refer to the below visuals for clarification.
 
 ### Instructions:
+1. Select the tag you want to search by from the dropdown menu.
+2. Type in a value for the tag in the input box.
+3. Press ENTER to create a tag. 
+4. You can now click "Seach" or add more tags.
+5. To clear a tag press the X button on the tag.
 
 ### Negotiated Verification Criteria:
 Please see: [Client Acceptance Criteria Documenation](#client-acceptance-criteria-documenation) for documentation on our conversation with the industry partner. <br/>
 
+1. The user is able to search a patient by any single parameter and any combination of parameters from {first name, last name, id}
+
 ### Tests:
 <br/>
 
-## Cards: 
 
 ## Patient Data Download
 When viewing patient information in a modal, the user is able to then download the data for the current patient. The user has two choices for the download: download all of the resources associated with the patient or download a csv file for the resource category being viewed.
