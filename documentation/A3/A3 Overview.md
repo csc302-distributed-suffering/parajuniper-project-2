@@ -26,8 +26,9 @@ User testing was another goal we were unable to achieve for our final submission
 
 For the majority of the decisions made we did a vote either in one of our meetings or in Discord as necessary.
 
-### Client Communication Documenation
+### Client Documenation
 
+![image](https://user-images.githubusercontent.com/44914019/144769899-e916d7b2-888e-45d7-ae70-c5165a1915a2.png)
 
 
 
