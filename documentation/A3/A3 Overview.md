@@ -224,7 +224,7 @@ We also verified acceptance criteria by reviewing each other's PRs. These serve 
 
 <br/>
 
-The PRs are organized from earliest to latest. So PR 1 is the very first PR of our application. 
+The PRs are organized from earliest to latest. So PR 1 is the very first PR of our application. More on the validation process can be found at the end of [this](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/A2/Milestone2.md) document
 
 <br/>
 
