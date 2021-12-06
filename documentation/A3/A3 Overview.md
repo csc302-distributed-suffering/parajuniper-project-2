@@ -65,19 +65,65 @@ Other places of intereset:
     1. Large volumes of data are paged at 40 entries per page.
     2. The user is able to click "Next" and "Previous" buttons on the UI to go back and forth between pages.
 
+<br/>
 
 5. Searching patients by tag - Complete
+    - We need to be able to choose what attribute we search patients by since there are multiple identifiers for a single patient. It can be a name or an id of the patient in the database. 
+
+    #### Acceptance Criteria:
+    1. The user is able to choose a combination of attributes and values to search the database for. This combination should come from {first name, last name, id}.
+    2. The user is then able to view only results matching this combination or none if nothing exists in the database.
+
+<br/>
 
 6. Finalize UI functionality - Eric and Felicia - Complete
+    - The UI needs to be finilized including inputs for search parameters, button positions, patient card display, 
 
-7. Presentation and A3 Overview - Viktar, Nikita and Felicia - Complete
-
-8. A2 Postmortem - Eric, Felicia, Nikita and Viktar - Complete
-
-9. Bug fixes - Felicia, Nikita and Viktar - Complete
-
+    #### Acceptance Criteria:
+    1. The different resources for a patient are displayed in a table per resource category.
+    2. The user is able to cycle between views for different resources.
+    3. The user is able to clearly see what parameters they are performing their searches on.
 
 
+<br/>
+
+7. Patient Data Download - Felicia - Complete
+    - We want to enable the user to download all data for a specific patient as well as data for a single resource for a single patient. This should be done through the UI. 
+
+    #### Acceptance Criteria:
+    1. The user is able to download all data for a specific patient in a JSON.
+    2. The user is able to download all data for a specific category of resource for a specific patient in a CSV.
+    3. Two download option buttons are visible in the UI for every category of resources that a patient has.
+
+<br/>
+
+8. Presentation and A3 Overview - Viktar, Nikita and Felicia - Complete
+    - We need to decide parts for each group member for the final presentation. Everyone should get an about equal part of the presentation.
+
+    #### Acceptance Criteria:
+    1. The presentation should have an accompanying powerpoint.
+    2. The presentation should include a video demo of our application.
+    3. The presentation should include about equal parts for everyone.
+    4. The following topics should be addressed: what our app is/does, why is it important, decisions made in the process, testing/verification information and any adjustments made during the retrospectives.
+
+<br/>
+
+9. A2 Postmortem - Eric, Felicia, Nikita and Viktar - Complete
+    - A2 postmortem has to be completed 
+    
+    #### Acceptance Criteria:
+    1. The postmortem should contain the following sections: What goals have been achieved (split into frontend and backend), what goals have been missed and by how much and adjustments that were made or are to be made.
+    2. The postmortem should use complete sentences.
+
+<br/>
+
+10. Bug fixes - Felicia, Nikita and Viktar - Complete
+    - At the beginning of A3 there were several visual issues (mostly items not being aligned properly) that need to be addressed.
+    
+    #### Acceptance Criteria:
+    1.  The UI is free of visual issues.
+
+<br/>
 
 # Project Features
 
