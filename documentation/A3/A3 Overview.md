@@ -1,12 +1,13 @@
 # A3 Overview
 - Project Features:
-    - [Patient Data Download](#patient-data-download-(abc))
+    - [Patient Data Download](#patient-data-download)
     - [Viewing Patient Data for a Resource Category](#viewing-patient-data-for-specific-resource-category)
+    - [Preview Patient Summary in a Modal Window](#preview-patient-summary-in-a-modal-window)
 
 
 ## Project Features
 
-### Patient Data Download (abc)
+### Patient Data Download
 When viewing patient information in a modal, the user is able to then download the data for the current patient. The user has two choices for the download: download all of the resources associated with the patient or download a csv file for the resource category being viewed.
 
 ### Details:
