@@ -21,6 +21,7 @@ class App extends Component {
       patients: this.patientList,
       searchPatientFirstName: "",
       searchPatientLastName: "",
+      searchPatientID: "",
       searchCount: 40,
       nextPageLink: "",
       previousPageLink: "",
@@ -89,7 +90,14 @@ class App extends Component {
         this.tagExists(tag.type)
       }
       if (tag.type == 'id'){
-        this.handlePatientIdSearch(tag.value)
+        if (type=="del"){
+          this.setState({searchPatientID: ''})
+          return
+        }
+        
+        this.setState({searchPatientID: tag.value})
+        
+        
 
       }
       else if (tag.type == 'firstName' || tag.type == 'lastName'){
@@ -101,7 +109,7 @@ class App extends Component {
           }
           
           this.setState({searchPatientFirstName: tag.value})
-          this.handlePatientListSearch()
+        
         }
         else if (tag.type == 'lastName'){
           if (type=='del'){
@@ -109,7 +117,7 @@ class App extends Component {
             return
           }
           this.setState({searchPatientLastName: tag.value})
-          this.handlePatientListSearch()
+          
         }
 
       }
@@ -132,6 +140,15 @@ class App extends Component {
       // console.log('handle add tags: ' + String(this.state.tags))
       this.setState(state => ({ tags: [...state.tags, tag] }));
       this.props.onInputChange([tag], 'add')
+  }
+
+  handleSearch = () => {
+    if (this.state.searchPatientID){
+      this.handlePatientIdSearch(this.state.searchPatientID)
+    }
+    else {
+      this.handlePatientListSearch()
+    }
   }
 
   render(){
@@ -157,7 +174,7 @@ class App extends Component {
                 handleAddition={this.handleAddition}
                 tags={this.state.tags}
                 field={this.state.field}
-                handlePatientListSearch={this.handlePatientListSearch}
+                handlePatientListSearch={this.handleSearch}
                 />
               {/* <div id='searchbar'>
                     <Searchbox type='search' id="patientSearch-1" name="searchPatientFirstName" placeholder='First Name' onInputChange={this.handleSearchInputChange}/>
