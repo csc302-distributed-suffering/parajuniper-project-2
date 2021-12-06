@@ -130,7 +130,7 @@ class App extends Component {
       tag.text = this.state.field[0].value + ': ' + tag.text
       tag.type = this.state.field[0].value
       tag.id = tag.text
-      // console.log('handle add tags: ' + String(this.state.tags))
+      
       this.setState(state => ({ tags: [...state.tags, tag] }));
       this.props.onInputChange([tag], 'add')
   }
@@ -198,7 +198,6 @@ class App extends Component {
   }
 
   getLinks = (bundle) => {
-    console.log('BUNDLE', bundle);
     const links = {next: '', previous: ''};
 
     if (!bundle.link) {
@@ -229,8 +228,6 @@ class App extends Component {
     this.setState({loading: true}, async () => {
       const res = await getPatientsWName(this.state.searchPatientFirstName, this.state.searchPatientLastName, this.state.searchCount);
 
-      console.log(res);
-
       if (res.status !== 200) {
         console.error(`Error retrieving patients. Code ${res.status}`);
         return;
@@ -239,7 +236,6 @@ class App extends Component {
       this.patientList = []
       if (res.data.patients) {
         for (const p of res.data.patients) {
-          console.log(p.id);
           const name = this.getPatientName(p);
   
           const patient = {
@@ -267,8 +263,6 @@ class App extends Component {
 
   getPatientName = (patient) => {
     let cName = '';
-
-    console.log(patient.name);
 
     if (!patient.name || patient.name.length === 0) {
       return 'Unknown';
@@ -324,7 +318,6 @@ class App extends Component {
   // }
 
   handleSpecificPatientSearch = async (id, count = 100) => {
-    console.log(id, count);
     const res = await getPatientByID(id, count);
     
     if(res.status !== 200){
@@ -398,7 +391,6 @@ class App extends Component {
         nextPageLink: links.next,
         page: page
       });
-      console.log('STATE AFTER', this.state);
     })
   }
 }

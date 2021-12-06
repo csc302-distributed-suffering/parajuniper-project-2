@@ -85,7 +85,6 @@ const getPatientByID = async (id, count) => {
 }
 
 const getPage = async (url) => {
-    console.log(url);
     const request = new Request(url, {
         method: 'GET',
         headers: {
