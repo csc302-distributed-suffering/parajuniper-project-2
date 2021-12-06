@@ -7,9 +7,9 @@
 - [Client Acceptance Criteria Documenation](#client-acceptance-criteria-documenation)
 
 
-## Project Features
+# Project Features
 
-### Patient Data Download
+## Patient Data Download
 When viewing patient information in a modal, the user is able to then download the data for the current patient. The user has two choices for the download: download all of the resources associated with the patient or download a csv file for the resource category being viewed.
 
 ### Details:
@@ -23,13 +23,49 @@ The download packages this information into either a CSV or the raw JSON returne
 3. Click “Download Table” for a csv file of the displayed table.
 4. To download data from all resources for this patient in a single JSON, click “Download All”
 
-### Acceptance Criteria:
-#### Negotiated Verification Criteria:
+### Negotiated Verification Criteria:
 From our discussions with our industry partner we agreed that accessing patient information in its entirety was an important use case. As such this is one of the features developed to enable the user to do just so. Since the user is a clinician they might want to save the data they are accessing for later use. 
 
 As such, the acceptance criteria for this feature are:
 1. The user is able to access all data for a given patient.
 2. The user is able to download the data in a common file format (CSV or JSON).
+
+### Tests:
+Automated backend tests ensure that correct information is retrieved.
+Please see the following tests that validate this functionality on the backend.
+
+- server\routes\tests\patients.test.ts: 152
+    - Validates that the server response contains correct information for an existing patient.
+- server\routes\tests\patients.test.ts: 167
+    - Validates that a 400 status code is correctly returned for a malformed query.
+- server\routes\tests\patients.test.ts: 175
+    - Validates that a 404 status code is correctly returned for a non-existing patient.
+- server\routes\tests\patients.test.ts:  185
+    - Validates that a 500 status code is correctly returned in case of a server error.
+
+<br/>
+
+## Viewing Patient Data for Specific Resource Category:
+Patients have a lot of data associated with them such as what conditions they have, when have they visited their GP, what medications they are on, etc… All of this data is organized in resource categories by FHIR. Using our application a clinician is able to access all information for a specific resource category associated with a particular patient.
+
+### Details:
+When a patient card is clicked (user clicks on “Details” button), we make a query to our FHIR server to retrieve all of the information associated with the patient whose card the user clicked on. This is achieved through the use of the $everything query on the given patient (using the patient’s id).
+
+This information is then organized into tables by the UI with the ability to change which resource category the user is viewing.
+
+By default, the user will see the general identification information for a patient such as their name, address, gender and birth date. The user can then use a drop down to select any other information they may want to view.
+
+### Steps: Add images once the search button is added!
+1. Search for a patient using our tag search system.
+2. Select the patient you want to view and click “Details”.
+3. Use the drop down menu to choose the category of information that you want to view.
+
+### Negotiated Verification Criteria:
+From our discussions with our industry partner we agreed that accessing patient information in its entirety was an important use case. As such this is one of the features developed to enable the user to do just so. Since the user is a clinician they might want to save the data they are accessing for later use. 
+
+As such, the acceptance criteria for this feature are:
+1. The user is able to access all data for a given patient in a categorized manner.
+2. The user is able to access detailed, single category information in a single table for a given patient.
 
 #### Tests:
 Automated backend tests ensure that correct information is retrieved.
@@ -44,14 +80,14 @@ Please see the following tests that validate this functionality on the backend.
 - server\routes\tests\patients.test.ts:  185
     - Validates that a 500 status code is correctly returned in case of a server error.
 
-### Viewing Patient Data for Specific Resource Category:
+<br/>
 
-### Preview Patient Summary in a Modal Window:
+## Preview Patient Summary in a Modal Window:
 Searching for a specific patient using a tag presents you with a grid of Modal cards per patient. These display basic patient information (name and date of birth). Then the user is able to view more detailed information by clicking the “Details” button on a specific patient.
 
 This allows you to see patients with duplicate names (if you searched by name) or whether a patient with a given name/id even exists in the database. 
 
-#### Details:
+### Details:
 When a patient card is clicked (user clicks on “Details” button), we make a query to our FHIR server to retrieve all of the information associated with the patient whose card the user clicked on. This is achieved through the use of the $everything query on the given patient (using the patient’s id).
 
 This information is then organized into tables by the UI with the ability to change which resource category the user is viewing.
@@ -60,19 +96,18 @@ By default, the user will see the general identification information for a patie
 
 This query is paged and the user can use the “Next” and “Previous” buttons at the bottom of the page to see the next or previous set of results.
 
-#### Steps to Access: 
+### Steps to Access: 
 
 1. Search for a specific patient by name using the tag search and observe how multiple results are returned.
 
-#### Acceptance Criteria:
-##### Negotiated Verification Criteria:
+### Negotiated Verification Criteria:
 Our app is mostly based on simply retrieving patient information and previewing the results. As discussed with our industry partner, some way of previewing search results would be helpful to users in identifying patients with the same name or patients that do not exist.
 
 As such, the acceptance criteria for this feature are:
 1. When the user searches for a patient name that exists in the database, they get a preview of every patient with that name.
 2. The user is able to view search results in a paged manner.
 
-#### Tests:
+### Tests:
 Automated backend tests ensure that correct information is retrieved.
 Please see the following tests that validate this functionality on the backend. <br/>
 
@@ -84,12 +119,6 @@ Please see the following tests that validate this functionality on the backend. 
    - Validates that a 404 status code is correctly returned for a non-existing patient.
 - server\routes\tests\patients.test.ts: 136
    - Validates that a 500 status code is correctly returned in case of a server error.
-
-
-
-
-
-
 
 <br/>
 
