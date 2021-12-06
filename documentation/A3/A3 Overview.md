@@ -142,7 +142,10 @@ For the majority of the decisions made we did a vote either in one of our meetin
 <br/>
 
 ## Client Acceptance Criteria Documenation
-This is a document confirming our confirmation of the acceptance criteria for the application and its features with our industry partners.
+This is a document confirming our confirmation of the acceptance criteria for the application and its features with our industry partners. <br/>
+
+<br/>
+
 ![image](https://user-images.githubusercontent.com/44914019/144769899-e916d7b2-888e-45d7-ae70-c5165a1915a2.png)
 
 
