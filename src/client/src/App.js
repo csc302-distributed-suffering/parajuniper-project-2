@@ -83,6 +83,7 @@ class App extends Component {
     for (let i = 0; i < tags.length; i++) {
       var tag = tags[i]
       if (type == 'del'){
+        // console.log('here');
         this.setState({searchPatientFirstName: ''})
         this.setState({searchPatientLastName: ''})
         this.setState({searchPatientID: ''})
@@ -226,6 +227,7 @@ class App extends Component {
 
   handlePatientListSearch = async () => {
     this.setState({loading: true}, async () => {
+      // console.log(this.state.searchPatientFirstName, this.state.searchPatientLastName);
       const res = await getPatientsWName(this.state.searchPatientFirstName, this.state.searchPatientLastName, this.state.searchCount);
 
       if (res.status !== 200) {
