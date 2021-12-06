@@ -1,12 +1,12 @@
 # A3 Overview
 - Project Features:
-    - [Patient Data Download](#patient-data-download)
-    - [Testing](#testing)
+    - [Patient Data Download](#patient-data-download-(abc))
+    - [Viewing Patient Data for a Resource Category](#viewing-patient-data-for-specific-resource-category)
 
 
 ## Project Features
 
-### Patient Data Download
+### Patient Data Download (abc)
 When viewing patient information in a modal, the user is able to then download the data for the current patient. The user has two choices for the download: download all of the resources associated with the patient or download a csv file for the resource category being viewed.
 
 ### Details:
@@ -41,7 +41,10 @@ Please see the following tests that validate this functionality on the backend.
 - server\routes\tests\patients.test.ts:  185
     - Validates that a 500 status code is correctly returned in case of a server error.
 
-### Testing
+### Viewing Patient Data for Specific Resource Category:
+
+### Preview Patient Summary in a Modal Window:
+
 
 
 
