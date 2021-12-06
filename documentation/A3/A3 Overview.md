@@ -3,6 +3,8 @@
     - [Patient Data Download](#patient-data-download)
     - [Viewing Patient Data for a Resource Category](#viewing-patient-data-for-specific-resource-category)
     - [Preview Patient Summary in a Modal Window](#preview-patient-summary-in-a-modal-window)
+- [Features and Tasks that were Missed](#features-and-tasks-that-were-missed)
+- [Client Acceptance Criteria Documenation](#client-acceptance-criteria-documenation)
 
 
 ## Project Features
@@ -74,7 +76,7 @@ For the majority of the decisions made we did a vote either in one of our meetin
 <br/>
 
 ## Client Acceptance Criteria Documenation
-
+This is a document confirming our confirmation of the acceptance criteria for the application and its features with our industry partners.
 ![image](https://user-images.githubusercontent.com/44914019/144769899-e916d7b2-888e-45d7-ae70-c5165a1915a2.png)
 
 
