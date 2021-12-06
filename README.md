@@ -17,6 +17,7 @@ For documentation, please see the [documentation](https://github.com/csc302-dist
 ### A3 
 [Assignment 3 Folder](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/A3) <br/>
 [Assignment 3 Meeting Minutes](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/A3/Meeting%20Minutes) <br/>
+[Assignment 3 Overview](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/A3/A3%20Overview.md) <br/>
 [Assignment 2 Postmortem](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/A3/A2%20Post%20Mortem.md) 
 
 
