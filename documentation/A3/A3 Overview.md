@@ -10,6 +10,7 @@ In this Document:
 - [Client Acceptance Criteria Documenation](#additional-acceptance-criteria-documenation)
 
 Other places of intereset:
+- [Milestones](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/A1/milestones.md)
 - [A2 Postmortem](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/A3/A2%20Post%20Mortem.md)
 - [A3 Meeting Minutes](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/A3/Meeting%20Minutes)
 - [All Meeting Minutes](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/All%20Meeting%20Minutes)
