@@ -1,7 +1,8 @@
 # A3 Overview
 
 In this Document:
-- Project Features:
+- [Task Breakdown](#task-breakdown)
+- [Project Features](#project-features):
     - [Tagged Search](#tagged-search)
     - [Patient Data Download](#patient-data-download)
     - [Viewing Patient Data for a Resource Category](#viewing-patient-data-for-specific-resource-category)
@@ -13,6 +14,70 @@ Other places of intereset:
 - [A2 Postmortem](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/A3/A2%20Post%20Mortem.md)
 - [A3 Meeting Minutes](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/A3/Meeting%20Minutes)
 - [All Meeting Minutes](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/All%20Meeting%20Minutes)
+
+# Task Breakdown
+1. Adjust Backend Tests for new Routes - Viktar - Complete
+    - Our routes were changed with A3 and some tests started failing since the routing logic changed. These were tests that validate our most important /info and /list routes for patients. 
+    
+
+    #### Acceptance Criteria:
+    1. The new tests pass.
+    
+<br/>    
+ 
+2. Create a workflow to parse patient data and collect it in category-based buckets - Viktar - Complete
+
+    - We want to be able to display all data for a single patient and for that we need to organize this data into categories when we get it from FHIR. Therefore, we created a new data parsing function in order to collect this data from FHIR and organize it in an object that our UI can work with.
+
+    #### Acceptance Criteria:
+    1. The user is able to search for a patient and view all data relating to that patient.
+    2. The following categories of data should be included:  'Annotation', 'Signature', 'Account', 'AdverseEvent', 'AllergyIntolerance', 'Appointment',
+ 'AppointmentResponse', 'AuditEvent', 'Basic', 'BiologicallyDerivedProduct', 'BodyStructure',
+'CarePlan', 'CareTeam', 'ChargeItem', 'Claim', 'ClaimResponse', 'ClinicalImpression',
+'Communication', 'CommunicationRequest', 'Composition', 'Condition', 'Consent', 'Contract',
+'Coverage', 'CoverageEligibilityRequest', 'CoverageEligibilityResponse', 'DetectedIssue',
+'Device', 'DeviceRequest', 'DeviceUseStatement', 'DiagnosticReport', 'DocumentManifest',
+'DocumentReference', 'Encounter', 'EnrollmentRequest', 'EpisodeOfCare', 'ExplanationOfBenefit',
+'FamilyMemberHistory', 'Flag', 'Goal', 'Group', 'GuidanceResponse', 'ImagingStudy',
+'Immunization', 'ImmunizationEvaluation', 'ImmunizationRecommendation', 'Invoice', 'List',
+'MeasureReport', 'Media', 'MedicationAdministration', 'MedicationDispense', 'MedicationRequest',
+'MedicationStatement', 'MolecularSequence', 'NutritionOrder', 'Observation', 'Person',
+'Procedure', 'Provenance', 'QuestionnaireResponse', 'RelatedPerson', 'RequestGroup',
+'ResearchSubject', 'RiskAssessment', 'Schedule', 'ServiceRequest', 'Specimen', 'SupplyDelivery',
+'SupplyRequest', 'Task', 'VisionPrescription', 'Practitioner', 'Organization', 'Patient',
+'Location'
+
+<br/>
+
+3. Paging for patient data - Nikita - Complete
+    - The volume of resources that can be related to a single FHIR Patient resource tends to be very large as one patient can have mutliple conditions, medications and other related information. Therefore, we need a mechanism to page such queries based on the total, current count of results and page offset.
+
+    #### Acceptance Criteria:
+    1. Large volumes of data are paged at 40 entries per page.
+    2. The user is able to click "Next" and "Previous" buttons on the UI to go back and forth between pages.
+
+<br/>
+
+4. Paging for patients - Nikita - Complete
+    - The volume of data returned by FHIR can be very large, especially for queries listing multiple patients. Therefore, we need a paging mechanism that will allow us to search each query based on the returned page. This will involve keeping track of the current page being displayed and calculating what page to query next if we decide to go forwards or backwards on the UI.
+
+    #### Acceptance Criteria:
+    1. Large volumes of data are paged at 40 entries per page.
+    2. The user is able to click "Next" and "Previous" buttons on the UI to go back and forth between pages.
+
+
+5. Searching patients by tag - Complete
+
+6. Finalize UI functionality - Eric and Felicia - Complete
+
+7. Presentation and A3 Overview - Viktar, Nikita and Felicia - Complete
+
+8. A2 Postmortem - Eric, Felicia, Nikita and Viktar - Complete
+
+9. Bug fixes - Felicia, Nikita and Viktar - Complete
+
+
+
 
 # Project Features
 
