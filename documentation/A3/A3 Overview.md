@@ -1,9 +1,12 @@
 # A3 Overview
+- Project Features:
+    - [Patient Data Download](#patient-data-download)
+    - [Testing](#testing)
 
 
 ## Project Features
 
-### Patient Data Download:
+### Patient Data Download
 When viewing patient information in a modal, the user is able to then download the data for the current patient. The user has two choices for the download: download all of the resources associated with the patient or download a csv file for the resource category being viewed.
 
 ### Details:
@@ -11,7 +14,7 @@ The feature works by retrieving all of the resources associated with a patient b
 
 The download packages this information into either a CSV or the raw JSON returned by the $everything query. 
 
-### Steps to access the download: 
+### Steps to access the download:
 1. Click on “Details” inside a patient’s card.
 2. Select the resource information that you want to download from the dropdown.
 3. Click “Download Table” for a csv file of the displayed table.
@@ -38,7 +41,7 @@ Please see the following tests that validate this functionality on the backend.
 - server\routes\tests\patients.test.ts:  185
     - Validates that a 500 status code is correctly returned in case of a server error.
 
-
+### Testing
 
 
 
