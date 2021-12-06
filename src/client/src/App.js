@@ -153,9 +153,9 @@ class App extends Component {
 
               <div className='header'>
                 <div className="header-content">
-                  <h1 className="header-title" >Suffering</h1>
+                  <h1 className="header-title" >Patient Data</h1>
                   <p >
-                    A FHIR based someting blah blah that gets you patient data
+                    A FHIR based service for retrieving patient data.
                   </p>
                   <a className="header-link" href="https://www.hl7.org/fhir/" target="_blank">About FHIR </a>
                   <i class="fas fa-fire-alt"></i>
