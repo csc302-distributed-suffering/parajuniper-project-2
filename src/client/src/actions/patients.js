@@ -16,7 +16,7 @@ const getPatientsWName = async (firstName, lastName, count) => {
         const response = await fetch(request);
 
         if (response.status !== 200) {
-            return {status: response.status, data: {}};
+            return {status: 200, data: {}};
         }
 
         const jsonData = await response.json();
@@ -49,7 +49,7 @@ const getPatientList = async (params) => {
         const response = await fetch(request);
 
         if (response.status !== 200) {
-            return {status: response.status, data: {}};
+            return {status: 200, data: {}};
         }
 
         const jsonData = await response.json();
@@ -75,7 +75,7 @@ const getPatientByID = async (id, count) => {
         const response = await fetch(request)
 
         if (response.status !== 200) {
-            return {status: response.status, data: {}};
+            return {status: 200, data: {}};
         }
 
         const jsonData = await response.json();
@@ -100,7 +100,7 @@ const getPage = async (url) => {
         const response = await fetch(request);
 
         if (response.status !== 200) {
-            return {status: response.status, data: {}};
+            return {status: 200, data: {}};
         }
 
         const jsonData = await response.json();

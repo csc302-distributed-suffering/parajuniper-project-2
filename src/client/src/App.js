@@ -254,7 +254,7 @@ class App extends Component {
   
           const patient = {
             name: name,
-            _id: p._id,
+            id: p.id,
             gender: p.gender,
             birthdate: p.birthDate,
           };
@@ -381,7 +381,7 @@ class App extends Component {
   
           const patient = {
             name: name,
-            _id: p._id,
+            id: p.id,
             gender: p.gender,
             birthdate: p.birthDate,
           };
