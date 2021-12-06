@@ -26,6 +26,8 @@ User testing was another goal we were unable to achieve for our final submission
 
 For the majority of the decisions made we did a vote either in one of our meetings or in Discord as necessary.
 
+### Client Communication Documenation
+
 
 
 
