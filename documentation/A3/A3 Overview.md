@@ -24,10 +24,11 @@ The feature works by retrieving all of the resources associated with a patient b
 The download packages this information into either a CSV or the raw JSON returned by the $everything query. 
 
 ### Steps to access the download:
-1. Click on “Details” inside a patient’s card.
-2. Select the resource information that you want to download from the dropdown.
-3. Click “Download Table” for a csv file of the displayed table.
-4. To download data from all resources for this patient in a single JSON, click “Download All”
+1. Search for a patient.
+2. Click on “Details” inside a patient’s card.
+3. Select the resource information that you want to download from the dropdown.
+4. Click “Download Table” for a csv file of the displayed table.
+5. To download data from all resources for this patient in a single JSON, click “Download All”
 
 ### Negotiated Verification Criteria:
 Please see: [Client Acceptance Criteria Documenation](#client-acceptance-criteria-documenation) for documentation on our conversation with the industry partner. <br/>
