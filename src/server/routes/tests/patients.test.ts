@@ -20,7 +20,7 @@ fhirKitClient.prototype.search = searchMock;
 //     };
 // });
 
-const blankPatient = {resource: {resourceType: 'Patient', id: "0"}};
+const blankPatient = {resource: {resourceType: 'Patient', id: '0'}};
 
 const bundleResponse: Bundle = {
     resourceType: 'Bundle',
@@ -32,11 +32,11 @@ const bundleResponse: Bundle = {
             name: [
                 {
                     given: [
-                        "John"
+                        'John',
                     ],
-                    family: "Smith"
-                }
-            ]
+                    family: 'Smith',
+                },
+            ],
         },
     }, {
         resource: {
@@ -154,7 +154,7 @@ describe('Patient Endpoints', () => {
 
             const response = await request
                 .get('/patients/info')
-                .query({id: '124'});
+                .query({_id: '124'});
 
             expect(response.statusCode).toBe(200);
             expect(Object.keys(response.body).length).toBe(5);
@@ -177,7 +177,7 @@ describe('Patient Endpoints', () => {
 
             const response = await request
                 .get('/patients/info')
-                .query({id: '123'});
+                .query({_id: '123'});
 
             expect(response.statusCode).toBe(404);
         });
@@ -187,7 +187,7 @@ describe('Patient Endpoints', () => {
 
             const response = await request
                 .get('/patients/info')
-                .query({id: '123'});
+                .query({_id: '123'});
 
             expect(response.statusCode).toBe(500);
         });
