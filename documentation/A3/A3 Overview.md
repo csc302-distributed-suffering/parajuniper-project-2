@@ -15,6 +15,19 @@ Other places of intereset:
 
 # Project Features
 
+## Tagged Search: 
+Create tag searches, where each tag is structured as fieldtype: fieldvalue. The user first selects a tag to search by from the dropdown and then enters a value for it by typing in the search bar. The user confirms the tag by pressing ENTER and then they are able to add additional tags. They user can alternatively click "Search" right away to search based on the current entered tags. Tags can be cleared by pressing the X on their float. Please refer to the below visuals for clarification.
+
+### Instructions:
+
+### Negotiated Verification Criteria:
+Please see: [Client Acceptance Criteria Documenation](#client-acceptance-criteria-documenation) for documentation on our conversation with the industry partner. <br/>
+
+### Tests:
+<br/>
+
+## Cards: 
+
 ## Patient Data Download
 When viewing patient information in a modal, the user is able to then download the data for the current patient. The user has two choices for the download: download all of the resources associated with the patient or download a csv file for the resource category being viewed.
 
@@ -23,7 +36,7 @@ The feature works by retrieving all of the resources associated with a patient b
 
 The download packages this information into either a CSV or the raw JSON returned by the $everything query. 
 
-### Steps to access the download:
+### Instructions:
 1. Search for a patient.
 2. Click on “Details” inside a patient’s card.
 3. Select the resource information that you want to download from the dropdown.
@@ -64,7 +77,7 @@ This information is then organized into tables by the UI with the ability to cha
 
 By default, the user will see the general identification information for a patient such as their name, address, gender and birth date. The user can then use a drop down to select any other information they may want to view.
 
-### Steps: 
+### Instructions: 
 1. Search for a patient using our tag search system.
 2. Select the patient you want to view and click “Details”.
 3. Use the drop down menu to choose the category of information that you want to view.
@@ -107,7 +120,7 @@ By default, the user will see the general identification information for a patie
 
 This query is paged and the user can use the “Next” and “Previous” buttons at the bottom of the page to see the next or previous set of results.
 
-### Steps to Access: 
+### Instructions: 
 
 1. Search for a specific patient by name using the tag search and observe how multiple results are returned.
 
