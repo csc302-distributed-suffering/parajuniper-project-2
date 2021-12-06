@@ -3,7 +3,6 @@
 In this Document:
 - Project Features:
     - [Tagged Search](#tagged-search)
-    - [Patient Cards](#cards)
     - [Patient Data Download](#patient-data-download)
     - [Viewing Patient Data for a Resource Category](#viewing-patient-data-for-specific-resource-category)
     - [Preview Patient Summary in a Modal Window](#preview-patient-summary-in-a-modal-window)
