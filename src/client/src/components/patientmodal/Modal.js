@@ -177,11 +177,11 @@ export class Modal extends React.Component {
       let address = ''
       if (patient_data['address']){
         var address_data = patient_data['address'][0]
-        address = 'Address: ' + (address_data['line'] ? address_data.line[0] : '') + ' ' + address_data['city'] 
+        address = '' + (address_data['line'] ? address_data.line[0] : '') + ' ' + address_data['city'] 
         + ' ' + address_data['state'] + ' ' + address_data['postalCode'] + ' ' + address_data['country'];
       }
       else {
-        address = 'Address: Unknown' 
+        address = 'Unknown' 
       }
 
       return (

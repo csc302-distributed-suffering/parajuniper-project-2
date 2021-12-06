@@ -1,0 +1,83 @@
+.search_wrapper{
+    position: relative;
+    width: 100%;
+    font-family: IBM Plex, sans-serif;
+    height: auto;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    text-align: -webkit-center;
+    .tag-wrapper{
+        color: #fff;
+        font-weight: bold;
+        background: #3a3a3a;
+        padding: 5px 10px;
+        border-radius: 10em;
+        margin: 5px;
+
+    }
+    .ReactTags__remove{
+        background-color: transparent;
+        border: none;
+        color:rgb(218, 214, 214);
+        display: inline-block;
+        &:hover {
+            color:white;
+        }
+    }
+
+    .ReactTags__tagInputField {
+        margin-top: 20px;
+        border: none;
+        outline: none;
+        padding: 10px;
+        width: 35vw;
+        line-height: 30px;
+        border-radius: 4px;
+        height: 36px;
+        height: 7vh;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .css-b62m3t-container{
+        width: 20%;
+        margin-top: 20px;
+        color:rgb(70, 70, 70);
+        font-family: 'ibm-plex', Helvetica, sans-serif;
+        .css-6j8wv5-Input{
+            border: none;
+            outline: none;
+            padding: 10px;
+            border-radius: 4px;
+            color:rgb(104, 104, 104);
+            text-align: center;
+        }
+    }
+    .css-1s2u09g-control{
+
+        width: 230px;
+        height: 7.5vh;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .css-1pahdxg-control{
+        width: 230px;
+        height: 7.5vh;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+    .search-button{
+        background: #5981cc; 
+        border-radius: 100px;
+        padding: 20px 60px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-family: 'ibm-plex', sans-serif;
+        font-weight: 500;
+        outline: none;
+        box-shadow: none;
+        vertical-align: middle;
+        line-height: 15px;
+        margin-top: 20px;
+      }
+      
+}

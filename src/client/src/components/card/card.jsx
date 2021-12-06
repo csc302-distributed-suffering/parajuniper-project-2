@@ -30,7 +30,7 @@ export class Card extends React.Component {
     }
 
     render = () => {
-
+        const name = this.props.patient.name.length < 40 ? this.props.patient.name : this.props.patient.name.substring(0, 40)
         return(
             <div>
                 <div className='card' >
