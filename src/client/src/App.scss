@@ -77,6 +77,13 @@
   color:white;
 }
 
+@-moz-document url-prefix() {
+  .css-1s2u09g-control{
+    left: 223% !important; 
+  }
+  }
+
+
 
 @keyframes fadein {
     from { opacity: 0; }
