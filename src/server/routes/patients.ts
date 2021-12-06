@@ -72,7 +72,7 @@ router.get('/list', async (req: Request, res: Response) => {
 });
 
 router.get('/info', async (req, res) => {
-    const pId: string = req.query.id as string ?? '';
+    const pId: string = req.query._id as string ?? '';
 
     if (pId == '') {
         console.error('No id provided.');
@@ -205,9 +205,9 @@ const getSearchParams = (req: Request): SParams => {
         } else if (key === '_pretty' && req.query[key] !== '') {
             const pretty: string = req.query._pretty as string;
             params.searchParams._pretty = pretty.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
-        } else if (key === 'id' && req.query[key] !== '') {
-            const id: string = req.query.id as string;
-            params.searchParams.id = id.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
+        } else if (key === '_id' && req.query[key] !== '') {
+            const _id: string = req.query._id as string;
+            params.searchParams._id = _id.replace(/[&\/\\#,+()$~%.":*?<>{}]/g, '');
         }
     }
 

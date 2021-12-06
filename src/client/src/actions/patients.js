@@ -30,7 +30,10 @@ const getPatientsWName = async (firstName, lastName, count) => {
 const getPatientList = async (params) => {
     const qParams = [];
     for (const key in params) {
-        qParams.push(`${key}=${params[key]}`);
+        if (params[key]) {
+            const param = params[key].trim ? params[key].trim() : params[key];
+            qParams.push(`${key}=${param}`);
+        }
     }
     const url = '/patients/list?' + qParams.join('&');
 
@@ -59,7 +62,7 @@ const getPatientList = async (params) => {
 }
 
 const getPatientByID = async (id, count) => {
-    const url = `/patients/info?id=${id}&_count=${count}`
+    const url = `/patients/info?_id=${id}&_count=${count}`
     const request = new Request(url, {
         method: 'GET',
         headers: {

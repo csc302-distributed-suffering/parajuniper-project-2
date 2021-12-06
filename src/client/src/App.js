@@ -50,7 +50,7 @@ class App extends Component {
     
       const patient = {
         name: name,
-        id: p_data.id,
+        _id: p_data._id,
         gender: p_data.gender,
         birthdate: p_data.birthDate,
       };
@@ -80,50 +80,55 @@ class App extends Component {
   }
 
   handleTagUpdates = (tags, type='add') => {
-    for (let i = 0; i < tags.length; i++) {
-      var tag = tags[i]
-      if (type == 'del'){
-        // console.log('here');
-        this.setState({searchPatientFirstName: ''})
-        this.setState({searchPatientLastName: ''})
-        this.setState({searchPatientID: ''})
-        return
-      }
-      if (type == 'add'){
-        this.tagExists(tag.type)
-      }
-      if (tag.type == 'id'){
-        if (type=="del"){
-          this.setState({searchPatientID: ''})
-          return
-        }
-        
-        this.setState({searchPatientID: tag.value})
-        
-        
+    const allTags = [
+      'searchPatientFirstName',
+      'searchPatientLastName',
+      'searchPatientID'];
+    
+    const tagMap = {
+      'firstName': 'searchPatientFirstName',
+      'lastName': 'searchPatientLastName',
+      'id': 'searchPatientID'
+    }
 
-      }
-      else if (tag.type == 'firstName' || tag.type == 'lastName'){
-
-        if (tag.type == 'firstName'){
+    const tagTypesUsed = []
+    for(const tag of tags){
+      tagTypesUsed.push(tag.type)
+      switch(tag.type){
+        case 'firstName':
           this.setState({searchPatientFirstName: tag.value})
-        
-        }
-        else if (tag.type == 'lastName'){
+          break;
+        case 'lastName':
           this.setState({searchPatientLastName: tag.value})
-  
-        }
-
+          break;
+        case 'id':
+          this.setState({searchPatientID: tag.value})
+          break;
       }
     }
 
+    if(type === 'del'){
+      const tagsUsed = []
+      for(let i = 0; i < tagTypesUsed.length; i++){
+        if(tagMap[tagTypesUsed[i]]){
+          tagsUsed.push(tagMap[tagTypesUsed[i]])
+        }
+      }
+
+      const tagsRemoved = allTags.filter(tag => tagsUsed.indexOf(tag) === -1)
+      for(let j = 0; j < tagsRemoved.length; j++){
+        this.setState({[tagsRemoved[j]]: ""})
+      }
+    }
   }
+  
   handleDelete(i) {
     const { tags } = this.state;
     this.setState({
      tags: tags.filter((tag, index) => index !== i),
+    }, () => {
+      this.props.onInputChange(this.state.tags, 'del')
     });
-    this.props.onInputChange(this.state.tags, 'del')
   }
 
   handleAddition(tag) {
@@ -132,8 +137,9 @@ class App extends Component {
       tag.type = this.state.field[0].value
       tag.id = tag.text
       
-      this.setState(state => ({ tags: [...state.tags, tag] }));
-      this.props.onInputChange([tag], 'add')
+      this.setState(state => ({ tags: [...state.tags, tag] }), () => {
+        this.props.onInputChange([tag], 'add')
+      });
   }
 
   handleSearch = () => {
@@ -168,7 +174,7 @@ class App extends Component {
                 handleAddition={this.handleAddition}
                 tags={this.state.tags}
                 field={this.state.field}
-                handlePatientListSearch={this.handleSearch}
+                handlePatientListSearch={this.handlePatientListSearch}
                 />
               {/* <div id='searchbar'>
                     <Searchbox type='search' id="patientSearch-1" name="searchPatientFirstName" placeholder='First Name' onInputChange={this.handleSearchInputChange}/>
@@ -217,7 +223,7 @@ class App extends Component {
   }
 
   handleSearch = async () => {
-    if (this.state.searchPatientID != ""){
+    if (this.state.searchPatientID !== ""){
       this.handlePatientIdSearch(this.state.searchPatientID)
     }
     else {
@@ -228,7 +234,13 @@ class App extends Component {
   handlePatientListSearch = async () => {
     this.setState({loading: true}, async () => {
       // console.log(this.state.searchPatientFirstName, this.state.searchPatientLastName);
-      const res = await getPatientsWName(this.state.searchPatientFirstName, this.state.searchPatientLastName, this.state.searchCount);
+      // const res = await getPatientsWName(this.state.searchPatientFirstName, this.state.searchPatientLastName, this.state.searchCount);
+      const res = await getPatientList({
+        _id: this.state.searchPatientID,
+        family: this.state.searchPatientLastName,
+        given: this.state.searchPatientFirstName,
+        _count: this.state.searchCount,
+      });
 
       if (res.status !== 200) {
         console.error(`Error retrieving patients. Code ${res.status}`);
@@ -242,7 +254,7 @@ class App extends Component {
   
           const patient = {
             name: name,
-            id: p.id,
+            _id: p._id,
             gender: p.gender,
             birthdate: p.birthDate,
           };
@@ -369,7 +381,7 @@ class App extends Component {
   
           const patient = {
             name: name,
-            id: p.id,
+            _id: p._id,
             gender: p.gender,
             birthdate: p.birthDate,
           };
