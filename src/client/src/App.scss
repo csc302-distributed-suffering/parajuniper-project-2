@@ -77,12 +77,19 @@
   color:white;
 }
 
+
 @-moz-document url-prefix() {
   .css-1s2u09g-control{
     left: 223% !important; 
   }
+  .css-1pahdxg-control{
+    left: 223% !important; 
   }
-
+  #react-select-3-listbox{
+    left: 223% !important; 
+    width: 40vh;
+  }
+  }
 
 
 @keyframes fadein {
