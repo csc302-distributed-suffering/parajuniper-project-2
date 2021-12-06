@@ -10,7 +10,6 @@ In this Document:
 - [Client Acceptance Criteria Documenation](#additional-acceptance-criteria-documenation)
 
 Other places of intereset:
-- [Milestones](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/A1/milestones.md)
 - [A2 Postmortem](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/A3/A2%20Post%20Mortem.md)
 - [A3 Meeting Minutes](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/A3/Meeting%20Minutes)
 - [All Meeting Minutes](https://github.com/csc302-distributed-suffering/parajuniper-project-2/tree/main/documentation/All%20Meeting%20Minutes)
@@ -22,32 +21,10 @@ Create tag searches, where each tag is structured as fieldtype: fieldvalue. The 
 
 ### Instructions:
 1. Select the tag you want to search by from the dropdown menu.
-![image](https://user-images.githubusercontent.com/44914019/144780186-1d63a6d7-68e2-4213-91e9-78a9522cae05.png)
-
-<br/>
-
 2. Type in a value for the tag in the input box.
-![image](https://user-images.githubusercontent.com/44914019/144780256-1b3e5c95-2024-4a1a-b864-be1a8d0cb271.png)
-
-<br/>
-
 3. Press ENTER to create a tag. 
-![image](https://user-images.githubusercontent.com/44914019/144780318-6db0736c-c8d6-4f35-af4c-a8bf14443b60.png)
-
-<br/>
-
-4. You can now click "Search" or add more tags.
-![image](https://user-images.githubusercontent.com/44914019/144780417-7283146d-6c29-4a16-8f4f-ca732c77ad69.png)
-
-<br/>
-
+4. You can now click "Seach" or add more tags.
 5. To clear a tag press the X button on the tag.
-![image](https://user-images.githubusercontent.com/44914019/144780466-2ccbc1a4-8790-4a38-97d7-7195ebd8aaa0.png)
-<br/>
-
-
-
-
 
 ### Negotiated Verification Criteria:
 Please see: [Client Acceptance Criteria Documenation](#client-acceptance-criteria-documenation) for documentation on our conversation with the industry partner. <br/>
@@ -148,6 +125,9 @@ Please see the following tests that validate this functionality on the backend.
 - server\routes\tests\patients.test.ts:  185
     - Validates that a 500 status code is correctly returned in case of a server error.
 
+Front end tests: 
+- React component testing was done with snapshotting and Jest. Components are provided constant data and rendered to check visual elements do not change unexpectedly during runtime. 
+
 <br/>
 
 ## Preview Patient Summary in a Modal Window:
@@ -209,7 +189,16 @@ User testing was another goal we were unable to achieve for our final submission
 
 For the majority of the decisions made we did a vote either in one of our meetings or in Discord as necessary.
 
+### More elaborate front-end testing
+Although we ended up deciding automated front-end testing wasn't as important due to the limited functionality of the app which could just be tested manually, 
+It would've been helpful to create proper test cases to check if components responded correctly compared with the snapshot testing that was done. Snapshot testing 
+can help discover unexpected changes, but provides limited coverage for any component logic. 
+
+### Customizable downloads 
+In the original wireframe designs we had on figma, we wanted to allow the user to download specific fields of data by selecting them via checklist. Due to time constraints, this was not implemented 
+
 <br/>
+
 
 ## Additional Acceptance Criteria Documenation
 This is a document confirming our confirmation of the acceptance criteria for the application and its features with our industry partners. <br/>
@@ -224,7 +213,7 @@ We also verified acceptance criteria by reviewing each other's PRs. These serve 
 
 <br/>
 
-The PRs are organized from earliest to latest. So PR 1 is the very first PR of our application. More on the validation process can be found at the end of [this](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/A2/Milestone2.md) document
+The PRs are organized from earliest to latest. So PR 1 is the very first PR of our application. 
 
 <br/>
 
