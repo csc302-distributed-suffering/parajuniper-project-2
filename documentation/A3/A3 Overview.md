@@ -3,11 +3,49 @@
 
 ## Project Features
 
+### Patient Data Download:
+When viewing patient information in a modal, the user is able to then download the data for the current patient. The user has two choices for the download: download all of the resources associated with the patient or download a csv file for the resource category being viewed.
+
+### Details:
+The feature works by retrieving all of the resources associated with a patient by running an $everything query search for the given patient in the database. The UI then processes the information into buckets (per resource category) and displays it in a table format.
+
+The download packages this information into either a CSV or the raw JSON returned by the $everything query. 
+
+### Steps to access the download: 
+1. Click on “Details” inside a patient’s card.
+2. Select the resource information that you want to download from the dropdown.
+3. Click “Download Table” for a csv file of the displayed table.
+4. To download data from all resources for this patient in a single JSON, click “Download All”
+
+### Acceptance Criteria:
+#### Negotiated Verification Criteria:
+From our discussions with our industry partner we agreed that accessing patient information in its entirety was an important use case. As such this is one of the features developed to enable the user to do just so. Since the user is a clinician they might want to save the data they are accessing for later use. 
+
+As such, the acceptance criteria for this feature are:
+The user is able to access all data for a given patient.
+The user is able to download the data in a common file format (CSV or JSON).
+
+#### Tests:
+Automated backend tests ensure that correct information is retrieved.
+Please see the following tests that validate this functionality on the backend.
+
+- server\routes\tests\patients.test.ts: 152
+    - Validates that the server response contains correct information for an existing patient.
+- server\routes\tests\patients.test.ts: 167
+    - Validates that a 400 status code is correctly returned for a malformed query.
+- server\routes\tests\patients.test.ts: 175
+    - Validates that a 404 status code is correctly returned for a non-existing patient.
+- server\routes\tests\patients.test.ts:  185
+    - Validates that a 500 status code is correctly returned in case of a server error.
 
 
 
 
 
+
+
+
+<br/>
 
 ## Features and Tasks that were Missed:
 
@@ -25,6 +63,8 @@ Code coverage remains at 78% for the backend. Our goal was to increase this to 8
 User testing was another goal we were unable to achieve for our final submission. However, we decided that it was enough for us to manually test the application. We agreed that user testing would not make sense for an application with a small scope such as ours.
 
 For the majority of the decisions made we did a vote either in one of our meetings or in Discord as necessary.
+
+<br/>
 
 ## Client Acceptance Criteria Documenation
 
