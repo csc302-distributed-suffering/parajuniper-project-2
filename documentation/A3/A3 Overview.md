@@ -138,7 +138,7 @@ This query is paged and the user can use the “Next” and “Previous” butto
 
 ### Instructions: 
 
-1. Search for a specific patient by name using the tag search and observe how multiple results are returned.
+1. Search for a specific patient by name using the tag search and observe how a single or multiple results (with the same value for the attribute you searched by) are returned.
 
 ### Negotiated Verification Criteria:
 Please see: [Client Acceptance Criteria Documenation](#client-acceptance-criteria-documenation) for documentation on our conversation with the industry partner. <br/>
