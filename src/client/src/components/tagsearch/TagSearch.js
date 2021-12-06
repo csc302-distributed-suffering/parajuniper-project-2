@@ -27,7 +27,7 @@ export class TagSearch extends React.Component {
              ],
             field: props.field,
             tags: props.tags,
-
+            currInput: '',
         };
 
         this.handleDelete = this.handleDelete.bind(this);
@@ -59,11 +59,17 @@ export class TagSearch extends React.Component {
                     tags={tags}
                     suggestions={[]}
                     handleDelete={this.handleDelete}
-                    handleAddition={this.handleAddition}
+                    handleAddition={(tag) => {
+                        this.setState({currInput: ''});
+                        this.handleAddition(tag);
+                    }}
                     handleDrag={this.handleDrag}
                     delimiters={delimiters} 
                     placeholder={"enter field value"}
                     inputFieldPosition="bottom"
+                    handleInputChange={((e) => {
+                        this.setState({currInput: e});
+                    })}
                 />
                 <div>
                 <Select
@@ -75,7 +81,23 @@ export class TagSearch extends React.Component {
                 />
                 <button 
                 className="search-button child-div"
-                onClick={this.props.handlePatientListSearch}
+                onClick={(() => {
+                    let flag = true;
+                    if (this.state.currInput) {
+                        for (let tag of this.state.tags) {
+                            if (tag.type === this.state.field[0].value) {
+                                this.setState({currInput: ''});
+                                flag = false;
+                                break;
+                            }
+                        }
+
+                        if (flag) {
+                            this.handleAddition({text: this.state.currInput});
+                        }
+                    }
+                    this.props.handlePatientListSearch();
+                })}
                 > Search </button>
                 </div>
 
