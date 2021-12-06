@@ -28,8 +28,8 @@ The download packages this information into either a CSV or the raw JSON returne
 From our discussions with our industry partner we agreed that accessing patient information in its entirety was an important use case. As such this is one of the features developed to enable the user to do just so. Since the user is a clinician they might want to save the data they are accessing for later use. 
 
 As such, the acceptance criteria for this feature are:
-The user is able to access all data for a given patient.
-The user is able to download the data in a common file format (CSV or JSON).
+1. The user is able to access all data for a given patient.
+2. The user is able to download the data in a common file format (CSV or JSON).
 
 #### Tests:
 Automated backend tests ensure that correct information is retrieved.
@@ -47,6 +47,43 @@ Please see the following tests that validate this functionality on the backend.
 ### Viewing Patient Data for Specific Resource Category:
 
 ### Preview Patient Summary in a Modal Window:
+Searching for a specific patient using a tag presents you with a grid of Modal cards per patient. These display basic patient information (name and date of birth). Then the user is able to view more detailed information by clicking the “Details” button on a specific patient.
+
+This allows you to see patients with duplicate names (if you searched by name) or whether a patient with a given name/id even exists in the database. 
+
+#### Details:
+When a patient card is clicked (user clicks on “Details” button), we make a query to our FHIR server to retrieve all of the information associated with the patient whose card the user clicked on. This is achieved through the use of the $everything query on the given patient (using the patient’s id).
+
+This information is then organized into tables by the UI with the ability to change which resource category the user is viewing.
+
+By default, the user will see the general identification information for a patient such as their name, address, gender and birth date. The user can then use a drop down to select any other information they may want to view.
+
+This query is paged and the user can use the “Next” and “Previous” buttons at the bottom of the page to see the next or previous set of results.
+
+#### Steps to Access: 
+
+1. Search for a specific patient by name using the tag search and observe how multiple results are returned.
+
+#### Acceptance Criteria:
+##### Negotiated Verification Criteria:
+Our app is mostly based on simply retrieving patient information and previewing the results. As discussed with our industry partner, some way of previewing search results would be helpful to users in identifying patients with the same name or patients that do not exist.
+
+As such, the acceptance criteria for this feature are:
+1. When the user searches for a patient name that exists in the database, they get a preview of every patient with that name.
+2. The user is able to view search results in a paged manner.
+
+#### Tests:
+Automated backend tests ensure that correct information is retrieved.
+Please see the following tests that validate this functionality on the backend. <br/>
+
+- server\routes\tests\patients.test.ts: 93
+    - Validates that patients with duplicate names are correctly returned.
+- server\routes\tests\patients.test.ts: 115
+    - Validates that non-existing patients result in an empty response.
+- server\routes\tests\patients.test.ts: 125
+   - Validates that a 404 status code is correctly returned for a non-existing patient.
+- server\routes\tests\patients.test.ts: 136
+   - Validates that a 500 status code is correctly returned in case of a server error.
 
 
 
