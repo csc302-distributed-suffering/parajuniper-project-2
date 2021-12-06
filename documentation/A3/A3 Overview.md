@@ -7,7 +7,7 @@ In this Document:
     - [Viewing Patient Data for a Resource Category](#viewing-patient-data-for-specific-resource-category)
     - [Preview Patient Summary in a Modal Window](#preview-patient-summary-in-a-modal-window)
 - [Features and Tasks that were Missed](#features-and-tasks-that-were-missed)
-- [Client Acceptance Criteria Documenation](#client-acceptance-criteria-documenation)
+- [Client Acceptance Criteria Documenation](#additional-acceptance-criteria-documenation)
 
 Other places of intereset:
 - [A2 Postmortem](https://github.com/csc302-distributed-suffering/parajuniper-project-2/blob/main/documentation/A3/A2%20Post%20Mortem.md)
@@ -188,12 +188,44 @@ For the majority of the decisions made we did a vote either in one of our meetin
 
 <br/>
 
-## Client Acceptance Criteria Documenation
+## Additional Acceptance Criteria Documenation
 This is a document confirming our confirmation of the acceptance criteria for the application and its features with our industry partners. <br/>
 
 <br/>
 
 ![image](https://user-images.githubusercontent.com/44914019/144769899-e916d7b2-888e-45d7-ae70-c5165a1915a2.png)
+
+<br/>
+
+We also verified acceptance criteria by reviewing each other's PRs. These serve as a documentation of our code verification process. In general,the approval processes required two different people to approve another person's PR. During this time the two reviewers would checkout the branch being merged locally and test it in addition to reviewing the code. Many changes were made during these reviews as a result. <br/>
+
+<br/>
+
+The PRs are organized from earliest to latest. So PR 1 is the very first PR of our application. 
+
+<br/>
+
+1. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/2
+2. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/3
+3. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/4
+4. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/5
+5. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/6
+6. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/7
+7. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/8
+8. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/9
+9. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/10
+10. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/11
+11. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/12
+12. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/16
+13. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/17
+14. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/18
+15. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/19
+16. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/20
+17. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/21
+18. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/25
+19. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/26
+20. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/27
+21. https://github.com/csc302-distributed-suffering/parajuniper-project-2/pull/24
 
 
 
