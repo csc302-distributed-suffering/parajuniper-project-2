@@ -42,8 +42,16 @@ The download packages this information into either a CSV or the raw JSON returne
 1. Search for a patient.
 2. Click on “Details” inside a patient’s card.
 3. Select the resource information that you want to download from the dropdown.
+![image](https://user-images.githubusercontent.com/44914019/144776671-13112cac-b9cd-436b-b6e5-2402d4d16642.png)
+
+<br/>
+
+
 4. Click “Download Table” for a csv file of the displayed table.
 5. To download data from all resources for this patient in a single JSON, click “Download All”
+![image](https://user-images.githubusercontent.com/44914019/144777222-540d38ae-8003-4fe3-ae2e-bfaac7986a5c.png)
+
+<br/>
 
 ### Negotiated Verification Criteria:
 Please see: [Client Acceptance Criteria Documenation](#client-acceptance-criteria-documenation) for documentation on our conversation with the industry partner. <br/>
