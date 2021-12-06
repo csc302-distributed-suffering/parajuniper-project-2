@@ -81,8 +81,14 @@ By default, the user will see the general identification information for a patie
 
 ### Instructions: 
 1. Search for a patient using our tag search system.
+![image](https://user-images.githubusercontent.com/36054510/144776798-a4db79ad-6190-4bae-9124-44de63eb3b1e.png)
+
 2. Select the patient you want to view and click “Details”.
+![image](https://user-images.githubusercontent.com/36054510/144776844-55570d47-4717-467e-bfd7-de9a0cd845c3.png)
+
 3. Use the drop down menu to choose the category of information that you want to view.
+![image](https://user-images.githubusercontent.com/36054510/144776900-c97b4310-d420-4d93-b467-ac76cfdf9ed7.png)
+
 
 ### Negotiated Verification Criteria:
 Please see: [Client Acceptance Criteria Documenation](#client-acceptance-criteria-documenation) for documentation on our conversation with the industry partner. <br/>
