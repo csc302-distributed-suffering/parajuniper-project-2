@@ -24,6 +24,8 @@ The download packages this information into either a CSV or the raw JSON returne
 4. To download data from all resources for this patient in a single JSON, click “Download All”
 
 ### Negotiated Verification Criteria:
+Please see: [Client Acceptance Criteria Documenation](#client-acceptance-criteria-documenation) for documentation on our conversation with the industry partner. <br/>
+
 From our discussions with our industry partner we agreed that accessing patient information in its entirety was an important use case. As such this is one of the features developed to enable the user to do just so. Since the user is a clinician they might want to save the data they are accessing for later use. 
 
 As such, the acceptance criteria for this feature are:
@@ -55,12 +57,14 @@ This information is then organized into tables by the UI with the ability to cha
 
 By default, the user will see the general identification information for a patient such as their name, address, gender and birth date. The user can then use a drop down to select any other information they may want to view.
 
-### Steps: Add images once the search button is added!
+### Steps: 
 1. Search for a patient using our tag search system.
 2. Select the patient you want to view and click “Details”.
 3. Use the drop down menu to choose the category of information that you want to view.
 
 ### Negotiated Verification Criteria:
+Please see: [Client Acceptance Criteria Documenation](#client-acceptance-criteria-documenation) for documentation on our conversation with the industry partner. <br/>
+
 From our discussions with our industry partner we agreed that accessing patient information in its entirety was an important use case. As such this is one of the features developed to enable the user to do just so. Since the user is a clinician they might want to save the data they are accessing for later use. 
 
 As such, the acceptance criteria for this feature are:
@@ -101,6 +105,8 @@ This query is paged and the user can use the “Next” and “Previous” butto
 1. Search for a specific patient by name using the tag search and observe how multiple results are returned.
 
 ### Negotiated Verification Criteria:
+Please see: [Client Acceptance Criteria Documenation](#client-acceptance-criteria-documenation) for documentation on our conversation with the industry partner. <br/>
+
 Our app is mostly based on simply retrieving patient information and previewing the results. As discussed with our industry partner, some way of previewing search results would be helpful to users in identifying patients with the same name or patients that do not exist.
 
 As such, the acceptance criteria for this feature are:
