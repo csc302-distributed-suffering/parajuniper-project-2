@@ -12,7 +12,7 @@ app.set('port', process.env.PORT || 5000);
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-
+//
 // routes config
 const patientRoutes = require('./routes/patients');
 app.use('/patients', patientRoutes);
